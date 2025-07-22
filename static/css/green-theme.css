@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #28a745;
+    --primary-dark: #218838;
+    --secondary: #ffc107;
+    --dark: #000000;
+    --light: #f8f9fa;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.929), rgba(0, 0, 0, 0.7)), url('/static/image/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+a, a:visited {
+    color: var(--secondary);
+}
+
+a:hover {
+    color: var(--primary);
+}
+
+.btn, button, input[type="submit"] {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover, button:hover, input[type="submit"]:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--secondary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.card, .container, .content, .main, .section {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+input, textarea, select {
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--primary);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+/* Utility classes */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.bg-primary { background: var(--primary); color: white; }
+.bg-dark { background: var(--dark); color: white; }
+.bg-light { background: var(--light); color: var(--dark); } 

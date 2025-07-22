@@ -1,0 +1,573 @@
+<!-- Save this as wheat.html or similar -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wheat Farming Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: Poppins, sans-serif;
+    margin: 0;
+    background-color: #010101;
+    color: #eee;
+    overflow-x: hidden;
+}
+
+header {
+    width: 1200px;
+    max-width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 80px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+   
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.logo-text span {
+    color: #4CAF50;
+}
+
+header .menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+header .menu li {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* CSS Slider */
+.slider {
+    height: 100vh;
+    margin-top: -80px;
+    position: relative;
+}
+
+.slider .list .item {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+}
+
+.slider .list .item::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.slider .list .item .content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.slider .list .item .content h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.slider .list .item .content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: #f0f0f0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.slider .list .item.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.arrows button {
+    background-color: rgba(255,255,255,0.3);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrows button:hover {
+    background-color: rgba(255,255,255,0.7);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.thumbnail {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 1000;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.thumbnail .item {
+    width: 120px;
+    height: 80px;
+    filter: brightness(0.6);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail .item .content {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.thumbnail .item.active {
+    filter: brightness(1.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+    .slider .list .item .content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 2rem;
+    }
+    
+    .slider .list .item .content p {
+        font-size: 1rem;
+    }
+    
+    .thumbnail {
+        bottom: 10px;
+    }
+    
+    .thumbnail .item {
+        width: 100px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        padding: 10px 0;
+    }
+    
+    .logo-container {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+    }
+    
+    .menu {
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 10px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .arrows {
+        right: 15px;
+    }
+    
+    .arrows button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .thumbnail {
+        justify-content: flex-start;
+        padding: 8px;
+    }
+    
+    .thumbnail .item {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    header .menu li {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .slider .list .item .content p {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .thumbnail {
+        bottom: 5px;
+    }
+    
+    .thumbnail .item {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .thumbnail .item .content {
+        font-size: 0.7rem;
+    }
+}
+
+/* Animation for content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slider .list .item.active .content h2,
+.slider .list .item.active .content p {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.slider .list .item.active .content p {
+    animation-delay: 0.3s;
+}
+
+.bullet {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.emoji {
+    font-size: 1.2em;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo-container">
+      <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo-img" />
+      <div class="logo-text">Green <span>Guard</span></div>
+    </a>
+    <ul class="menu">
+      <li>Wheat Farming: Complete Guide</li>
+    </ul>
+  </header>
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="list">
+      <!-- Overview Slide -->
+      <div class="item active">
+        <img src="https://images.unsplash.com/photo-1600592691771-46c57a2d2b3d?auto=format&fit=crop&w=1471&q=80" />
+        <div class="content">
+          <h2>Overview</h2>
+          <p>
+            <span class="emoji">🌾</span> <strong>Wheat</strong> is one of the most important cereal crops in India.<br><br>
+            <span class="bullet"></span> India ranks <strong>2nd in global wheat production</strong><br>
+            <span class="bullet"></span> Covers over <strong>30 million hectares</strong><br>
+            <span class="bullet"></span> Provides staple food for millions<br><br>
+            <span class="emoji">📊</span> Annual production: ~110 million tons<br>
+            <span class="emoji">⚖️</span> Productivity: ~3.5 tons per hectare
+          </p>
+        </div>
+      </div>
+
+      <!-- Climate Slide -->
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1587915561425-3e2d75802fb6?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">
+          <h2>Climate Requirements</h2>
+          <p>
+            <strong>Ideal Conditions for Wheat:</strong><br><br>
+            <span class="bullet"></span> <strong>Temperature:</strong> 10–25°C (growth), 25–30°C (maturity)<br>
+            <span class="bullet"></span> <strong>Rainfall:</strong> 500–1000 mm<br>
+            <span class="bullet"></span> <strong>Sunlight:</strong> Full sun exposure<br><br>
+            <span class="emoji">⚠️</span> High humidity and rain during grain filling reduce quality
+          </p>
+        </div>
+      </div>
+
+      <!-- Soil Slide -->
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1612262025474-f9a2fffb9e90?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">
+          <h2>Soil Preparation</h2>
+          <p>
+            <strong>Soil Requirements:</strong><br><br>
+            <span class="bullet"></span> <strong>Soil Type:</strong> Well-drained loamy to clay-loam<br>
+            <span class="bullet"></span> <strong>pH Level:</strong> 6.0–7.5<br>
+            <span class="bullet"></span> <strong>Preparation:</strong> 2-3 deep plowings and leveling<br><br>
+            <span class="emoji">🧪</span> Soil testing ensures proper nutrient management
+          </p>
+        </div>
+      </div>
+
+      <!-- Planting Slide -->
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1615638667384-7b8352dce46d?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">
+          <h2>Sowing Techniques</h2>
+          <p>
+            <strong>Planting Guidelines:</strong><br><br>
+            <span class="bullet"></span> <strong>Time:</strong> Late October to early December<br>
+            <span class="bullet"></span> <strong>Seed Rate:</strong> 100–125 kg/ha<br>
+            <span class="bullet"></span> <strong>Spacing:</strong> 20–22 cm row-to-row<br><br>
+            <span class="emoji">📅</span> Timely sowing ensures better yields
+          </p>
+        </div>
+      </div>
+
+      <!-- Guide Slide -->
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1589330694653-ded6dfd3243e?auto=format&fit=crop&w=1471&q=80" />
+        <div class="content">
+          <h2>Wheat Farming Guide</h2>
+          <p>
+            <strong>1. Land Preparation:</strong><br>
+            <span class="emoji">🚜</span> Deep plowing and leveling<br><br>
+
+            <strong>2. Seed Selection:</strong><br>
+            <span class="emoji">🌱</span> Use high-yielding, disease-resistant varieties<br><br>
+
+            <strong>3. Nutrient Management:</strong><br>
+            <span class="emoji">🧪</span> Apply NPK fertilizers based on soil test<br><br>
+
+            <strong>4. Irrigation:</strong><br>
+            <span class="emoji">💧</span> Critical stages: crown root initiation, flowering, grain filling<br><br>
+
+            <strong>5. Weed & Pest Control:</strong><br>
+            <span class="emoji">🐛</span> Use appropriate herbicides and monitor pests<br><br>
+
+            <strong>6. Harvesting:</strong><br>
+            <span class="emoji">🌾</span> Harvest when grains are hard and dry<br>
+            <span class="emoji">🏠</span> Store in cool, dry, rodent-free spaces
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow Buttons -->
+    <div class="arrows">
+      <button id="prev"><</button>
+      <button id="next">></button>
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="thumbnail">
+      <div class="item active">
+        <img src="https://images.unsplash.com/photo-1600592691771-46c57a2d2b3d?auto=format&fit=crop&w=1471&q=80" />
+        <div class="content">Overview</div>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1587915561425-3e2d75802fb6?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">Climate</div>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1612262025474-f9a2fffb9e90?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">Soil</div>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1615638667384-7b8352dce46d?auto=format&fit=crop&w=1470&q=80" />
+        <div class="content">Sowing</div>
+      </div>
+      <div class="item">
+        <img src="https://images.unsplash.com/photo-1589330694653-ded6dfd3243e?auto=format&fit=crop&w=1471&q=80" />
+        <div class="content">Guide</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script same as Onion guide -->
+  <script>
+    let items = document.querySelectorAll('.slider .list .item');
+    let next = document.getElementById('next');
+    let prev = document.getElementById('prev');
+    let thumbnails = document.querySelectorAll('.thumbnail .item');
+    let countItem = items.length;
+    let itemActive = 0;
+
+    next.onclick = () => {
+      itemActive = (itemActive + 1) % countItem;
+      showSlider();
+    };
+
+    prev.onclick = () => {
+      itemActive = (itemActive - 1 + countItem) % countItem;
+      showSlider();
+    };
+
+    let refreshInterval = setInterval(() => {
+      next.click();
+    }, 7000);
+
+    function showSlider(){
+      document.querySelector('.slider .list .item.active').classList.remove('active');
+      document.querySelector('.thumbnail .item.active').classList.remove('active');
+      items[itemActive].classList.add('active');
+      thumbnails[itemActive].classList.add('active');
+      setPositionThumbnail();
+      clearInterval(refreshInterval);
+      refreshInterval = setInterval(() => {
+        next.click();
+      }, 7000);
+    }
+
+    function setPositionThumbnail () {
+      let thumbnailActive = document.querySelector('.thumbnail .item.active');
+      let rect = thumbnailActive.getBoundingClientRect();
+      if (rect.left < 0 || rect.right > window.innerWidth) {
+        thumbnailActive.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+      }
+    }
+
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => {
+        itemActive = index;
+        showSlider();
+      })
+    });
+
+    document.querySelector('.slider').addEventListener('mouseenter', () => {
+      clearInterval(refreshInterval);
+    });
+    document.querySelector('.slider').addEventListener('mouseleave', () => {
+      clearInterval(refreshInterval);
+      refreshInterval = setInterval(() => {
+        next.click();
+      }, 7000);
+    });
+  </script>
+</body>
+</html>

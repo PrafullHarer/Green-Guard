@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ग्रीन गार्ड - नजदीकी कृषि बाजार</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FFC107;
+            --secondary-dark: rgba(0, 0, 0, 0.2);
+            --light: #f5f5f5;
+            --dark: #000000;
+            --card-bg: #000000;
+            --text-color: #ffffff;
+            --text-light: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: rgba(105, 249, 2, 0.283);
+            background-size: cover;
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .user-greeting {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-greeting i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .logo {
+            height: 120px;
+            width: auto;
+        }
+
+        .lang-toggle {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .lang-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            color: rgb(0, 0, 0);
+            position: relative;
+            font-weight: 600;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .map-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            height: 70vh;
+            margin-bottom: 20px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .control-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading i {
+            margin-right: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Language toggle button */
+        .language-toggle {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            z-index: 1000;
+        }
+
+        .language-toggle:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-link {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-link:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .map-container {
+                height: 60vh;
+            }
+
+            .user-info {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="\static\image\greenguard_logo.png" alt="FarmConnect Logo" class="logo">
+        <div class="user-info">
+            <a href="profile.html" class="profile-link" title="View Profile">
+                <i class="fas fa-user"></i>
+            </a>
+            <div class="user-greeting" id="greeting">
+                <i class="fas fa-seedling"></i>
+                <span id="greeting-text">नमस्ते, User !</span>
+            </div>
+            <button class="lang-toggle" id="langToggle">
+                <i class="fas fa-language"></i>
+                <span id="lang-text">English</span>
+            </button>
+            <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+                <i class="fas fa-sign-out-alt"></i> 
+                <span id="logout-text">लॉगआउट</span>
+            </a>
+        </div>
+    </div>
+    <!-- TASK BAR HEADER END -->
+
+    <!-- Page Title with ID -->
+    <div class="page-title" id="page-title">नजदीकी कृषि बाजार</div>
+
+    <div class="map-container">
+        <div id="map"></div>
+        <div class="map-controls">
+            <button class="control-btn" id="locate-btn" title="Find my location">
+                <i class="fas fa-location-arrow"></i>
+            </button>
+            <button class="control-btn" id="refresh-btn" title="Refresh markets">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i> <span id="loading-text">लोड हो रहा है...</span>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+
+        function logoutAndRedirect() {
+            // If you use localStorage/sessionStorage for login, clear it here if needed
+            // localStorage.removeItem('user');
+            // sessionStorage.removeItem('user');
+            window.location.href = "login.html";
+        }
+        const map = L.map('map').setView([20.5937, 78.9629], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        let userMarker = null;
+        let marketMarkers = [];
+
+        const translate = {
+            hindi: {
+                title: "नजदीकी कृषि बाजार",
+                language: "English",
+                locateBtnTitle: "मेरे स्थान को खोजें",
+                refreshBtnTitle: "बाजार को रिफ्रेश करें",
+                loadingText: "लोड हो रहा है...",
+                noMarkets: "कोई बाजार नहीं मिला। कृपया किसी अन्य स्थान पर प्रयास करें।",
+                locationError: "स्थान त्रुटि: डिफ़ॉल्ट रूप से दिल्ली दिखाया जा रहा है।",
+                geoNotSupported: "स्थान सेवा समर्थित नहीं: डिफ़ॉल्ट रूप से दिल्ली दिखाया जा रहा है।",
+                currentLocation: "आपकी वर्तमान स्थिति",
+                marketLabel: "बाजार",
+                unnamedMarket: "अनाम बाजार",
+                logout: "लॉगआउट",
+            },
+            english: {
+                title: "Nearby Agricultural Markets",
+                language: "हिंदी",
+                locateBtnTitle: "Find my location",
+                refreshBtnTitle: "Refresh markets",
+                loadingText: "Loading...",
+                noMarkets: "No markets found. Please try another location.",
+                locationError: "Location error: Defaulting to Delhi.",
+                geoNotSupported: "Geolocation not supported: Defaulting to Delhi.",
+                currentLocation: "Your Current Location",
+                marketLabel: "Market",
+                unnamedMarket: "Unnamed Market",
+                logout: "Logout"
+            }
+        };
+
+        const langToggleBtn = document.getElementById('langToggle');
+        const loadingText = document.getElementById('loading-text');
+        const pageTitle = document.getElementById('page-title');
+        const locateBtn = document.getElementById('locate-btn');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const logoutText = document.getElementById('logout-text');
+
+        let isHindi = localStorage.getItem("language") === "hindi" || !localStorage.getItem("language");
+
+        function setLanguage(language) {
+            pageTitle.innerText = translate[language].title;
+            langToggleBtn.querySelector("span").innerText = translate[language].language;
+            loadingText.innerText = translate[language].loadingText;
+            locateBtn.title = translate[language].locateBtnTitle;
+            refreshBtn.title = translate[language].refreshBtnTitle;
+            logoutText.innerText = translate[language].logout;
+            localStorage.setItem("language", language);
+        }
+
+        setLanguage(isHindi ? 'hindi' : 'english');
+
+        langToggleBtn.addEventListener('click', () => {
+            isHindi = !isHindi;
+            const language = isHindi ? 'hindi' : 'english';
+            setLanguage(language);
+        });
+
+        // Logout redirect function
+        function logoutAndRedirect() {
+            window.location.href = "{{ url_for('logout') }}";
+        }
+
+        function clearMarketMarkers() {
+            marketMarkers.forEach(marker => map.removeLayer(marker));
+            marketMarkers = [];
+        }
+
+        function locateUser() {
+            document.getElementById('loading').style.display = 'flex';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        map.setView([lat, lon], 13);
+
+                        if (userMarker) map.removeLayer(userMarker);
+
+                        userMarker = L.marker([lat, lon], {
+                            icon: L.divIcon({
+                                className: 'user-location-marker',
+                                html: '<i class="fas fa-map-marker-alt" style="color: #FF5722; font-size: 32px;"></i>',
+                                iconSize: [32, 32],
+                                iconAnchor: [16, 32]
+                            })
+                        }).addTo(map)
+                            .bindPopup(translate[isHindi ? 'hindi' : 'english'].currentLocation)
+                            .openPopup();
+
+                        fetchNearbyMarkets(lat, lon);
+                    },
+                    () => {
+                        document.getElementById('loading').style.display = 'none';
+                        alert(translate[isHindi ? 'hindi' : 'english'].locationError);
+                        fetchNearbyMarkets(28.6139, 77.2090);
+                    }
+                );
+            } else {
+                document.getElementById('loading').style.display = 'none';
+                alert(translate[isHindi ? 'hindi' : 'english'].geoNotSupported);
+                fetchNearbyMarkets(28.6139, 77.2090);
+            }
+        }
+
+        function fetchNearbyMarkets(lat, lon) {
+            const radius = 10000;
+            const query = `
+                [out:json][timeout:25];
+                (
+                    node["amenity"="marketplace"](around:${radius},${lat},${lon});
+                    way["amenity"="marketplace"](around:${radius},${lat},${lon});
+                    relation["amenity"="marketplace"](around:${radius},${lat},${lon});
+                );
+                out center;
+            `;
+
+            const url = "https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query);
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    clearMarketMarkers();
+
+                    if (data.elements.length === 0) {
+                        alert(translate[isHindi ? 'hindi' : 'english'].noMarkets);
+                    } else {
+                        data.elements.forEach(market => {
+                            const marketLat = market.lat || market.center?.lat;
+                            const marketLon = market.lon || market.center?.lon;
+                            const tags = market.tags || {};
+                            const marketName = tags.name || translate[isHindi ? 'hindi' : 'english'].unnamedMarket;
+                            const marketLabel = translate[isHindi ? 'hindi' : 'english'].marketLabel;
+
+                            if (marketLat && marketLon) {
+                                const marker = L.marker([marketLat, marketLon]).addTo(map)
+                                    .bindPopup(`<strong>${marketLabel}:</strong> ${marketName}`);
+                                marketMarkers.push(marker);
+                            }
+                        });
+                    }
+                });
+        }
+
+        document.getElementById('locate-btn').addEventListener('click', locateUser);
+        document.getElementById('refresh-btn').addEventListener('click', locateUser);
+
+        locateUser();
+    </script>
+
+</body>
+
+</html>

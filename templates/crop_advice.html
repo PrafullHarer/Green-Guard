@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crop Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #FFC107;
+      --accent-color: #2196F3;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: rgba(105, 249, 2, 0.283);
+      color: white;
+      min-height: 100vh;
+    }
+
+    nav {
+      background-color: #d2ffbd;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 30px 20px;
+      color: black;
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.9);
+      margin: 0;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: var(--secondary-color);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      padding: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.715);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      backdrop-filter: blur(8px);
+      padding: 25px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 24px;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .more-info-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .more-info-btn:hover {
+      background-color: var(--secondary-color);
+      color: #333;
+    }
+
+    @media (max-width: 1200px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="/static/image/greenguard_logo.png" alt="GreenGuard Logo" style="height: 120px;">
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <div style="background-color: #2e7d32; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+      <i class="fa fa-user" style="color: white;"></i>
+    </div>
+
+    <div style="background-color: #2e7d32; color: white; padding: 8px 16px; border-radius: 9999px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+      🌱 <span id="greeting">Hello</span>, <span id="user-name">User</span>!
+    </div>
+
+    <button onclick="toggleLanguage()" style="background-color: black; color: white; padding: 8px 16px; border-radius: 9999px; border: none; font-weight: 500; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+      <i class="fa-solid fa-language"></i> <span id="lang-label">English</span>
+    </button>
+
+    <button onclick="logoutAndRedirect()" style="background-color: #ffc107; border: none; border-radius: 9999px; padding: 8px 20px; font-weight: 600; cursor: pointer;">
+      <i class="fa-solid fa-right-from-bracket"></i> <span id="logout-label">Logout</span>
+    </button>
+  </div>
+</nav>
+
+<h1 id="crop-heading">Crop Guide</h1>
+
+<div class="grid-container" id="crop-container">
+  <!-- Cards will be inserted by JS -->
+</div>
+
+<script>
+  const crops = [
+    {
+      en: { name: "Sugarcane", desc: "Essential cash crop with year-round cultivation cycle." },
+      hi: { name: "गन्ना", desc: "सालभर उगाई जाने वाली आवश्यक नकदी फसल।" },
+      img: "/static/image/SUGARCANE.jpg",
+      link: "sugarcane.html"
+    },
+    {
+      en: { name: "Rice", desc: "Staple food crop cultivated across various seasons." },
+      hi: { name: "चावल", desc: "विभिन्न मौसमों में उगाई जाने वाली मुख्य खाद्यान्न फसल।" },
+      img: "/static/image/rice.jpeg",
+      link: "rice.html"
+    },
+    {
+      en: { name: "Wheat", desc: "Primary crop for bread and flour production." },
+      hi: { name: "गेहूं", desc: "रोटी और आटे के लिए प्रमुख फसल।" },
+      img: "/static/image/wheat.jpeg",
+      link: "wheat.html"
+    },
+    {
+      en: { name: "Onion", desc: "Essential kitchen vegetable with multiple harvests." },
+      hi: { name: "प्याज", desc: "अनेक फसल चक्रों वाली आवश्यक सब्ज़ी।" },
+      img: "/static/image/onion.jpg",
+      link: "onion.html"
+    },
+    {
+      en: { name: "Tomato", desc: "Versatile fruit vegetable used in countless dishes." },
+      hi: { name: "टमाटर", desc: "अनेक व्यंजनों में उपयोग होने वाली फल-सब्ज़ी।" },
+      img: "/static/image/tomato.avif",
+      link: "tomato.html"
+    },
+    {
+      en: { name: "Potato", desc: "Starchy tuber crop grown in various conditions." },
+      hi: { name: "आलू", desc: "विभिन्न स्थितियों में उगने वाली स्टार्चयुक्त फसल।" },
+      img: "/static/image/potato.jpg",
+      link: "potato.html"
+    },
+    {
+      en: { name: "Cabbage", desc: "Leafy vegetable with multiple varieties." },
+      hi: { name: "पत्ता गोभी", desc: "अनेक किस्मों वाली पत्तेदार सब्ज़ी।" },
+      img: "/static/image/cabbage.jpg",
+      link: "cabbage.html"
+    },
+    {
+      en: { name: "Ladies Finger", desc: "Warm season vegetable known for nutrition." },
+      hi: { name: "भिंडी", desc: "गर्मी में उगाई जाने वाली पौष्टिक सब्ज़ी।" },
+      img: "/static/image/ladii.jpg",
+      link: "ladii.html"
+    },
+    {
+      en: { name: "Chilli", desc: "Spice crop with multiple varieties and heat levels." },
+      hi: { name: "मिर्च", desc: "विभिन्न प्रकारों और तीव्रता की मसालेदार फसल।" },
+      img: "/static/image/image.png",
+      link: "chilli.html"
+    },
+    {
+      en: { name: "Garlic", desc: "Bulb crop valued for culinary and medicinal uses." },
+      hi: { name: "लहसुन", desc: "खाद्य और औषधीय गुणों वाली बल्ब फसल।" },
+      img: "/static/image/garlic.jpg",
+      link: "garlic.html"
+    }
+  ];
+
+  let currentLang = "en";
+
+  function renderCrops() {
+    const container = document.getElementById("crop-container");
+    container.innerHTML = "";
+    crops.forEach(crop => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${crop.img}" alt="${crop[currentLang].name}">
+        <strong>${crop[currentLang].name}</strong>
+        <p>${crop[currentLang].desc}</p>
+        <a href="${crop.link}" class="more-info-btn">${currentLang === "en" ? "More Information" : "और जानकारी"}</a>
+      `;
+      container.appendChild(card);
+    });
+
+    document.getElementById("crop-heading").textContent = currentLang === "en" ? "Crop Guide" : "फसल मार्गदर्शिका";
+    document.getElementById("greeting").textContent = currentLang === "en" ? "Hello" : "नमस्ते";
+    document.getElementById("lang-label").textContent = currentLang === "en" ? "हिन्दी" : "English";
+    document.getElementById("logout-label").textContent = currentLang === "en" ? "Logout" : "लॉग आउट";
+  }
+
+  function toggleLanguage() {
+    currentLang = currentLang === "en" ? "hi" : "en";
+    renderCrops();
+  }
+
+  function logoutAndRedirect() {
+    window.location.href = "login.html";
+  }
+
+  document.addEventListener("DOMContentLoaded", renderCrops);
+</script>
+
+</body>
+</html>

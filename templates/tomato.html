@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tomato Guide - Green Guard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/onion.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: Poppins, sans-serif;
+    margin: 0;
+    background-color: #010101;
+    color: #eee;
+    overflow-x: hidden;
+}
+
+header {
+    width: 1200px;
+    max-width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 80px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+   
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.logo-text span {
+    color: #4CAF50;
+}
+
+header .menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+header .menu li {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* CSS Slider */
+.slider {
+    height: 100vh;
+    margin-top: -80px;
+    position: relative;
+}
+
+.slider .list .item {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+}
+
+.slider .list .item::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.slider .list .item .content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.slider .list .item .content h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.slider .list .item .content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: #f0f0f0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.slider .list .item.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.arrows button {
+    background-color: rgba(255,255,255,0.3);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrows button:hover {
+    background-color: rgba(255,255,255,0.7);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.thumbnail {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 1000;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.thumbnail .item {
+    width: 120px;
+    height: 80px;
+    filter: brightness(0.6);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail .item .content {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.thumbnail .item.active {
+    filter: brightness(1.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+    .slider .list .item .content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 2rem;
+    }
+    
+    .slider .list .item .content p {
+        font-size: 1rem;
+    }
+    
+    .thumbnail {
+        bottom: 10px;
+    }
+    
+    .thumbnail .item {
+        width: 100px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        padding: 10px 0;
+    }
+    
+    .logo-container {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+    }
+    
+    .menu {
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 10px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .arrows {
+        right: 15px;
+    }
+    
+    .arrows button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .thumbnail {
+        justify-content: flex-start;
+        padding: 8px;
+    }
+    
+    .thumbnail .item {
+        width: 80px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    header .menu li {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+    
+    .slider .list .item .content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .slider .list .item .content p {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .thumbnail {
+        bottom: 5px;
+    }
+    
+    .thumbnail .item {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .thumbnail .item .content {
+        font-size: 0.7rem;
+    }
+}
+
+/* Animation for content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slider .list .item.active .content h2,
+.slider .list .item.active .content p {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.slider .list .item.active .content p {
+    animation-delay: 0.3s;
+}
+
+.bullet {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.emoji {
+    font-size: 1.2em;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <a href="#" class="logo-container">
+    <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Logo" class="logo-img" />
+    <div class="logo-text">Green <span>Guard</span></div>
+  </a>
+  <ul class="menu">
+    <li>Tomato Farming: Complete Guide</li>
+  </ul>
+</header>
+
+<!-- Slider -->
+<div class="slider">
+  <div class="list">
+
+    <!-- Slide 1: Overview -->
+    <div class="item active">
+      <img src="https://images.unsplash.com/photo-1582281298056-b24b56c7c3df?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">
+        <h2>Overview</h2>
+        <p>
+          <span class="emoji">🍅</span> <strong>Tomato</strong> is one of the most popular vegetables grown in India.<br><br>
+          <span class="bullet"></span> Used in cooking, sauces, ketchup, etc.<br>
+          <span class="bullet"></span> Rich in Vitamin C and antioxidants<br>
+          <span class="bullet"></span> India is the <strong>2nd largest producer</strong><br><br>
+          <span class="emoji">📊</span> Major states: Andhra Pradesh, Maharashtra, Karnataka
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Climate -->
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1559329007-0a17d6f5e0d5?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">
+        <h2>Climate</h2>
+        <p>
+          <strong>Ideal Conditions:</strong><br><br>
+          <span class="bullet"></span> <strong>Temperature:</strong> 20–30°C<br>
+          <span class="bullet"></span> Requires warm days and cool nights<br>
+          <span class="bullet"></span> <strong>Rainfall:</strong> 600–800 mm<br><br>
+          <span class="emoji">🌤️</span> Avoid frost and excessive humidity
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Soil -->
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">
+        <h2>Soil</h2>
+        <p>
+          <strong>Soil Requirements:</strong><br><br>
+          <span class="bullet"></span> Well-drained loamy soil rich in organic matter<br>
+          <span class="bullet"></span> pH: 6.0–7.5<br>
+          <span class="bullet"></span> Deep soil with good aeration<br><br>
+          <span class="emoji">🌱</span> Avoid acidic and saline soils
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 4: Sowing -->
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1595247156033-f7fdfb5e6d9d?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">
+        <h2>Sowing</h2>
+        <p>
+          <strong>Sowing Guide:</strong><br><br>
+          <span class="bullet"></span> <strong>Nursery raising:</strong> Transplant 25–30 day old seedlings<br>
+          <span class="bullet"></span> <strong>Spacing:</strong> 60x45 cm or 75x60 cm<br>
+          <span class="bullet"></span> <strong>Time:</strong> Kharif (June–July), Rabi (Oct–Nov), Zaid (Feb–Mar)<br><br>
+          <span class="emoji">🧪</span> Treat seeds with fungicide before sowing
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 5: Farming Guide -->
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1589447871428-d8f7dc71c7de?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">
+        <h2>Tomato Farming Guide</h2>
+        <p>
+          <span class="emoji">🚜</span> <strong>Land Prep:</strong> 2–3 ploughings with FYM (25 tons/ha)<br>
+          <span class="emoji">🌱</span> <strong>Transplanting:</strong> Early morning or evening time<br>
+          <span class="emoji">🧪</span> <strong>Fertilizer:</strong> 100–120 kg N, 60 P, 50 K/ha<br>
+          <span class="emoji">💧</span> <strong>Irrigation:</strong> Every 5–7 days (critical at flowering & fruiting)<br>
+          <span class="emoji">🐛</span> <strong>Pests:</strong> Fruit borer, whiteflies, aphids<br>
+          <span class="emoji">🌾</span> <strong>Harvest:</strong> 60–75 days after transplanting<br>
+          <span class="emoji">📦</span> <strong>Storage:</strong> Store at 12–15°C for short duration
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Arrows -->
+  <div class="arrows">
+    <button id="prev"><</button>
+    <button id="next">></button>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="thumbnail">
+    <div class="item active">
+      <img src="https://images.unsplash.com/photo-1582281298056-b24b56c7c3df?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">Overview</div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1559329007-0a17d6f5e0d5?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">Climate</div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">Soil</div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1595247156033-f7fdfb5e6d9d?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">Sowing</div>
+    </div>
+    <div class="item">
+      <img src="https://images.unsplash.com/photo-1589447871428-d8f7dc71c7de?auto=format&fit=crop&w=1470&q=80" />
+      <div class="content">Guide</div>
+    </div>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  let items = document.querySelectorAll('.slider .list .item');
+  let next = document.getElementById('next');
+  let prev = document.getElementById('prev');
+  let thumbnails = document.querySelectorAll('.thumbnail .item');
+  let countItem = items.length;
+  let itemActive = 0;
+
+  next.onclick = () => {
+    itemActive = (itemActive + 1) % countItem;
+    showSlider();
+  };
+
+  prev.onclick = () => {
+    itemActive = (itemActive - 1 + countItem) % countItem;
+    showSlider();
+  };
+
+  let refreshInterval = setInterval(() => {
+    next.click();
+  }, 7000);
+
+  function showSlider(){
+    document.querySelector('.slider .list .item.active').classList.remove('active');
+    document.querySelector('.thumbnail .item.active').classList.remove('active');
+    items[itemActive].classList.add('active');
+    thumbnails[itemActive].classList.add('active');
+    setPositionThumbnail();
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(() => {
+      next.click();
+    }, 7000);
+  }
+
+  function setPositionThumbnail () {
+    let thumbnailActive = document.querySelector('.thumbnail .item.active');
+    let rect = thumbnailActive.getBoundingClientRect();
+    if (rect.left < 0 || rect.right > window.innerWidth) {
+      thumbnailActive.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+    }
+  }
+
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      itemActive = index;
+      showSlider();
+    })
+  });
+
+  document.querySelector('.slider').addEventListener('mouseenter', () => {
+    clearInterval(refreshInterval);
+  });
+  document.querySelector('.slider').addEventListener('mouseleave', () => {
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(() => {
+      next.click();
+    }, 7000);
+  });
+</script>
+
+</body>
+</html>
