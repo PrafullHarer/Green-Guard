@@ -126,27 +126,48 @@
         transform: scale(1.05);
       }
     }
+
+    /* Language toggle button style */
+    #langToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 0.9rem;
+      border-radius: 15px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <button id="langToggle"><span id="lang-text">हिंदी</span></button>
+
     <div class="content">
       <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Logo" class="logo" />
-      <h1><span class="highlight">THE NEW ERA OF</span> AGRICULTURE</h1>
-      <p class="subtext">Sustainable farming solutions for a better tomorrow.</p>
+
+      <h1 id="page-title">
+        <span class="highlight" id="highlight-text">THE NEW ERA OF</span> 
+        <span id="main-title">AGRICULTURE</span>
+      </h1>
+
+      <p class="subtext" id="subtitle">Sustainable farming solutions for a better tomorrow.</p>
 
       <div class="button-container">
-        <a href="{{ url_for('login') }}" class="button">
+        <a href="{{ url_for('login') }}" class="button" id="login-btn">
           Login
         </a>
-        <a href="{{ url_for('register') }}" class="button secondary">
+        <a href="{{ url_for('register') }}" class="button secondary" id="register-btn">
           Register
         </a>
       </div>
 
       <a href="{{ url_for('features') }}">
-        <button class="button features-btn">Explore Features</button>
+        <button class="button features-btn" id="explore-btn">Explore Features</button>
       </a>
     </div>
 
@@ -154,6 +175,60 @@
       <img src="{{ url_for('static', filename='image/wheat.jpg') }}" alt="Wheat Field" />
     </div>
   </div>
+
+  <script>
+    const translations = {
+      english: {
+        langText: "हिंदी",
+        highlight: "THE NEW ERA OF",
+        title: "AGRICULTURE",
+        subtitle: "Sustainable farming solutions for a better tomorrow.",
+        login: "Login",
+        register: "Register",
+        explore: "Explore Features"
+      },
+      hindi: {
+        langText: "English",
+        highlight: "खेती का नया युग",
+        title: "कृषि",
+        subtitle: "बेहतर कल के लिए सतत कृषि समाधान।",
+        login: "लॉगिन करें",
+        register: "पंजीकरण करें",
+        explore: "विशेषताएँ देखें"
+      }
+    };
+
+    const langToggleBtn = document.getElementById("langToggle");
+    const langText = document.getElementById("lang-text");
+    const highlight = document.getElementById("highlight-text");
+    const mainTitle = document.getElementById("main-title");
+    const subtitle = document.getElementById("subtitle");
+    const loginBtn = document.getElementById("login-btn");
+    const registerBtn = document.getElementById("register-btn");
+    const exploreBtn = document.getElementById("explore-btn");
+
+    let isHindi = localStorage.getItem("language") === "hindi" || !localStorage.getItem("language");
+
+    function setLanguage(lang) {
+      const t = translations[lang];
+      langText.innerText = t.langText;
+      highlight.innerText = t.highlight;
+      mainTitle.innerText = t.title;
+      subtitle.innerText = t.subtitle;
+      loginBtn.innerText = t.login;
+      registerBtn.innerText = t.register;
+      exploreBtn.innerText = t.explore;
+      localStorage.setItem("language", lang);
+      document.documentElement.lang = lang === "hindi" ? "hi" : "en";
+    }
+
+    function toggleLanguage() {
+      isHindi = !isHindi;
+      setLanguage(isHindi ? "hindi" : "english");
+    }
+
+    langToggleBtn.addEventListener("click", toggleLanguage);
+    setLanguage(isHindi ? "hindi" : "english");
+  </script>
 </body>
 </html>
-  
