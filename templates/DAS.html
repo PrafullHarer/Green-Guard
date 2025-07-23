@@ -691,66 +691,66 @@
     // sessionStorage.removeItem('user');
     window.location.href = "login.html";
 }
-    const translations = {
-        en: {
-            greeting: "Hello, User !!",
-            logout: "Logout",
-            dashboardTitle: "Your Agriculture Dashboard",
-            cardTitles: [
-                "Government Schemes",
-                "Agricultural Market Info",
-                "Crop Advice",
-                "AI Assistant",
-                "Seed and Equipment Market",
-                "About Us"
-            ],
-            cardDescriptions: [
-                "Information and application process for all government schemes related to agriculture",
-                "Current prices of agricultural products in nearby markets and market analysis",
-                "Crop recommendations and farming methods according to weather and soil",
-                "Talk to our AI assistant for crop disease identification and solutions",
-                "Shop for high-quality seeds, fertilizers, and agricultural tools",
-                "Learn about Green Guardand get more information about our services"
-            ],
-            weatherTitle: "Weather Forecast",
-            weatherLoading: "Loading weather information...",
-            locationText: "Detecting location...",
-            forecastTitle: "Next 3 Days Forecast",
-            calendarTitle: "Today",
-            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            langText: "हिंदी"
-        },
-        hi: {
-            greeting: "नमस्ते, User !!",
-            logout: "लॉग आउट",
-            dashboardTitle: "आपका कृषि डैशबोर्ड",
-            cardTitles: [
-                "सरकारी योजनाएं",
-                "कृषि बाजार जानकारी",
-                "फसल सलाह",
-                "AI सहायक",
-                "बीज और उपकरण बाजार",
-                "हमारे बारे में"
-            ],
-            cardDescriptions: [
-                "कृषि से संबंधित सभी सरकारी योजनाओं की जानकारी और आवेदन प्रक्रिया",
-                "नजदीकी मंडियों में कृषि उत्पादों के वर्तमान कीमतें और बाजार विश्लेषण",
-                "मौसम और मिट्टी के अनुसार फसल सिफारिशें और खेती के तरीके",
-                "फसल रोगों की पहचान और समाधान के लिए हमारे AI सहायक से बात करें",
-                "उच्च गुणवत्ता वाले बीज, उर्वरक और कृषि उपकरणों की खरीदारी करें",
-                "ग्रीन गार्ड के बारे में जानें और हमारी सेवाओं के बारे में अधिक जानकारी प्राप्त करें"
-            ],
-            weatherTitle: "मौसम पूर्वानुमान",
-            weatherLoading: "मौसम जानकारी लोड हो रही है...",
-            locationText: "स्थान ज्ञात किया जा रहा है...",
-            forecastTitle: "अगले 3 दिन का पूर्वानुमान",
-            calendarTitle: "आज का दिन",
-            dayNames: ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"],
-            monthNames: ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर", "अक्टूबर", "नवम्बर", "दिसम्बर"],
-            langText: "English"
-        }
-    };
+const translations = {
+            en: {
+                greeting: "Hello, {{ name }}!",
+                logout: "Logout",
+                dashboardTitle: "Your Agriculture Dashboard",
+                cardTitles: [
+                    "Government Schemes",
+                    "Agricultural Market Info",
+                    "Crop Advice",
+                    "AI Assistant",
+                    "Seed and Equipment Market",
+                    "About Us"
+                ],
+                cardDescriptions: [
+                    "Information and application process for all government schemes related to agriculture",
+                    "Current prices of agricultural products in nearby markets and market analysis",
+                    "Crop recommendations and farming methods according to weather and soil",
+                    "Talk to our AI assistant for crop disease identification and solutions",
+                    "Shop for high-quality seeds, fertilizers, and agricultural tools",
+                    "Learn about Kisan Sathi and get more information about our services"
+                ],
+                weatherTitle: "Weather Forecast",
+                weatherLoading: "Loading weather information...",
+                locationText: "Detecting location...",
+                forecastTitle: "Next 3 Days Forecast",
+                calendarTitle: "Today",
+                dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                langText: "हिंदी"
+            },
+            hi: {
+                greeting: "नमस्ते, {{ name }}!",
+                logout: "लॉग आउट",
+                dashboardTitle: "आपका कृषि डैशबोर्ड",
+                cardTitles: [
+                    "सरकारी योजनाएं",
+                    "कृषि बाजार जानकारी",
+                    "फसल सलाह",
+                    "AI सहायक",
+                    "बीज और उपकरण बाजार",
+                    "हमारे बारे में"
+                ],
+                cardDescriptions: [
+                    "कृषि से संबंधित सभी सरकारी योजनाओं की जानकारी और आवेदन प्रक्रिया",
+                    "नजदीकी मंडियों में कृषि उत्पादों के वर्तमान कीमतें और बाजार विश्लेषण",
+                    "मौसम और मिट्टी के अनुसार फसल सिफारिशें और खेती के तरीके",
+                    "फसल रोगों की पहचान और समाधान के लिए हमारे AI सहायक से बात करें",
+                    "उच्च गुणवत्ता वाले बीज, उर्वरक और कृषि उपकरणों की खरीदारी करें",
+                    "किसान साथी के बारे में जानें और हमारी सेवाओं के बारे में अधिक जानकारी प्राप्त करें"
+                ],
+                weatherTitle: "मौसम पूर्वानुमान",
+                weatherLoading: "मौसम जानकारी लोड हो रही है...",
+                locationText: "स्थान ज्ञात किया जा रहा है...",
+                forecastTitle: "अगले 3 दिन का पूर्वानुमान",
+                calendarTitle: "आज का दिन",
+                dayNames: ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"],
+                monthNames: ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर", "अक्टूबर", "नवम्बर", "दिसम्बर"],
+                langText: "English"
+            }
+        };
 
     let currentLang = 'hi';
     let currentMonth = new Date().getMonth();
@@ -772,6 +772,11 @@
             calendarHTML += `<div class="calendar-date ${isToday ? 'today' : ''}">${day}</div>`;
         }
         document.getElementById('calendar-dates').innerHTML = calendarHTML;
+
+        // Update day names in the calendar header
+        for (let i = 0; i < 7; i++) {
+            document.querySelector(`.day-name-${i}`).textContent = translations[currentLang].dayNames[i];
+        }
     }
 
     function updateLanguage() {
@@ -791,6 +796,7 @@
         document.querySelector('.forecast-title-text').textContent = translations[currentLang].forecastTitle;
         document.querySelector('.calendar-title-text').textContent = translations[currentLang].calendarTitle;
 
+        // Update day names in the calendar header
         for (let i = 0; i < 7; i++) {
             document.querySelector(`.day-name-${i}`).textContent = translations[currentLang].dayNames[i];
         }
