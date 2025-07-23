@@ -185,6 +185,11 @@
       <button type="submit" id="submit-btn">🔐 Login</button>
     </form>
 
+    <!-- Google Login Button -->
+    <button id="google-login-btn" style="width:100%;padding:12px;margin-top:10px;background-color:#fff;border:1px solid #4CAF50;border-radius:25px;color:#4CAF50;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background 0.3s, color 0.3s;">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" style="width:22px;height:22px;vertical-align:middle;"> <span id="google-btn-label">Sign in with Google</span>
+    </button>
+
     <p class="register-link" id="register-text">Don't have an account? <a href="register.html">Register here</a></p>
   </div>
 
@@ -251,6 +256,40 @@
 
       isHindi = !isHindi;
     }
+
+  // Google Login
+  const googleLoginBtn = document.getElementById("google-login-btn");
+  const googleBtnLabel = document.getElementById("google-btn-label");
+  googleLoginBtn.addEventListener("click", async function () {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const result = await firebase.auth().signInWithPopup(provider);
+      const user = result.user;
+      alert("✅ Logged in as " + user.email);
+      window.location.href = "DAS.html";
+    } catch (error) {
+      console.error("Google Login Error:", error);
+      alert("❌ " + error.message);
+    }
+  });
+
+  // Update Google button label on language toggle
+  function updateGoogleBtnLabel() {
+    if (isHindi) {
+      googleBtnLabel.innerText = "Google से लॉगिन करें";
+    } else {
+      googleBtnLabel.innerText = "Sign in with Google";
+    }
+  }
+
+  // Patch toggleLanguage to update Google button label
+  const origToggleLanguage = toggleLanguage;
+  toggleLanguage = function() {
+    origToggleLanguage();
+    updateGoogleBtnLabel();
+  }
+  // Set initial label
+  updateGoogleBtnLabel();
   </script>
 </body>
 </html> 
