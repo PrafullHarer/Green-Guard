@@ -579,7 +579,7 @@ nav ul li a.active {
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="static/image/greenguard_logo.png" alt="AgriShop Logo">
+                <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="AgriShop Logo">
                 <div class="logo-text">
                     <h1>Green<span>Shop</span></h1>
                 </div>
@@ -623,7 +623,7 @@ nav ul li a.active {
         <a href="/seeds" class="category-link">
             <div class="category-card">
                 <div class="category-img">
-                    <img src="/static/image/image1.jpg" alt="Seeds">
+                    <img src="{{ url_for('static', filename='image/image1.jpg') }}" alt="Seeds">
                 </div>
                 <div class="category-content">
                     <h3>Seeds</h3>
@@ -636,7 +636,7 @@ nav ul li a.active {
 <div class="category-card">
     <a href="/tools" style="text-decoration: none; color: inherit;">
         <div class="category-img">
-            <img src="/static/image/image2.jpeg" alt="Farming Tools">
+            <img src="{{ url_for('static', filename='image/image2.jpeg') }}" alt="Farming Tools">
         </div>
         <div class="category-content">
             <h3>Farming Tools</h3>

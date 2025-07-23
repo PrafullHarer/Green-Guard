@@ -8,7 +8,7 @@
                 {% if developer.profile_picture %}
                 <img src="{{ developer.profile_picture }}" class="card-img-top" alt="{{ developer.name }}">
                 {% else %}
-                <img src="/static/images/default-profile.png" class="card-img-top" alt="{{ developer.name }}">
+                <img src="{{ url_for('static', filename='image/default-profile.png') }}" class="card-img-top" alt="{{ developer.name }}">
                 {% endif %}
                 <div class="card-body text-center">
                     <h2 class="card-title">{{ developer.name }}</h2>

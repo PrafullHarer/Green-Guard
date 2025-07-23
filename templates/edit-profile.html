@@ -186,7 +186,10 @@
 <body>
     <div class="container">
         <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">English</button>
-        <img src="/static/image/greenguard_logo.png" alt="Green GuardLogo" class="logo">
+        <img src="{{ profile_picture or url_for('static', filename='image/default-profile.png') }}" 
+             alt="Profile Picture" 
+             class="profile-picture" 
+             id="profilePicturePreview">
         <h2 id="title">🌾 Edit Profile 🌾</h2>
 
         {% with messages = get_flashed_messages(with_categories=true) %}

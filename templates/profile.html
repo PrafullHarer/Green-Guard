@@ -222,7 +222,7 @@
 <body>
     <div class="container">
         <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">English</button>
-        <img src="/static/image/greenguard_logo.png" alt="Green GuardLogo" class="logo">
+        <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Green GuardLogo" class="logo">
         <h2 id="title">🌾 User Profile 🌾</h2>
 
         <div class="profile-header">
