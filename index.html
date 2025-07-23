@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>New Era of Agriculture</title>
+  <title>Green Guard- The New Era of Agriculture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #4CAF50;
+      --primary-light: #81C784;
+      --primary-dark: #218838;
+      --secondary: #FFC107;
+      --secondary-dark: #FFA000;
+      --background: rgba(105, 249, 2, 0.283);
+      --card-bg:  rgba(0, 0, 0, 0.724);
+      --text-dark: #000000;
+      --text-medium: #000000;
+      --text-light: #ffffff;
+      --border: #000000;
+    }
 
     * {
       margin: 0;
@@ -16,219 +31,353 @@
     }
 
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url('{{ url_for("static", filename="image/background.jpg") }}');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: var(--background);
+      color: var(--text-dark);
+      min-height: 100vh;
     }
 
     .container {
-      position: relative;
-      width: 90%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1.5s ease-in-out;
+      display: flex;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
     }
 
-    .logo {
-      width: 100px;
-      margin-bottom: 20px;
+    .content {
+      width: 60%;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-size: cover;
+      background-position: center left;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(105, 249, 2, 0.283);
+      z-index: 0;
+    }
+
+    .content h1,
+    .content h2,
+    .content p,
+    .content .features {
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 1.5rem;
-      color: #774c2d;
-    }
-
-    .highlight {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-
-    .subtext {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+      font-size: 4.5rem;
       margin-bottom: 15px;
+      font-weight: 700;
     }
 
-    .button {
-      flex: 1;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 0;
-      font-size: 0.9rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s ease-in-out, transform 0.3s;
-      text-decoration: none;
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      position: relative;
       display: inline-block;
+      color: var(--primary-dark);
     }
 
-    .button:hover {
-      background: #388E3C;
-      transform: scale(1.05);
-    }
-
-    .button.secondary {
-      background: #774c2d;
-    }
-
-    .button.secondary:hover {
-      background: #5a3b22;
-    }
-
-    .features-btn {
-      width: 100%;
-      padding: 10px 20px;
-      font-size: 1rem;
-    }
-
-    .background img {
-      width: 100%;
-      border-radius: 15px;
-      margin-top: 20px;
-      filter: brightness(0.8);
-      animation: zoomIn 3s infinite alternate ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes zoomIn {
-      from {
-        transform: scale(1);
-      }
-      to {
-        transform: scale(1.05);
-      }
-    }
-
-    /* Language toggle button style */
-    #langToggle {
+    h2::after {
+      content: '';
       position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 6px 12px;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 0.9rem;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 3px;
+    }
+
+    p.subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      line-height: 1.7;
+      color: var(--text-medium);
+      max-width: 100%;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .feature {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.712);
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgb(0, 0, 0);
+    }
+
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feature h3 i {
+      font-size: 1.4rem;
+      color: var(--secondary);
+    }
+
+    .feature p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    .sidebar {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+      z-index: 1;
+      position: relative;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 350px;
+      background: white;
       border-radius: 15px;
-      cursor: pointer;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 1;
+      position: relative;
+    }
+
+    .auth-title {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: var(--primary-dark);
+      position: relative;
+    }
+
+    .auth-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+
+    .auth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .auth-button {
+      padding: 14px 25px;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .login-btn {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .login-btn:hover {
+      background: var(--text-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .register-btn {
+      background: white;
+      color: var(--primary-dark);
+      border: 2px solid var(--primary-dark);
+    }
+
+    .register-btn:hover {
+      background: var(--primary-light);
+      color: white;
+      border-color: var(--primary-light);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .divider::before {
+      margin-right: 15px;
+    }
+
+    .divider::after {
+      margin-left: 15px;
+    }
+
+    .guest-option {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .guest-link {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .guest-link:hover {
+      color: var(--text-dark);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .content, .sidebar {
+        width: 100%;
+        padding: 50px 40px;
+      }
+
+      .sidebar {
+        background: linear-gradient(to right, var(--primary-light), var(--primary));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content, .sidebar {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-container {
+        padding: 30px 25px;
+      }
     }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <button id="langToggle"><span id="lang-text">हिंदी</span></button>
-
+    <!-- Main Content with Background -->
     <div class="content">
-      <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Logo" class="logo" />
+      <h1>Green Guard</h1>
+      <h2>The New Era of Agriculture</h2>
+      <p class="subtitle">Sustainable farming solutions for a better tomorrow. Empowering farmers with technology, information, and smart solutions.</p>
 
-      <h1 id="page-title">
-        <span class="highlight" id="highlight-text">THE NEW ERA OF</span> 
-        <span id="main-title">AGRICULTURE</span>
-      </h1>
+      <div class="features">
+        <div class="feature">
+          <h3><i class="fas fa-file-contract"></i> Government Schemes</h3>
+          <p>Access comprehensive information about all agricultural schemes from central and state governments with simplified application processes.</p>
+        </div>
 
-      <p class="subtext" id="subtitle">Sustainable farming solutions for a better tomorrow.</p>
+        <div class="feature">
+          <h3><i class="fas fa-leaf"></i> AI Disease Detection</h3>
+          <p>Our advanced AI analyzes crop images to detect diseases early and provides tailored treatment recommendations.</p>
+        </div>
 
-      <div class="button-container">
-        <a href="{{ url_for('login') }}" class="button" id="login-btn">
-          Login
-        </a>
-        <a href="{{ url_for('register') }}" class="button secondary" id="register-btn">
-          Register
-        </a>
+        <div class="feature">
+          <h3><i class="fas fa-map-marker-alt"></i> Agricultural Market Info</h3>
+          <p>
+            Discover nearby agricultural markets (mandis) to easily find where you can buy or sell crops and farming goods. 
+           <p>
+            Our platform helps you identify the closest mandis in your region so you can plan your visits more efficiently.
+
+           </p>
+          </p>
+        </div>
+        
+        <div class="feature">
+          <h3><i class="fas fa-tractor"></i> Agri E-Commerce</h3>
+          <p>Direct marketplace connecting farmers with suppliers for seeds, equipment, and other agricultural needs.</p>
+        </div>
       </div>
-
-      <a href="{{ url_for('features') }}">
-        <button class="button features-btn" id="explore-btn">Explore Features</button>
-      </a>
     </div>
 
-    <div class="background">
-      <img src="{{ url_for('static', filename='image/wheat.jpg') }}" alt="Wheat Field" />
+    <!-- Sidebar with Logo and Auth -->
+    <div class="sidebar">
+      <img src="/static/image/greenguard_logo.png" alt="Green GuardLogo" class="main-logo"/>
+
+      <div class="auth-container">
+        <h3 class="auth-title">Welcome to Green Guard</h3>
+
+        <div class="auth-buttons">
+          <a href="login.html" class="auth-button login-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+
+          <div class="divider">OR</div>
+
+          <a href="register.html" class="auth-button register-btn">
+            <i class="fas fa-user-plus"></i> Create Account
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script>
-    const translations = {
-      english: {
-        langText: "हिंदी",
-        highlight: "THE NEW ERA OF",
-        title: "AGRICULTURE",
-        subtitle: "Sustainable farming solutions for a better tomorrow.",
-        login: "Login",
-        register: "Register",
-        explore: "Explore Features"
-      },
-      hindi: {
-        langText: "English",
-        highlight: "खेती का नया युग",
-        title: "कृषि",
-        subtitle: "बेहतर कल के लिए सतत कृषि समाधान।",
-        login: "लॉगिन करें",
-        register: "पंजीकरण करें",
-        explore: "विशेषताएँ देखें"
-      }
-    };
-
-    const langToggleBtn = document.getElementById("langToggle");
-    const langText = document.getElementById("lang-text");
-    const highlight = document.getElementById("highlight-text");
-    const mainTitle = document.getElementById("main-title");
-    const subtitle = document.getElementById("subtitle");
-    const loginBtn = document.getElementById("login-btn");
-    const registerBtn = document.getElementById("register-btn");
-    const exploreBtn = document.getElementById("explore-btn");
-
-    let isHindi = localStorage.getItem("language") === "hindi" || !localStorage.getItem("language");
-
-    function setLanguage(lang) {
-      const t = translations[lang];
-      langText.innerText = t.langText;
-      highlight.innerText = t.highlight;
-      mainTitle.innerText = t.title;
-      subtitle.innerText = t.subtitle;
-      loginBtn.innerText = t.login;
-      registerBtn.innerText = t.register;
-      exploreBtn.innerText = t.explore;
-      localStorage.setItem("language", lang);
-      document.documentElement.lang = lang === "hindi" ? "hi" : "en";
-    }
-
-    function toggleLanguage() {
-      isHindi = !isHindi;
-      setLanguage(isHindi ? "hindi" : "english");
-    }
-
-    langToggleBtn.addEventListener("click", toggleLanguage);
-    setLanguage(isHindi ? "hindi" : "english");
-  </script>
 </body>
 </html>
