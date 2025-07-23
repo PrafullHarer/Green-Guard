@@ -189,6 +189,11 @@
       <button type="submit" id="submit-btn">📝 Register</button>
     </form>
 
+    <!-- Google Register Button -->
+    <button id="google-register-btn" style="width:100%;padding:12px;margin-top:10px;background-color:#fff;border:1px solid #4CAF50;border-radius:25px;color:#4CAF50;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background 0.3s, color 0.3s;">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" style="width:22px;height:22px;vertical-align:middle;"> <span id="google-register-label">Sign up with Google</span>
+    </button>
+
     <p class="login-link" id="login-text">Already have an account? <a href="/login">Login here</a></p>
   </div>
 
@@ -255,6 +260,40 @@
   
       isHindi = !isHindi;
     }
+
+  // Google Register
+  const googleRegisterBtn = document.getElementById("google-register-btn");
+  const googleRegisterLabel = document.getElementById("google-register-label");
+  googleRegisterBtn.addEventListener("click", async function () {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+      const result = await firebase.auth().signInWithPopup(provider);
+      const user = result.user;
+      alert("✅ Registered: " + user.email);
+      window.location.href = "login.html";
+    } catch (error) {
+      alert("❌ " + error.message);
+      console.error(error);
+    }
+  });
+
+  // Update Google button label on language toggle
+  function updateGoogleRegisterLabel() {
+    if (isHindi) {
+      googleRegisterLabel.innerText = "Google से पंजीकरण करें";
+    } else {
+      googleRegisterLabel.innerText = "Sign up with Google";
+    }
+  }
+
+  // Patch toggleLanguage to update Google button label
+  const origToggleLanguage = toggleLanguage;
+  toggleLanguage = function() {
+    origToggleLanguage();
+    updateGoogleRegisterLabel();
+  }
+  // Set initial label
+  updateGoogleRegisterLabel();
   </script>
   
 </body>
