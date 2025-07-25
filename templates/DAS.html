@@ -363,92 +363,6 @@
             color: var(--text-color);
         }
 
-        /* Calendar Widget - Compact version */
-        .calendar {
-            text-align: center;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .calendar-month {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 1.1rem;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 8px;
-        }
-
-        .calendar-nav-btn {
-            background: var(--primary);
-            color: rgba(28, 227, 13, 0.548);
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.8rem;
-        }
-
-        .calendar-nav-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 5px;
-        }
-
-        .calendar-day-name {
-            font-size: 0.75rem;
-            color: var(--primary-dark);
-            font-weight: 600;
-            padding: 3px 0;
-        }
-
-        .calendar-dates {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-        }
-
-        .calendar-date {
-            padding: 6px 0;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        .calendar-date:hover:not(.empty):not(.today) {
-            background: rgba(3, 152, 3, 0.621);
-            cursor: pointer;
-        }
-
-        .calendar-date.today {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-
-        .calendar-date.empty {
-            visibility: hidden;
-        }
-
         /* Loading States */
         .loading {
             text-align: center;
@@ -648,33 +562,10 @@
                                 <span id="weather-region">--, --</span>
                             </div>
                         </div>
+                        
                         <h4 style="margin: 12px 0 8px; color: var(--primary-dark); font-size: 0.9rem;"><span class="forecast-title-text">अगले 3 दिन का पूर्वानुमान</span></h4>
                         <div class="weather-forecast" id="weather-forecast">
                             <!-- Forecast will be populated by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-<div class="widget">
-                    <h3 class="widget-title"><i class="fas fa-calendar-alt"></i> <span class="calendar-title-text">आज का दिन</span></h3>
-                    <div class="calendar">
-                        <div class="calendar-header">
-                            <span class="calendar-month" id="current-month">माह, वर्ष</span>
-                            <div class="calendar-nav">
-                                <button class="calendar-nav-btn" id="prev-month"><i class="fas fa-chevron-left"></i></button>
-                                <button class="calendar-nav-btn" id="next-month"><i class="fas fa-chevron-right"></i></button>
-                            </div>
-                        </div>
-                        <div class="calendar-days">
-                            <div class="calendar-day-name"><span class="day-name-0">रवि</span></div>
-                            <div class="calendar-day-name"><span class="day-name-1">सोम</span></div>
-                            <div class="calendar-day-name"><span class="day-name-2">मंगल</span></div>
-                            <div class="calendar-day-name"><span class="day-name-3">बुध</span></div>
-                            <div class="calendar-day-name"><span class="day-name-4">गुरु</span></div>
-                            <div class="calendar-day-name"><span class="day-name-5">शुक्र</span></div>
-                            <div class="calendar-day-name"><span class="day-name-6">शनि</span></div>
-                        </div>
-                        <div class="calendar-dates" id="calendar-dates">
-                            <!-- Calendar dates will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -747,75 +638,38 @@
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
         let currentLang = 'hi'; // Default
-    
+
         const userName = "{{ name }}"; // Inserted from Flask or backend
-    
-        function renderCalendar(month, year) {
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const today = new Date();
-    
-            document.getElementById('current-month').textContent =
-                `${translations[currentLang].monthNames[month]} ${year}`;
-    
-            let calendarHTML = '';
-            for (let i = 0; i < firstDay; i++) {
-                calendarHTML += '<div class="calendar-date empty"></div>';
+
+        // Removed renderCalendar and calendar-related code
+        function updateLanguage() {
+            document.getElementById('greeting-text').textContent = translations[currentLang].greeting.replace('User !', userName);
+            document.getElementById('logout-text').textContent = translations[currentLang].logout;
+            document.getElementById('lang-text').textContent = translations[currentLang].langText;
+            document.querySelector('.dashboard-title-text').textContent = translations[currentLang].dashboardTitle;
+
+            for (let i = 0; i < 6; i++) {
+                document.querySelector(`.card-title-${i + 1}`).textContent = translations[currentLang].cardTitles[i];
+                document.querySelector(`.card-desc-${i + 1}`).textContent = translations[currentLang].cardDescriptions[i];
             }
-            for (let day = 1; day <= daysInMonth; day++) {
-                const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-                calendarHTML += `<div class="calendar-date ${isToday ? 'today' : ''}">${day}</div>`;
-            }
-            document.getElementById('calendar-dates').innerHTML = calendarHTML;
-        }
-    function updateLanguage() {
-        document.getElementById('greeting-text').textContent = translations[currentLang].greeting.replace('User !', userName);
-        document.getElementById('logout-text').textContent = translations[currentLang].logout;
-        document.getElementById('lang-text').textContent = translations[currentLang].langText;
-        document.querySelector('.dashboard-title-text').textContent = translations[currentLang].dashboardTitle;
 
-        for (let i = 0; i < 6; i++) {
-            document.querySelector(`.card-title-${i + 1}`).textContent = translations[currentLang].cardTitles[i];
-            document.querySelector(`.card-desc-${i + 1}`).textContent = translations[currentLang].cardDescriptions[i];
+            document.querySelector('.weather-title-text').textContent = translations[currentLang].weatherTitle;
+            document.querySelector('.weather-loading-text').textContent = translations[currentLang].weatherLoading;
+            document.querySelector('.location-text').textContent = translations[currentLang].locationText;
+            document.querySelectorAll('.forecast-title-text').forEach(el => {
+                el.textContent = translations[currentLang].forecastTitle;
+            });
+            // Removed calendar title and day names update
         }
 
-        document.querySelector('.weather-title-text').textContent = translations[currentLang].weatherTitle;
-        document.querySelector('.weather-loading-text').textContent = translations[currentLang].weatherLoading;
-        document.querySelector('.location-text').textContent = translations[currentLang].locationText;
-        document.querySelector('.forecast-title-text').textContent = translations[currentLang].forecastTitle;
-        document.querySelector('.calendar-title-text').textContent = translations[currentLang].calendarTitle;
+        // Removed calendar navigation event listeners
 
-        // Update day names in the calendar header
-        for (let i = 0; i < 7; i++) {
-            document.querySelector(`.day-name-${i}`).textContent = translations[currentLang].dayNames[i];
-        }
-
-        renderCalendar(currentMonth, currentYear);
-    }
-
-    document.getElementById('prev-month').addEventListener('click', () => {
-        currentMonth--;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
-        renderCalendar(currentMonth, currentYear);
-    });
-
-    document.getElementById('next-month').addEventListener('click', () => {
-        currentMonth++;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
-        }
-        renderCalendar(currentMonth, currentYear);
-    });
-
-    document.getElementById('langToggle').addEventListener('click', () => {
-        currentLang = currentLang === 'hi' ? 'en' : 'hi';
-        document.documentElement.lang = currentLang;
-        updateLanguage();
-    });
+        document.getElementById('langToggle').addEventListener('click', () => {
+            currentLang = currentLang === 'hi' ? 'en' : 'hi';
+            document.documentElement.lang = currentLang;
+            updateLanguage();
+            getLocationAndWeather(); // Ensure weather widget updates with new language
+        });
 
 
     async function getWeatherFromAPI(location) {
@@ -928,8 +782,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        renderCalendar(currentMonth, currentYear); // You must define this elsewhere
-        updateLanguage(); // You must define this elsewhere
+        updateLanguage();
         getLocationAndWeather();
     });
 
