@@ -654,8 +654,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="widget">
+<div class="widget">
                     <h3 class="widget-title"><i class="fas fa-calendar-alt"></i> <span class="calendar-title-text">आज का दिन</span></h3>
                     <div class="calendar">
                         <div class="calendar-header">
@@ -684,14 +683,7 @@
     </div>
 
     <script>
-
-    function logoutAndRedirect() {
-    // If you use localStorage/sessionStorage for login, clear it here if needed
-    // localStorage.removeItem('user');
-    // sessionStorage.removeItem('user');
-    window.location.href = "login.html";
-}
-const translations = {
+        const translations = {
             en: {
                 greeting: "Hello, {{ name }}!",
                 logout: "Logout",
@@ -710,7 +702,7 @@ const translations = {
                     "Crop recommendations and farming methods according to weather and soil",
                     "Talk to our AI assistant for crop disease identification and solutions",
                     "Shop for high-quality seeds, fertilizers, and agricultural tools",
-                    "Learn about Green Guard and get more information about our services"
+                    "Learn about Kisan Sathi and get more information about our services"
                 ],
                 weatherTitle: "Weather Forecast",
                 weatherLoading: "Loading weather information...",
@@ -751,34 +743,31 @@ const translations = {
                 langText: "English"
             }
         };
-
-    let currentLang = 'hi';
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
-    const userName = "User !";
-
-    function renderCalendar(month, year) {
-        const firstDay = new Date(year, month, 1).getDay();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const today = new Date();
-        document.getElementById('current-month').textContent = `${translations[currentLang].monthNames[month]} ${year}`;
-
-        let calendarHTML = '';
-        for (let i = 0; i < firstDay; i++) {
-            calendarHTML += '<div class="calendar-date empty"></div>';
+    
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let currentLang = 'hi'; // Default
+    
+        const userName = "{{ name }}"; // Inserted from Flask or backend
+    
+        function renderCalendar(month, year) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+    
+            document.getElementById('current-month').textContent =
+                `${translations[currentLang].monthNames[month]} ${year}`;
+    
+            let calendarHTML = '';
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += '<div class="calendar-date empty"></div>';
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                calendarHTML += `<div class="calendar-date ${isToday ? 'today' : ''}">${day}</div>`;
+            }
+            document.getElementById('calendar-dates').innerHTML = calendarHTML;
         }
-        for (let day = 1; day <= daysInMonth; day++) {
-            const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-            calendarHTML += `<div class="calendar-date ${isToday ? 'today' : ''}">${day}</div>`;
-        }
-        document.getElementById('calendar-dates').innerHTML = calendarHTML;
-
-        // Update day names in the calendar header
-        for (let i = 0; i < 7; i++) {
-            document.querySelector(`.day-name-${i}`).textContent = translations[currentLang].dayNames[i];
-        }
-    }
-
     function updateLanguage() {
         document.getElementById('greeting-text').textContent = translations[currentLang].greeting.replace('User !', userName);
         document.getElementById('logout-text').textContent = translations[currentLang].logout;
