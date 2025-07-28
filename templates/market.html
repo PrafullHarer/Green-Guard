@@ -21,11 +21,11 @@
             </a>
             <div class="user-greeting" id="greeting">
                 <i class="fas fa-seedling"></i>
-                <span id="greeting-text">नमस्ते, User !</span>
+                <span id="greeting-text">Hello , User !</span>
             </div>
             <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
                 <i class="fas fa-sign-out-alt"></i> 
-                <span id="logout-text">लॉगआउट</span>
+                <span id="logout-text">Logout</span>
             </a>
         </div>
     </div>
@@ -181,6 +181,10 @@
         document.getElementById('refresh-btn').addEventListener('click', locateUser);
 
         locateUser();
+
+        function logoutAndRedirect() {
+    window.location.href = "login.html";
+  }
     </script>
 
 </body>

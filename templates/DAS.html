@@ -1,216 +1,212 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Guard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/DAS.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Green Guard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/DAS.css"/>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="/static/image/greenguard_logo.png" alt="FarmConnect Logo" class="logo">
-            <div class="user-info">
-                <a href="profile.html" class="profile-link" title="View Profile">
-                    <i class="fas fa-user"></i>
-                </a>
-                <div class="user-greeting" id="greeting">
-                    <i class="fas fa-seedling"></i> 
-                    <span id="greeting-text">Hello, User!</span>
-                </div>
-                <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
-                    <i class="fas fa-sign-out-alt"></i> 
-                    <span id="logout-text">Logout</span>
-                </a>
-            </div>
+  <div class="container">
+    <div class="header">
+      <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo"/>
+      <div class="user-info">
+        <a href="profile.html" class="profile-link" title="View Profile">
+          <i class="fas fa-user"></i>
+        </a>
+        <div class="user-greeting" id="greeting">
+          <i class="fas fa-seedling"></i>
+          <span id="greeting-text">Hello, User!</span>
         </div>
-        <h1 class="dashboard-title"><span class="dashboard-title-text">Your Agriculture Dashboard</span></h1>
-
-        <div class="dashboard-content">
-            <div class="dashboard-grid">
-                <a href="disease.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-robot"></i></div>
-                    <h3 class="card-title-4">AI Assistant</h3>
-                    <p class="card-desc-4">Talk to our AI assistant for crop disease identification and solutions</p>
-                </a>
-                <a href="market.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="card-title-2">Agricultural Market Info</h3>
-                    <p class="card-desc-2">Current prices and market analysis of agricultural products in nearby mandis</p>
-                </a>
-                <a href="crop_advice.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-leaf"></i></div>
-                    <h3 class="card-title-3">Crop Advice</h3>
-                    <p class="card-desc-3">Crop suggestions and methods based on weather and soil</p>
-                </a>
-                <a href="schemes.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <h3 class="card-title-1">Government Schemes</h3>
-                    <p class="card-desc-1">Information and application process for all government schemes related to agriculture</p>
-                </a>
-                <a href="market1.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
-                    <h3 class="card-title-5">Seed and Equipment Market</h3>
-                    <p class="card-desc-5">Buy high-quality seeds, fertilizers, and agricultural equipment</p>
-                </a>
-                <a href="about.html" class="dashboard-card">
-                    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-                    <h3 class="card-title-6">About Us</h3>
-                    <p class="card-desc-6">Learn about Green Guard and get more information about our services</p>
-                </a>
-            </div>
-            <div class="widget-container">
-                <div class="widget weather-widget">
-                    <h3 class="widget-title"><i class="fas fa-cloud-sun"></i> <span class="weather-title-text">Weather Forecast</span></h3>
-                    <div id="weather-loading" class="loading">
-                        <i class="fas fa-spinner"></i> <span class="weather-loading-text">Loading weather data...</span>
-                    </div>
-                    <div id="weather-error" class="error-message" style="display: none;"></div>
-                    <div id="weather-content" style="display: none;">
-                        <div class="current-weather">
-                            <div class="weather-icon-large">
-                                <img id="current-weather-icon" src="" alt="Current Weather">
-                            </div>
-                            <div>
-                                <div class="weather-temp-large"><span id="current-temp">--</span>°C</div>
-                                <div class="weather-location" id="weather-location"><span class="location-text">Location being determined...</span></div>
-                                <div class="weather-desc" id="weather-desc">--</div>
-                            </div>
-                        </div>
-                        <div class="weather-details">
-                            <div class="weather-detail">
-                                <i class="fas fa-wind"></i>
-                                <span id="weather-wind">-- kph</span>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-tint"></i>
-                                <span id="weather-humidity">--%</span>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-temperature-low"></i>
-                                <span id="weather-feelslike">--°C</span>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span id="weather-region">--, --</span>
-                            </div>
-                        </div>
-                        <h4 style="margin: 12px 0 8px; color: var(--primary-dark); font-size: 0.9rem;"><span class="forecast-title-text">3-Day Forecast</span></h4>
-                        <div class="weather-forecast" id="weather-forecast"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+            <i class="fas fa-sign-out-alt"></i> 
+            <span id="logout-text">Logout</span>
+        </a>
+      </div>
     </div>
 
-<script>
+    <h1 class="dashboard-title">
+      <span class="dashboard-title-text">Your Agriculture Dashboard</span>
+    </h1>
+
+    <div class="dashboard-content">
+      <div class="dashboard-grid">
+        <a href="disease.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-robot"></i></div>
+          <h3 class="card-title-4">AI Assistant</h3>
+          <p class="card-desc-4">Talk to our AI assistant for crop disease identification and solutions</p>
+        </a>
+        <a href="market.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <h3 class="card-title-2">Agricultural Market Info</h3>
+          <p class="card-desc-2">Current prices and market analysis of agricultural products in nearby mandis</p>
+        </a>
+        <a href="crop_advice.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-leaf"></i></div>
+          <h3 class="card-title-3">Crop Advice</h3>
+          <p class="card-desc-3">Crop suggestions and methods based on weather and soil</p>
+        </a>
+        <a href="schemes.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3 class="card-title-1">Government Schemes</h3>
+          <p class="card-desc-1">Information and application process for all government schemes related to agriculture</p>
+        </a>
+        <a href="market1.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
+          <h3 class="card-title-5">Seed and Equipment Market</h3>
+          <p class="card-desc-5">Buy high-quality seeds, fertilizers, and agricultural equipment</p>
+        </a>
+        <a href="about.html" class="dashboard-card">
+          <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+          <h3 class="card-title-6">About Us</h3>
+          <p class="card-desc-6">Learn about Green Guard and get more information about our services</p>
+        </a>
+      </div>
+
+      <div class="widget-container">
+        <div class="widget weather-widget">
+          <h3 class="widget-title"><i class="fas fa-cloud-sun"></i> <span class="weather-title-text">Weather Forecast</span></h3>
+          <div id="weather-loading" class="loading">
+            <i class="fas fa-spinner"></i> <span class="weather-loading-text">Loading weather data...</span>
+          </div>
+          <div id="weather-error" class="error-message" style="display: none;"></div>
+          <div id="weather-content" style="display: none;">
+            <div class="current-weather">
+              <div class="weather-icon-large">
+                <img id="current-weather-icon" src="" alt="Current Weather">
+              </div>
+              <div>
+                <div class="weather-temp-large"><span id="current-temp">--</span>°C</div>
+                <div class="weather-location" id="weather-location"><span class="location-text">Location being determined...</span></div>
+                <div class="weather-desc" id="weather-desc">--</div>
+              </div>
+            </div>
+            <div class="weather-details">
+              <div class="weather-detail"><i class="fas fa-wind"></i> <span id="weather-wind">-- kph</span></div>
+              <div class="weather-detail"><i class="fas fa-tint"></i> <span id="weather-humidity">--%</span></div>
+              <div class="weather-detail"><i class="fas fa-temperature-low"></i> <span id="weather-feelslike">--°C</span></div>
+              <div class="weather-detail"><i class="fas fa-map-marker-alt"></i> <span id="weather-region">--, --</span></div>
+            </div>
+            <h4 style="margin: 12px 0 8px; color: var(--primary-dark); font-size: 0.9rem;"><span class="forecast-title-text">3-Day Forecast</span></h4>
+            <div class="weather-forecast" id="weather-forecast"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     async function getWeatherFromAPI(location) {
-        const apiKey = "8cc6019347fb4791b83181032251907";
-        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(location)}&days=4&aqi=no&alerts=no`;
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
+      const apiKey = "8cc6019347fb4791b83181032251907";
+      const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(location)}&days=4&aqi=no&alerts=no`;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
 
-            if (data.error) {
-                return { error: data.error.message || "Unknown error" };
-            }
-
-            return {
-                location: data.location,
-                current: {
-                    temp_c: data.current.temp_c || "--",
-                    condition: data.current.condition.text || "--",
-                    icon: data.current.condition.icon || "",
-                    wind_kph: data.current.wind_kph || "--",
-                    humidity: data.current.humidity || "--",
-                    feelslike_c: data.current.feelslike_c || "--"
-                },
-                forecast: data.forecast.forecastday.map(day => ({
-                    date: day.date,
-                    maxtemp_c: day.day.maxtemp_c,
-                    mintemp_c: day.day.mintemp_c,
-                    condition: day.day.condition.text,
-                    icon: day.day.condition.icon
-                }))
-            };
-        } catch (err) {
-            console.error("Weather fetch error:", err);
-            return { error: "Failed to fetch weather data." };
+        if (data.error) {
+          return { error: data.error.message || "Unknown error" };
         }
+
+        return {
+          location: data.location,
+          current: {
+            temp_c: data.current.temp_c || "--",
+            condition: data.current.condition.text || "--",
+            icon: data.current.condition.icon || "",
+            wind_kph: data.current.wind_kph || "--",
+            humidity: data.current.humidity || "--",
+            feelslike_c: data.current.feelslike_c || "--"
+          },
+          forecast: data.forecast.forecastday.map(day => ({
+            date: day.date,
+            maxtemp_c: day.day.maxtemp_c,
+            mintemp_c: day.day.mintemp_c,
+            condition: day.day.condition.text,
+            icon: day.day.condition.icon
+          }))
+        };
+      } catch (err) {
+        console.error("Weather fetch error:", err);
+        return { error: "Failed to fetch weather data." };
+      }
     }
 
     function updateWeatherUI(weatherData) {
-        document.getElementById('weather-loading').style.display = 'none';
+      document.getElementById('weather-loading').style.display = 'none';
 
-        if (weatherData.error) {
-            document.getElementById('weather-error').style.display = 'block';
-            document.getElementById('weather-error').textContent = "Error getting weather data: " + weatherData.error;
-            return;
-        }
+      if (weatherData.error) {
+        document.getElementById('weather-error').style.display = 'block';
+        document.getElementById('weather-error').textContent = "Error getting weather data: " + weatherData.error;
+        return;
+      }
 
-        document.getElementById('weather-content').style.display = 'block';
-        document.getElementById('current-temp').textContent = weatherData.current.temp_c;
-        document.querySelector('#weather-location .location-text').textContent = weatherData.location.name;
-        document.getElementById('weather-desc').textContent = weatherData.current.condition;
+      document.getElementById('weather-content').style.display = 'block';
+      document.getElementById('current-temp').textContent = weatherData.current.temp_c;
+      document.querySelector('#weather-location .location-text').textContent = weatherData.location.name;
+      document.getElementById('weather-desc').textContent = weatherData.current.condition;
 
-        const iconURL = weatherData.current.icon.startsWith('http') ? weatherData.current.icon : `https:${weatherData.current.icon}`;
-        document.getElementById('current-weather-icon').src = iconURL;
+      const iconURL = weatherData.current.icon.startsWith('http') ? weatherData.current.icon : `https:${weatherData.current.icon}`;
+      document.getElementById('current-weather-icon').src = iconURL;
 
-        document.getElementById('weather-wind').textContent = `${weatherData.current.wind_kph} kph`;
-        document.getElementById('weather-humidity').textContent = `${weatherData.current.humidity}%`;
-        document.getElementById('weather-feelslike').textContent = `${weatherData.current.feelslike_c}°C`;
+      document.getElementById('weather-wind').textContent = `${weatherData.current.wind_kph} kph`;
+      document.getElementById('weather-humidity').textContent = `${weatherData.current.humidity}%`;
+      document.getElementById('weather-feelslike').textContent = `${weatherData.current.feelslike_c}°C`;
 
-        let forecastHTML = '';
-        weatherData.forecast.slice(1).forEach(day => {
-            const date = new Date(day.date);
-            const dayName = date.toLocaleDateString("en-IN", { weekday: "long" });
-            forecastHTML += `
-                <div class="forecast-day">
-                    <h4>${dayName}</h4>
-                    <div class="forecast-icon">
-                        <img src="${day.icon.startsWith('http') ? day.icon : 'https:' + day.icon}" alt="${day.condition}">
-                    </div>
-                    <div class="forecast-temp">
-                        ${day.maxtemp_c}° / ${day.mintemp_c}°
-                    </div>
-                </div>`;
-        });
-        document.getElementById('weather-forecast').innerHTML = forecastHTML;
+      let forecastHTML = '';
+      weatherData.forecast.slice(1).forEach(day => {
+        const date = new Date(day.date);
+        const dayName = date.toLocaleDateString("en-IN", { weekday: "long" });
+        forecastHTML += `
+          <div class="forecast-day">
+            <h4>${dayName}</h4>
+            <div class="forecast-icon">
+              <img src="${day.icon.startsWith('http') ? day.icon : 'https:' + day.icon}" alt="${day.condition}">
+            </div>
+            <div class="forecast-temp">
+              ${day.maxtemp_c}° / ${day.mintemp_c}°
+            </div>
+          </div>`;
+      });
+      document.getElementById('weather-forecast').innerHTML = forecastHTML;
     }
 
     function getLocationAndWeather() {
-        const weatherTimeout = setTimeout(() => {
-            document.getElementById('weather-loading').style.display = 'none';
-            document.getElementById('weather-error').style.display = 'block';
-            document.getElementById('weather-error').textContent = "Timeout: Could not fetch weather data.";
-        }, 10000);
+      const weatherTimeout = setTimeout(() => {
+        document.getElementById('weather-loading').style.display = 'none';
+        document.getElementById('weather-error').style.display = 'block';
+        document.getElementById('weather-error').textContent = "Timeout: Could not fetch weather data.";
+      }, 10000);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                async position => {
-                    clearTimeout(weatherTimeout);
-                    const latlon = `${position.coords.latitude},${position.coords.longitude}`;
-                    const data = await getWeatherFromAPI(latlon);
-                    updateWeatherUI(data);
-                },
-                async () => {
-                    clearTimeout(weatherTimeout);
-                    const data = await getWeatherFromAPI("Delhi");
-                    updateWeatherUI(data);
-                },
-                { timeout: 5000 }
-            );
-        } else {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async position => {
             clearTimeout(weatherTimeout);
-            getWeatherFromAPI("Delhi").then(updateWeatherUI);
-        }
+            const latlon = `${position.coords.latitude},${position.coords.longitude}`;
+            const data = await getWeatherFromAPI(latlon);
+            updateWeatherUI(data);
+          },
+          async () => {
+            clearTimeout(weatherTimeout);
+            const data = await getWeatherFromAPI("Delhi");
+            updateWeatherUI(data);
+          },
+          { timeout: 5000 }
+        );
+      } else {
+        clearTimeout(weatherTimeout);
+        getWeatherFromAPI("Delhi").then(updateWeatherUI);
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        getLocationAndWeather();
+      getLocationAndWeather();
     });
-</script>
+
+    function logoutAndRedirect() {
+    window.location.href = "login.html";
+  }
+  </script>
 </body>
 </html>
