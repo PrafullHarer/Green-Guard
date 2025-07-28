@@ -1,301 +1,78 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - प्रोफाइल</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2E7D32;
-            --primary-light: #4CAF50;
-            --primary-dark: #1B5E20;
-            --secondary: #FFC107;
-            --secondary-dark: #FFA000;
-            --light: #f5f5f5;
-            --dark: #212121;
-            --card-bg: #FFFFFF;
-            --text-color: #333333;
-            --text-light: #757575;
-            --border-color: #e0e0e0;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Guard - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image: url('{{ url_for("static", filename="image/background.jpg") }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-in-out;
-            position: relative;
-        }
-
-        .logo {
-            width: 80px;
-            margin-bottom: 15px;
-        }
-
-        h2 {
-            font-size: 1.4rem;
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .profile-icon {
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-right: 20px;
-            overflow: hidden;
-            border: 3px solid var(--primary-light);
-        }
-
-        .profile-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .profile-icon i {
-            display: none;
-        }
-
-        .profile-icon:not(:has(img)) i {
-            display: flex;
-        }
-
-        .profile-info {
-            text-align: left;
-        }
-
-        .profile-info h3 {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            margin-bottom: 5px;
-        }
-
-        .profile-details {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .detail-item {
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-        }
-
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .detail-item i {
-            color: var(--primary);
-            margin-right: 15px;
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .detail-label {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            width: 100px;
-        }
-
-        .detail-value {
-            color: var(--text-color);
-            font-weight: 500;
-            flex-grow: 1;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary);
-            color: var(--dark);
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--secondary-dark);
-            transform: translateY(-2px);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 </head>
+
 <body>
     <div class="container">
-        <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Green GuardLogo" class="logo">
-        <h2 id="title">🌾 User Profile 🌾</h2>
+        <a href="DAS.html" class="home-button" title="Go to Dashboard">🏠</a>
 
-        <div class="profile-header">
-            <div class="profile-icon">
-                {% if profile_picture %}
-                    <img src="{{ url_for('uploaded_images', filename=profile_picture) }}" alt="Profile Picture" onerror="this.style.display='none'; this.parentElement.querySelector('i').style.display='flex';">
-                {% endif %}
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="profile-info">
-                <h3>User !</h3>
-                <p>{{ email }}</p>
-            </div>
-        </div>
+        <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
+        <h2>🌿 Green Guard - Your Profile 🌿</h2>
 
-        <div class="profile-details">
-            <div class="detail-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span class="detail-label" id="label-village">Village:</span>
-                <span class="detail-value">{{ village }}</span>
-            </div>
-            <div class="detail-item">
-                <i class="fas fa-city"></i>
-                <span class="detail-label" id="label-district">District:</span>
-                <span class="detail-value">{{ district }}</span>
-            </div>
-            <div class="detail-item">
-                <i class="fas fa-map"></i>
-                <span class="detail-label" id="label-state">State:</span>
-                <span class="detail-value">{{ state }}</span>
-            </div>
-            <div class="detail-item">
-                <i class="fas fa-phone"></i>
-                <span class="detail-label" id="label-phone">Phone:</span>
-                <span class="detail-value">{{ phone }}</span>
-            </div>
-            <div class="detail-item">
-                <i class="fas fa-seedling"></i>
-                <span class="detail-label" id="label-crops">Crops:</span>
-                <span class="detail-value">{{ crops }}</span>
-            </div>
-        </div>
-
-        <div class="buttons">
-            <a href="/dashboard" class="btn btn-secondary" id="btn-back">
-                <i class="fas fa-arrow-left"></i> 
-                <span>Back</span>
-            </a>
-            <a href="/edit-profile" class="btn btn-primary" id="btn-edit">
-                <i class="fas fa-edit"></i> 
-                <span>Edit Profile</span>
-            </a>
+        <div id="profileData">
+            <p><strong>👤 Name:</strong> <span id="profile-name"></span></p>
+            <p><strong>📧 Email:</strong> <span id="profile-email"></span></p>
+            <p><strong>📱 Phone:</strong> <span id="profile-phone"></span></p>
+            <p><strong>🌍 State:</strong> <span id="profile-state"></span></p>
+            <p><strong>🏣 District:</strong> <span id="profile-district"></span></p>
+            <p><strong>🌾 Farmer Type:</strong> <span id="profile-farmerType"></span></p>
+            <button onclick="location.href='edit_profile.html'">✏️ Edit Profile</button>
+            <button onclick="logout()">🚪 Logout</button>
         </div>
     </div>
 
     <script>
-        let isHindi = false;
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
+            authDomain: "greenguard-408ed.firebaseapp.com",
+            projectId: "greenguard-408ed"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        function toggleLanguage() {
-            const title = document.getElementById("title");
-            const langToggle = document.getElementById("langToggle");
-            const labelVillage = document.getElementById("label-village");
-            const labelDistrict = document.getElementById("label-district");
-            const labelState = document.getElementById("label-state");
-            const labelPhone = document.getElementById("label-phone");
-            const labelCrops = document.getElementById("label-crops");
-            const btnBack = document.getElementById("btn-back");
-            const btnEdit = document.getElementById("btn-edit");
-            
-            if (isHindi) {
-                title.innerText = "🌾 User Profile 🌾";
-                langToggle.innerText = "हिन्दी";
-                labelVillage.innerText = "Village:";
-                labelDistrict.innerText = "District:";
-                labelState.innerText = "State:";
-                labelPhone.innerText = "Phone:";
-                labelCrops.innerText = "Crops:";
-                btnBack.innerHTML = '<i class="fas fa-arrow-left"></i> <span>Back</span>';
-                btnEdit.innerHTML = '<i class="fas fa-edit"></i> <span>Edit Profile</span>';
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                const uid = user.uid;
+                try {
+                    const doc = await db.collection("users").doc(uid).get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById("profile-name").innerText = data.name || "";
+                        document.getElementById("profile-email").innerText = data.email || "";
+                        document.getElementById("profile-phone").innerText = data.phone || "";
+                        document.getElementById("profile-state").innerText = data.state || "";
+                        document.getElementById("profile-district").innerText = data.district || "";
+                        document.getElementById("profile-farmerType").innerText = data.farmerType || "";
+                    } else {
+                        alert("No user data found.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching profile:", error);
+                }
             } else {
-                title.innerText = "🌾 उपयोगकर्ता प्रोफाइल 🌾";
-                langToggle.innerText = "English";
-                labelVillage.innerText = "गांव:";
-                labelDistrict.innerText = "जिला:";
-                labelState.innerText = "राज्य:";
-                labelPhone.innerText = "फोन:";
-                labelCrops.innerText = "फसलें:";
-                btnBack.innerHTML = '<i class="fas fa-arrow-left"></i> <span>वापस जाएं</span>';
-                btnEdit.innerHTML = '<i class="fas fa-edit"></i> <span>प्रोफाइल संपादित करें</span>';
+                window.location.href = "login.html";
             }
-            
-            isHindi = !isHindi;
+        });
+
+        function logout() {
+            firebase.auth().signOut().then(() => {
+                window.location.href = "login.html";
+            });
         }
     </script>
 </body>
+
 </html>
