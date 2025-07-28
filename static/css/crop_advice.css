@@ -1,0 +1,121 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #FFC107;
+      --accent-color: #2196F3;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: rgba(105, 249, 2, 0.283);
+      color: white;
+      min-height: 100vh;
+    }
+
+    nav {
+      background-color: #d2ffbd;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 30px 20px;
+      color: black;
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.9);
+      margin: 0;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: var(--secondary-color);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      padding: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.715);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      backdrop-filter: blur(8px);
+      padding: 25px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 24px;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .more-info-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .more-info-btn:hover {
+      background-color: var(--secondary-color);
+      color: #333;
+    }
+
+    @media (max-width: 1200px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
