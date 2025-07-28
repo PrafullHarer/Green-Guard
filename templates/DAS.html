@@ -3,93 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड</title>
+    <title>Green Guard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="\static\css\DAS.css">
+    <link rel="stylesheet" href="/static/css/DAS.css">
 </head>
 <body>
     <div class="container">
-        <div class="container">
-            <div class="header">
-                <img src="\static\image\greenguard_logo.png" alt="FarmConnect Logo" class="logo">
-                <div class="user-info">
-                    <a href="profile.html" class="profile-link" title="View Profile">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <div class="user-greeting" id="greeting">
-                        <i class="fas fa-seedling"></i> 
-                        <span id="greeting-text">नमस्ते, User !</span>
-                    </div>
-                    <button class="lang-toggle" id="langToggle">
-                        <i class="fas fa-language"></i>
-                        <span id="lang-text">English</span>
-                    </button>
-                    <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
-                        <i class="fas fa-sign-out-alt"></i> 
-                        <span id="logout-text">लॉगआउट</span>
-                    </a>
+        <div class="header">
+            <img src="/static/image/greenguard_logo.png" alt="FarmConnect Logo" class="logo">
+            <div class="user-info">
+                <a href="profile.html" class="profile-link" title="View Profile">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="user-greeting" id="greeting">
+                    <i class="fas fa-seedling"></i> 
+                    <span id="greeting-text">Hello, User!</span>
                 </div>
+                <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+                    <i class="fas fa-sign-out-alt"></i> 
+                    <span id="logout-text">Logout</span>
+                </a>
             </div>
-        <h1 class="dashboard-title"><span class="dashboard-title-text">आपका कृषि डैशबोर्ड</span></h1>
+        </div>
+        <h1 class="dashboard-title"><span class="dashboard-title-text">Your Agriculture Dashboard</span></h1>
 
         <div class="dashboard-content">
             <div class="dashboard-grid">
-
-
-
-
                 <a href="disease.html" class="dashboard-card">
                     <div class="card-icon"><i class="fas fa-robot"></i></div>
-                    <h3 class="card-title-4">AI सहायक</h3>
-                    <p class="card-desc-4">फसल रोगों की पहचान और समाधान के लिए हमारे AI सहायक से बात करें</p>
+                    <h3 class="card-title-4">AI Assistant</h3>
+                    <p class="card-desc-4">Talk to our AI assistant for crop disease identification and solutions</p>
                 </a>
-
-
-
-
                 <a href="market.html" class="dashboard-card">
                     <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="card-title-2">कृषि बाजार जानकारी</h3>
-                    <p class="card-desc-2">नजदीकी मंडियों में कृषि उत्पादों के वर्तमान कीमतें और बाजार विश्लेषण</p>
+                    <h3 class="card-title-2">Agricultural Market Info</h3>
+                    <p class="card-desc-2">Current prices and market analysis of agricultural products in nearby mandis</p>
                 </a>
-                
-
                 <a href="crop_advice.html" class="dashboard-card">
                     <div class="card-icon"><i class="fas fa-leaf"></i></div>
-                    <h3 class="card-title-3">फसल सलाह</h3>
-                    <p class="card-desc-3">मौसम और मिट्टी के अनुसार फसल सिफारिशें और खेती के तरीके</p>
+                    <h3 class="card-title-3">Crop Advice</h3>
+                    <p class="card-desc-3">Crop suggestions and methods based on weather and soil</p>
                 </a>
-
-                
                 <a href="schemes.html" class="dashboard-card">
                     <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <h3 class="card-title-1">सरकारी योजनाएं</h3>
-                    <p class="card-desc-1">कृषि से संबंधित सभी सरकारी योजनाओं की जानकारी और आवेदन प्रक्रिया</p>
+                    <h3 class="card-title-1">Government Schemes</h3>
+                    <p class="card-desc-1">Information and application process for all government schemes related to agriculture</p>
                 </a>
-
                 <a href="market1.html" class="dashboard-card">
-        <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
-        <h3 class="card-title-5">बीज और उपकरण बाजार</h3>
-        <p class="card-desc-5">उच्च गुणवत्ता वाले बीज, उर्वरक और कृषि उपकरणों की खरीदारी करें</p>
-    </a>
-
-    <a href="about.html" class="dashboard-card">
-        <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-        <h3 class="card-title-6">हमारे बारे में</h3>
-        <p class="card-desc-6">ग्रीन गार्ड के बारे में जानें और हमारी सेवाओं के बारे में अधिक जानकारी प्राप्त करें</p>
-    </a>
-
-
-
-
+                    <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <h3 class="card-title-5">Seed and Equipment Market</h3>
+                    <p class="card-desc-5">Buy high-quality seeds, fertilizers, and agricultural equipment</p>
+                </a>
+                <a href="about.html" class="dashboard-card">
+                    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                    <h3 class="card-title-6">About Us</h3>
+                    <p class="card-desc-6">Learn about Green Guard and get more information about our services</p>
+                </a>
             </div>
-
             <div class="widget-container">
                 <div class="widget weather-widget">
-                    <h3 class="widget-title"><i class="fas fa-cloud-sun"></i> <span class="weather-title-text">मौसम पूर्वानुमान</span></h3>
+                    <h3 class="widget-title"><i class="fas fa-cloud-sun"></i> <span class="weather-title-text">Weather Forecast</span></h3>
                     <div id="weather-loading" class="loading">
-                        <i class="fas fa-spinner"></i> <span class="weather-loading-text">मौसम जानकारी लोड हो रही है...</span>
+                        <i class="fas fa-spinner"></i> <span class="weather-loading-text">Loading weather data...</span>
                     </div>
                     <div id="weather-error" class="error-message" style="display: none;"></div>
                     <div id="weather-content" style="display: none;">
@@ -99,7 +75,7 @@
                             </div>
                             <div>
                                 <div class="weather-temp-large"><span id="current-temp">--</span>°C</div>
-                                <div class="weather-location" id="weather-location"><span class="location-text">स्थान ज्ञात किया जा रहा है...</span></div>
+                                <div class="weather-location" id="weather-location"><span class="location-text">Location being determined...</span></div>
                                 <div class="weather-desc" id="weather-desc">--</div>
                             </div>
                         </div>
@@ -121,116 +97,15 @@
                                 <span id="weather-region">--, --</span>
                             </div>
                         </div>
-                        
-                        <h4 style="margin: 12px 0 8px; color: var(--primary-dark); font-size: 0.9rem;"><span class="forecast-title-text">अगले 3 दिन का पूर्वानुमान</span></h4>
-                        <div class="weather-forecast" id="weather-forecast">
-                            <!-- Forecast will be populated by JavaScript -->
-                        </div>
+                        <h4 style="margin: 12px 0 8px; color: var(--primary-dark); font-size: 0.9rem;"><span class="forecast-title-text">3-Day Forecast</span></h4>
+                        <div class="weather-forecast" id="weather-forecast"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const translations = {
-            en: {
-                greeting: "Hello, {{ name }}!",
-                logout: "Logout",
-                dashboardTitle: "Your Agriculture Dashboard",
-                cardTitles: [
-                    "Government Schemes",
-                    "Agricultural Market Info",
-                    "Crop Advice",
-                    "AI Assistant",
-                    "Seed and Equipment Market",
-                    "About Us"
-                ],
-                cardDescriptions: [
-                    "Information and application process for all government schemes related to agriculture",
-                    "Current prices of agricultural products in nearby markets and market analysis",
-                    "Crop recommendations and farming methods according to weather and soil",
-                    "Talk to our AI assistant for crop disease identification and solutions",
-                    "Shop for high-quality seeds, fertilizers, and agricultural tools",
-                    "Learn about Kisan Sathi and get more information about our services"
-                ],
-                weatherTitle: "Weather Forecast",
-                weatherLoading: "Loading weather information...",
-                locationText: "Detecting location...",
-                forecastTitle: "Next 3 Days Forecast",
-                calendarTitle: "Today",
-                dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-                monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                langText: "हिंदी"
-            },
-            hi: {
-                greeting: "नमस्ते, {{ name }}!",
-                logout: "लॉग आउट",
-                dashboardTitle: "आपका कृषि डैशबोर्ड",
-                cardTitles: [
-                    "सरकारी योजनाएं",
-                    "कृषि बाजार जानकारी",
-                    "फसल सलाह",
-                    "AI सहायक",
-                    "बीज और उपकरण बाजार",
-                    "हमारे बारे में"
-                ],
-                cardDescriptions: [
-                    "कृषि से संबंधित सभी सरकारी योजनाओं की जानकारी और आवेदन प्रक्रिया",
-                    "नजदीकी मंडियों में कृषि उत्पादों के वर्तमान कीमतें और बाजार विश्लेषण",
-                    "मौसम और मिट्टी के अनुसार फसल सिफारिशें और खेती के तरीके",
-                    "फसल रोगों की पहचान और समाधान के लिए हमारे AI सहायक से बात करें",
-                    "उच्च गुणवत्ता वाले बीज, उर्वरक और कृषि उपकरणों की खरीदारी करें",
-                    "किसान साथी के बारे में जानें और हमारी सेवाओं के बारे में अधिक जानकारी प्राप्त करें"
-                ],
-                weatherTitle: "मौसम पूर्वानुमान",
-                weatherLoading: "मौसम जानकारी लोड हो रही है...",
-                locationText: "स्थान ज्ञात किया जा रहा है...",
-                forecastTitle: "अगले 3 दिन का पूर्वानुमान",
-                calendarTitle: "आज का दिन",
-                dayNames: ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"],
-                monthNames: ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर", "अक्टूबर", "नवम्बर", "दिसम्बर"],
-                langText: "English"
-            }
-        };
-    
-        let currentMonth = new Date().getMonth();
-        let currentYear = new Date().getFullYear();
-        let currentLang = 'hi'; // Default
-
-        const userName = "{{ name }}"; // Inserted from Flask or backend
-
-        // Removed renderCalendar and calendar-related code
-        function updateLanguage() {
-            document.getElementById('greeting-text').textContent = translations[currentLang].greeting.replace('User !', userName);
-            document.getElementById('logout-text').textContent = translations[currentLang].logout;
-            document.getElementById('lang-text').textContent = translations[currentLang].langText;
-            document.querySelector('.dashboard-title-text').textContent = translations[currentLang].dashboardTitle;
-
-            for (let i = 0; i < 6; i++) {
-                document.querySelector(`.card-title-${i + 1}`).textContent = translations[currentLang].cardTitles[i];
-                document.querySelector(`.card-desc-${i + 1}`).textContent = translations[currentLang].cardDescriptions[i];
-            }
-
-            document.querySelector('.weather-title-text').textContent = translations[currentLang].weatherTitle;
-            document.querySelector('.weather-loading-text').textContent = translations[currentLang].weatherLoading;
-            document.querySelector('.location-text').textContent = translations[currentLang].locationText;
-            document.querySelectorAll('.forecast-title-text').forEach(el => {
-                el.textContent = translations[currentLang].forecastTitle;
-            });
-            // Removed calendar title and day names update
-        }
-
-        // Removed calendar navigation event listeners
-
-        document.getElementById('langToggle').addEventListener('click', () => {
-            currentLang = currentLang === 'hi' ? 'en' : 'hi';
-            document.documentElement.lang = currentLang;
-            updateLanguage();
-            getLocationAndWeather(); // Ensure weather widget updates with new language
-        });
-
-
+<script>
     async function getWeatherFromAPI(location) {
         const apiKey = "8cc6019347fb4791b83181032251907";
         const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(location)}&days=4&aqi=no&alerts=no`;
@@ -252,7 +127,7 @@
                     humidity: data.current.humidity || "--",
                     feelslike_c: data.current.feelslike_c || "--"
                 },
-                forecast: data.forecast.forecastday.slice(0, 4).map(day => ({
+                forecast: data.forecast.forecastday.map(day => ({
                     date: day.date,
                     maxtemp_c: day.day.maxtemp_c,
                     mintemp_c: day.day.mintemp_c,
@@ -271,21 +146,16 @@
 
         if (weatherData.error) {
             document.getElementById('weather-error').style.display = 'block';
-            document.getElementById('weather-error').textContent =
-                currentLang === 'hi'
-                    ? "मौसम डेटा प्राप्त करने में त्रुटि: " + weatherData.error
-                    : "Error getting weather data: " + weatherData.error;
+            document.getElementById('weather-error').textContent = "Error getting weather data: " + weatherData.error;
             return;
         }
 
         document.getElementById('weather-content').style.display = 'block';
         document.getElementById('current-temp').textContent = weatherData.current.temp_c;
-        document.getElementById('weather-location').textContent = weatherData.location.name;
+        document.querySelector('#weather-location .location-text').textContent = weatherData.location.name;
         document.getElementById('weather-desc').textContent = weatherData.current.condition;
 
-        const iconURL = weatherData.current.icon.startsWith('http')
-            ? weatherData.current.icon
-            : `https:${weatherData.current.icon}`;
+        const iconURL = weatherData.current.icon.startsWith('http') ? weatherData.current.icon : `https:${weatherData.current.icon}`;
         document.getElementById('current-weather-icon').src = iconURL;
 
         document.getElementById('weather-wind').textContent = `${weatherData.current.wind_kph} kph`;
@@ -294,7 +164,8 @@
 
         let forecastHTML = '';
         weatherData.forecast.slice(1).forEach(day => {
-            const dayName = translations[currentLang].dayNames[new Date(day.date).getDay()];
+            const date = new Date(day.date);
+            const dayName = date.toLocaleDateString("en-IN", { weekday: "long" });
             forecastHTML += `
                 <div class="forecast-day">
                     <h4>${dayName}</h4>
@@ -313,10 +184,7 @@
         const weatherTimeout = setTimeout(() => {
             document.getElementById('weather-loading').style.display = 'none';
             document.getElementById('weather-error').style.display = 'block';
-            document.getElementById('weather-error').textContent =
-                currentLang === 'hi'
-                    ? "समय समाप्त: मौसम डेटा प्राप्त नहीं किया जा सका।"
-                    : "Timeout: Could not fetch weather data.";
+            document.getElementById('weather-error').textContent = "Timeout: Could not fetch weather data.";
         }, 10000);
 
         if (navigator.geolocation) {
@@ -341,13 +209,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        updateLanguage();
         getLocationAndWeather();
     });
-
-
 </script>
-
-    
 </body>
 </html>

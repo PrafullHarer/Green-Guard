@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - हमारे बारे में</title>
+    <title>Green Guard - About Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -22,75 +22,68 @@
                 </a>
                 <div class="user-greeting" id="greeting">
                     <i class="fas fa-seedling"></i>
-                    <span id="greeting-text">नमस्ते, User !</span>
+                    <span id="greeting-text">Hello, User!</span>
                 </div>
-                <button class="lang-toggle" id="langToggle">
-                    <i class="fas fa-language"></i>
-                    <span id="lang-text">English</span>
-                </button>
                 <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn"
                     onclick="event.preventDefault(); logoutAndRedirect();">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span id="logout-text">लॉगआउट</span>
+                    <span id="logout-text">Logout</span>
                 </a>
             </div>
         </div>
 
         <div class="about-section">
-            <h1 class="about-title" id="about-title">हमारे बारे में</h1>
+            <h1 class="about-title" id="about-title">About Us</h1>
             <div class="about-content" id="about-content">
-                <p>ग्रीन गार्ड एक अभिनव डिजिटल प्लेटफॉर्म है जो भारतीय किसानों को आधुनिक तकनीक और जानकारी से जोड़ता है।
-                    हमारा उद्देश्य किसानों को सशक्त बनाना और उनकी उत्पादकता बढ़ाना है।</p>
+                <p>Green Guard is an innovative digital platform that connects Indian farmers with modern technology and information. Our goal is to empower farmers and increase their productivity.</p>
 
                 <div class="mission-vision">
                     <div class="mission-box">
-                        <h3 id="mission-title">हमारा मिशन</h3>
-                        <p id="mission-text">किसानों को सर्वोत्तम तकनीकी समाधान और जानकारी प्रदान करके भारतीय कृषि को
-                            आधुनिक बनाना।</p>
+                        <h3 id="mission-title">Our Mission</h3>
+                        <p id="mission-text">To modernize Indian agriculture by providing farmers with the best technological solutions and information.</p>
                     </div>
                     <div class="vision-box">
-                        <h3 id="vision-title">हमारी दृष्टि</h3>
-                        <p id="vision-text">एक ऐसा भारत बनाना जहां हर किसान डिजिटल रूप से सशक्त हो और सतत कृषि का अभ्यास
-                            करे।</p>
+                        <h3 id="vision-title">Our Vision</h3>
+                        <p id="vision-text">To create an India where every farmer is digitally empowered and practices sustainable agriculture.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="about-section team-section">
-            <h2 class="about-title" id="team-title">हमारी टीम</h2>
+            <h2 class="about-title" id="team-title">Our Team</h2>
             <div class="team-grid">
                 <div class="team-member">
                     <div class="member-photo">
                         <i class="fas fa-user"></i>
                     </div>
-                    <h3 class="member-name">प्रफुल्ल हरेर</h3>
-                    <p class="member-role">डॉक्यूमेंटेशन और रिपोर्ट</p>
-                    <p class="member-bio">प्रोजेक्ट डॉक्यूमेंटेशन और रिपोर्टिंग में विशेषज्ञ</p>
+                    <h3 class="member-name">Prafull Harer</h3>
+                    <p class="member-role">Documentation and Reports</p>
+                    <p class="member-bio">Expert in Project Documentation and Reporting</p>
                 </div>
                 <div class="team-member">
                     <div class="member-photo">
                         <i class="fas fa-user"></i>
                     </div>
-                    <h3 class="member-name">प्रणव मोरे</h3>
-                    <p class="member-role">फ्रंटएंड डेवलपर</p>
-                    <p class="member-bio">यूजर इंटरफेस और वेब डिज़ाइन में विशेषज्ञ</p>
+                    <h3 class="member-name">Pranav More</h3>
+                    <p class="member-role">Frontend Developer</p>
+                    <p class="member-bio">Expert in User Interface and Web Design</p>
                 </div>
                 <div class="team-member">
                     <div class="member-photo">
                         <i class="fas fa-user"></i>
                     </div>
-                    <h3 class="member-name">ऋषिकेश कुलकर्णी </h3>
-                    <p class="member-role">आईडिया और सिस्टम डेवलपमेंट</p>
-                    <p class="member-bio">सिस्टम आर्किटेक्चर और प्रोजेक्ट प्लानिंग में विशेषज्ञ</p>
+                    <h3 class="member-name">Rushikesh Kulkarni</h3>
+                    <p class="member-role">Idea and System Development</p>
+                    <p class="member-bio">Expert in System Architecture and Project Planning</p>
                 </div>
                 <div class="team-member">
                     <div class="member-photo">
                         <i class="fas fa-user"></i>
                     </div>
-                    <h3 class="member-name">पार्थ मोकल</h3>
-                    <p class="member-role">बैकएंड डेवलपर</p>
-                    <p class="member-bio">सर्वर-साइड लॉजिक और डेटाबेस मैनेजमेंट में विशेषज्ञ</p>
+                    <h3 class="member-name">Parth Mokal</h3>
+                    <p class="member-role">Backend Developer</p>
+                    <p class="member-bio">Expert in Server-side Logic and Database Management</p>
                 </div>
             </div>
         </div>
@@ -118,118 +111,6 @@
                         }
                     };
                 });
-            });
-
-            const translations = {
-                en: {
-                    aboutTitle: "About Us",
-                    aboutContent: "Green Guardis an innovative digital platform that connects Indian farmers with modern technology and information. Our goal is to empower farmers and increase their productivity.",
-                    missionTitle: "Our Mission",
-                    missionText: "To modernize Indian agriculture by providing farmers with the best technological solutions and information.",
-                    visionTitle: "Our Vision",
-                    visionText: "To create an India where every farmer is digitally empowered and practices sustainable agriculture.",
-                    teamTitle: "Our Team",
-                    greeting: "Hello, User !!",
-                    logout: "Logout",
-                    langText: "हिंदी",
-                    teamMembers: [
-                        {
-                            name: "Prafull Harer",
-                            role: "Documentation and Reports",
-                            bio: "Expert in Project Documentation and Reporting"
-                        },
-                        {
-                            name: "Pranav More",
-                            role: "Frontend Developer",
-                            bio: "Expert in User Interface and Web Design"
-                        },
-                        {
-                            name: "Rushikesh Kulkarni",
-                            role: "Idea and System Development",
-                            bio: "Expert in System Architecture and Project Planning"
-                        },
-                        {
-                            name: "Parth Mokal",
-                            role: "Backend Developer",
-                            bio: "Expert in Server-side Logic and Database Management"
-                        }
-                    ]
-                },
-                hi: {
-                    aboutTitle: "हमारे बारे में",
-                    aboutContent: "ग्रीन गार्ड एक अभिनव डिजिटल प्लेटफॉर्म है जो भारतीय किसानों को आधुनिक तकनीक और जानकारी से जोड़ता है। हमारा उद्देश्य किसानों को सशक्त बनाना और उनकी उत्पादकता बढ़ाना है।",
-                    missionTitle: "हमारा मिशन",
-                    missionText: "किसानों को सर्वोत्तम तकनीकी समाधान और जानकारी प्रदान करके भारतीय कृषि को आधुनिक बनाना।",
-                    visionTitle: "हमारी दृष्टि",
-                    visionText: "एक ऐसा भारत बनाना जहां हर किसान डिजिटल रूप से सशक्त हो और सतत कृषि का अभ्यास करे।",
-                    teamTitle: "हमारी टीम",
-                    greeting: "नमस्ते, User !!",
-                    logout: "लॉग आउट",
-                    langText: "English",
-                    teamMembers: [
-                        {
-                            name: "प्रफुल्ल हरेर",
-                            role: "डॉक्यूमेंटेशन और रिपोर्ट",
-                            bio: "प्रोजेक्ट डॉक्यूमेंटेशन और रिपोर्टिंग में विशेषज्ञ"
-                        },
-                        {
-                            name: "प्रणव मोरे",
-                            role: "फ्रंटएंड डेवलपर",
-                            bio: "यूजर इंटरफेस और वेब डिज़ाइन में विशेषज्ञ"
-                        },
-                        {
-                            name: "ऋषिकेश कुलकर्णी ",
-                            role: "आईडिया और सिस्टम डेवलपमेंट",
-                            bio: "सिस्टम आर्किटेक्चर और प्रोजेक्ट प्लानिंग में विशेषज्ञ"
-                        },
-                        {
-                            name: "पार्थ मोकल",
-                            role: "बैकएंड डेवलपर",
-                            bio: "सर्वर-साइड लॉजिक और डेटाबेस मैनेजमेंट में विशेषज्ञ"
-                        }
-                    ]
-                }
-            };
-
-            let currentLang = 'en'; // Default language is English
-
-            function updateLanguage() {
-                document.getElementById('greeting-text').textContent =
-                    translations[currentLang].greeting.replace('User !', "User !");
-                document.getElementById('logout-text').textContent = translations[currentLang].logout;
-                document.getElementById('lang-text').textContent = translations[currentLang].langText;
-
-                // Update about section
-                document.getElementById('about-title').textContent = translations[currentLang].aboutTitle;
-                document.getElementById('about-content').querySelector('p').textContent = translations[currentLang].aboutContent;
-
-                // Update mission and vision
-                document.getElementById('mission-title').textContent = translations[currentLang].missionTitle;
-                document.getElementById('mission-text').textContent = translations[currentLang].missionText;
-                document.getElementById('vision-title').textContent = translations[currentLang].visionTitle;
-                document.getElementById('vision-text').textContent = translations[currentLang].visionText;
-
-                // Update team section
-                document.getElementById('team-title').textContent = translations[currentLang].teamTitle;
-
-                // Update team members
-                const teamMembers = document.querySelectorAll('.team-member');
-                teamMembers.forEach((member, index) => {
-                    const data = translations[currentLang].teamMembers[index];
-                    member.querySelector('.member-name').textContent = data.name;
-                    member.querySelector('.member-role').textContent = data.role;
-                    member.querySelector('.member-bio').textContent = data.bio;
-                });
-            }
-
-            document.getElementById('langToggle').addEventListener('click', () => {
-                currentLang = currentLang === 'hi' ? 'en' : 'hi';
-                document.documentElement.lang = currentLang;
-                updateLanguage();
-            });
-
-            document.addEventListener('DOMContentLoaded', () => {
-                updateLanguage();
             });
     </script>
 </body>

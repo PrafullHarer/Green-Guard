@@ -23,10 +23,6 @@
                 <i class="fas fa-seedling"></i>
                 <span id="greeting-text">नमस्ते, User !</span>
             </div>
-            <button class="lang-toggle" id="langToggle">
-                <i class="fas fa-language"></i>
-                <span id="lang-text">English</span>
-            </button>
             <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
                 <i class="fas fa-sign-out-alt"></i> 
                 <span id="logout-text">लॉगआउट</span>
@@ -72,63 +68,26 @@
         let userMarker = null;
         let marketMarkers = [];
 
-        const translate = {
-            hindi: {
-                title: "नजदीकी कृषि बाजार",
-                language: "English",
-                locateBtnTitle: "मेरे स्थान को खोजें",
-                refreshBtnTitle: "बाजार को रिफ्रेश करें",
-                loadingText: "लोड हो रहा है...",
-                noMarkets: "कोई बाजार नहीं मिला। कृपया किसी अन्य स्थान पर प्रयास करें।",
-                locationError: "स्थान त्रुटि: डिफ़ॉल्ट रूप से दिल्ली दिखाया जा रहा है।",
-                geoNotSupported: "स्थान सेवा समर्थित नहीं: डिफ़ॉल्ट रूप से दिल्ली दिखाया जा रहा है।",
-                currentLocation: "आपकी वर्तमान स्थिति",
-                marketLabel: "बाजार",
-                unnamedMarket: "अनाम बाजार",
-                logout: "लॉगआउट",
-            },
-            english: {
-                title: "Nearby Agricultural Markets",
-                language: "हिंदी",
-                locateBtnTitle: "Find my location",
-                refreshBtnTitle: "Refresh markets",
-                loadingText: "Loading...",
-                noMarkets: "No markets found. Please try another location.",
-                locationError: "Location error: Defaulting to Delhi.",
-                geoNotSupported: "Geolocation not supported: Defaulting to Delhi.",
-                currentLocation: "Your Current Location",
-                marketLabel: "Market",
-                unnamedMarket: "Unnamed Market",
-                logout: "Logout"
-            }
-        };
-
-        const langToggleBtn = document.getElementById('langToggle');
+        // Remove translate object and all Hindi text. Set all UI text to English only.
         const loadingText = document.getElementById('loading-text');
         const pageTitle = document.getElementById('page-title');
         const locateBtn = document.getElementById('locate-btn');
         const refreshBtn = document.getElementById('refresh-btn');
         const logoutText = document.getElementById('logout-text');
 
-        let isHindi = localStorage.getItem("language") === "hindi" || !localStorage.getItem("language");
+        // Set default language as English
+        let isHindi = false;
 
         function setLanguage(language) {
-            pageTitle.innerText = translate[language].title;
-            langToggleBtn.querySelector("span").innerText = translate[language].language;
-            loadingText.innerText = translate[language].loadingText;
-            locateBtn.title = translate[language].locateBtnTitle;
-            refreshBtn.title = translate[language].refreshBtnTitle;
-            logoutText.innerText = translate[language].logout;
-            localStorage.setItem("language", language);
+            pageTitle.innerText = "Nearby Agricultural Markets";
+            loadingText.innerText = "Loading...";
+            locateBtn.title = "Find my location";
+            refreshBtn.title = "Refresh markets";
+            logoutText.innerText = "Logout";
+            localStorage.setItem("language", "english"); // Keep it set to english
         }
 
         setLanguage(isHindi ? 'hindi' : 'english');
-
-        langToggleBtn.addEventListener('click', () => {
-            isHindi = !isHindi;
-            const language = isHindi ? 'hindi' : 'english';
-            setLanguage(language);
-        });
 
         // Logout redirect function
         function logoutAndRedirect() {
@@ -160,20 +119,20 @@
                                 iconAnchor: [16, 32]
                             })
                         }).addTo(map)
-                            .bindPopup(translate[isHindi ? 'hindi' : 'english'].currentLocation)
+                            .bindPopup("Your Current Location")
                             .openPopup();
 
                         fetchNearbyMarkets(lat, lon);
                     },
                     () => {
                         document.getElementById('loading').style.display = 'none';
-                        alert(translate[isHindi ? 'hindi' : 'english'].locationError);
+                        alert("Location error: Defaulting to Delhi.");
                         fetchNearbyMarkets(28.6139, 77.2090);
                     }
                 );
             } else {
                 document.getElementById('loading').style.display = 'none';
-                alert(translate[isHindi ? 'hindi' : 'english'].geoNotSupported);
+                alert("Geolocation not supported: Defaulting to Delhi.");
                 fetchNearbyMarkets(28.6139, 77.2090);
             }
         }
@@ -199,14 +158,14 @@
                     clearMarketMarkers();
 
                     if (data.elements.length === 0) {
-                        alert(translate[isHindi ? 'hindi' : 'english'].noMarkets);
+                        alert("No markets found. Please try another location.");
                     } else {
                         data.elements.forEach(market => {
                             const marketLat = market.lat || market.center?.lat;
                             const marketLon = market.lon || market.center?.lon;
                             const tags = market.tags || {};
-                            const marketName = tags.name || translate[isHindi ? 'hindi' : 'english'].unnamedMarket;
-                            const marketLabel = translate[isHindi ? 'hindi' : 'english'].marketLabel;
+                            const marketName = tags.name || "Unnamed Market";
+                            const marketLabel = "Market";
 
                             if (marketLat && marketLon) {
                                 const marker = L.marker([marketLat, marketLon]).addTo(map)

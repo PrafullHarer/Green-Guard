@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - सरकारी योजनाएं</title>
+    <title>Green Guard - Government Schemes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="\static\css\schemes.css">
 </head>
@@ -19,22 +19,17 @@
                 </a>
                 <div class="user-greeting" id="greeting">
                     <i class="fas fa-seedling"></i>
-                    <span id="greeting-text">नमस्ते, User !</span>
+                    <span id="greeting-text">Hello, User!</span>
                 </div>
-                <button class="lang-toggle" id="langToggle">
-                    <i class="fas fa-language"></i>
-                    <span id="lang-text">English</span>
-                </button>
-
                 
                 <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn"
                     onclick="event.preventDefault(); logoutAndRedirect();">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span id="logout-text">लॉगआउट</span>
+                    <span id="logout-text">Logout</span>
                 </a>
             </div>
         </div>
-        <h1 class="dashboard-title"><span id="page-title" class="pageTitle">सरकारी योजनाएं</span></h1>
+        <h1 class="dashboard-title"><span id="page-title" class="pageTitle">Government Schemes</span></h1>
 
 
         <div class="schemes-grid">
@@ -42,28 +37,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2019</span>
                 <h3 id="scheme1-name">PM-KISAN</h3>
-                <p class="scheme-desc" id="scheme1-desc">छोटे और सीमांत किसानों को प्रत्यक्ष नकद सहायता ₹6,000 प्रति
-                    वर्ष</p>
+                <p class="scheme-desc" id="scheme1-desc">Direct cash support of ₹6,000 per year to small and marginal farmers</p>
                 <div class="highlight" id="scheme1-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>₹2.81 लाख करोड़ वितरित</span>
+                        <span>₹2.81 lakh crore distributed</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>11+ करोड़ लाभार्थी</span>
+                        <span>11+ crore beneficiaries</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>3 समान किस्तों में ₹2,000-₹2,000</span>
+                        <span>₹2,000 in 3 equal installments</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>DBT के माध्यम से सीधे बैंक खाते में</span>
+                        <span>Directly to bank account via DBT</span>
                     </div>
                 </div>
                 <a href="https://pmkisan.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn1">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn1">Apply</button>
                 </a>
             </div>
 
@@ -71,28 +65,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2015-16</span>
                 <h3 id="scheme2-name">Per Drop More Crop (PDMC)</h3>
-                <p class="scheme-desc" id="scheme2-desc">ड्रिप और स्प्रिंकलर सिंचाई जैसी सूक्ष्म सिंचाई को बढ़ावा देता
-                    है</p>
+                <p class="scheme-desc" id="scheme2-desc">Promotes micro-irrigation like drip and sprinkler systems</p>
                 <div class="highlight" id="scheme2-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>2022-23 तक 78 लाख हेक्टेयर कवर</span>
+                        <span>78 lakh hectares covered till 2022-23</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>पानी की बचत 20-48%</span>
+                        <span>20-48% water saving</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>उत्पादकता में 30-50% वृद्धि</span>
+                        <span>30-50% increase in productivity</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>छोटे किसानों के लिए 55% सब्सिडी</span>
+                        <span>55% subsidy for small farmers</span>
                     </div>
                 </div>
                 <a href="https://pmksy.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn2">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn2">Apply</button>
                 </a>
             </div>
 
@@ -100,27 +93,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2018-19</span>
                 <h3 id="scheme3-name">Micro Irrigation Fund (MIF)</h3>
-                <p class="scheme-desc" id="scheme3-desc">NABARD के तहत सूक्ष्म सिंचाई के लिए ₹5,000 करोड़ का फंड</p>
+                <p class="scheme-desc" id="scheme3-desc">₹5,000 crore fund for micro-irrigation under NABARD</p>
                 <div class="highlight" id="scheme3-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>3% ब्याज अनुदान</span>
+                        <span>3% interest subvention</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>5 साल की मोहलत अवधि</span>
+                        <span>5 years moratorium period</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>7 साल की चुकौती अवधि</span>
+                        <span>7 years repayment period</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>राज्य सरकारों को ऋण उपलब्ध</span>
+                        <span>Loans available to state governments</span>
                     </div>
                 </div>
                 <a href="https://www.nabard.org/" target="_blank">
-                    <button class="apply-btn" id="applyBtn3">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn3">Apply</button>
                 </a>
             </div>
 
@@ -128,28 +121,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2015</span>
                 <h3 id="scheme4-name">Paramparagat Krishi Vikas Yojana (PKVY)</h3>
-                <p class="scheme-desc" id="scheme4-desc">क्लस्टर-आधारित दृष्टिकोण के माध्यम से जैविक खेती का समर्थन करता
-                    है</p>
+                <p class="scheme-desc" id="scheme4-desc">Supports organic farming through cluster-based approach</p>
                 <div class="highlight" id="scheme4-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>₹31,500/हेक्टेयर सहायता</span>
+                        <span>₹31,500/hectare assistance</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>50 एकड़ के क्लस्टर</span>
+                        <span>50-acre clusters</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>3 साल का प्रमाणीकरण</span>
+                        <span>3 years certification</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>बाजार संपर्क सहायता</span>
+                        <span>Market linkage support</span>
                     </div>
                 </div>
                 <a href="https://pgsindia-ncof.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn4">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn4">Apply</button>
                 </a>
             </div>
 
@@ -157,27 +149,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2014</span>
                 <h3 id="scheme5-name">Sub-Mission on Agricultural Mechanization (SMAM)</h3>
-                <p class="scheme-desc" id="scheme5-desc">आधुनिक कृषि मशीनरी के लिए धन प्रदान करता है</p>
+                <p class="scheme-desc" id="scheme5-desc">Funds for modern agricultural machinery</p>
                 <div class="highlight" id="scheme5-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>कीटनाशक छिड़काव के लिए ड्रोन उपयोग को बढ़ावा</span>
+                        <span>Promotes drone use for pesticide spraying</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>40-50% तक सब्सिडी</span>
+                        <span>40-50% subsidy</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>कस्टम हायरिंग सेंटर</span>
+                        <span>Custom hiring centers</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>महिला किसानों के लिए अतिरिक्त प्रोत्साहन</span>
+                        <span>Extra incentives for women farmers</span>
                     </div>
                 </div>
                 <a href="https://farmech.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn5">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn5">Apply</button>
                 </a>
             </div>
 
@@ -185,27 +177,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2007</span>
                 <h3 id="scheme6-name">National Food Security Mission (NFSM)</h3>
-                <p class="scheme-desc" id="scheme6-desc">चावल, गेहूं, दलहन और बाजरा का उत्पादन बढ़ाता है</p>
+                <p class="scheme-desc" id="scheme6-desc">Boosts production of rice, wheat, pulses, and millets</p>
                 <div class="highlight" id="scheme6-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>बाजरा क्षेत्र में 500+ स्टार्टअप और 350 FPO</span>
+                        <span>500+ startups and 350 FPOs in millet sector</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>HYV बीज, माइक्रो-न्यूट्रिएंट्स</span>
+                        <span>HYV seeds, micro-nutrients</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>कृषि यंत्रों पर 50% सब्सिडी</span>
+                        <span>50% subsidy on agri-machinery</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>क्षेत्र विस्तार और उत्पादकता वृद्धि</span>
+                        <span>Area expansion and productivity increase</span>
                     </div>
                 </div>
                 <a href="https://nfsm.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn6">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn6">Apply</button>
                 </a>
             </div>
 
@@ -213,27 +205,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2021</span>
                 <h3 id="scheme7-name">National Mission on Edible Oils (NMEO)-Oil Palm</h3>
-                <p class="scheme-desc" id="scheme7-desc">भारत में ताड़ की खेती का विस्तार</p>
+                <p class="scheme-desc" id="scheme7-desc">Expanding oil palm cultivation in India</p>
                 <div class="highlight" id="scheme7-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>2025-26 तक 6.5 लाख हेक्टेयर लक्ष्य</span>
+                        <span>6.5 lakh hectare target by 2025-26</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>₹11,040 करोड़ का बजट</span>
+                        <span>₹11,040 crore budget</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>पूर्वोत्तर और अंडमान पर फोकस</span>
+                        <span>Focus on Northeast and Andaman</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>किसानों के लिए मूल्य निर्धारण सुरक्षा</span>
+                        <span>Price assurance for farmers</span>
                     </div>
                 </div>
                 <a href="https://nmeo.dac.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn7">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn7">Apply</button>
                 </a>
             </div>
 
@@ -241,28 +233,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2014</span>
                 <h3 id="scheme8-name">Integrated Scheme for Agricultural Marketing (ISAM)</h3>
-                <p class="scheme-desc" id="scheme8-desc">ई-नाम ऑनलाइन ट्रेडिंग के माध्यम से उचित मूल्य निर्धारण का
-                    समर्थन करता है</p>
+                <p class="scheme-desc" id="scheme8-desc">Supports fair pricing via e-NAM online trading</p>
                 <div class="highlight" id="scheme8-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>1.76 करोड़ किसान पंजीकृत</span>
+                        <span>1.76 crore farmers registered</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>1,000+ मंडियों को जोड़ा गया</span>
+                        <span>1,000+ mandis connected</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>100+ कृषि उत्पादों का कारोबार</span>
+                        <span>100+ agri-products traded</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>पारदर्शी कीमत खोज</span>
+                        <span>Transparent price discovery</span>
                     </div>
                 </div>
                 <a href="https://enam.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn8">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn8">Apply</button>
                 </a>
             </div>
 
@@ -270,27 +261,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2017</span>
                 <h3 id="scheme9-name">Mission Organic Value Chain Development (MOVCD-NER)</h3>
-                <p class="scheme-desc" id="scheme9-desc">पूर्वोत्तर भारत में जैविक खेती को बढ़ावा देता है</p>
+                <p class="scheme-desc" id="scheme9-desc">Promotes organic farming in Northeast India</p>
                 <div class="highlight" id="scheme9-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>1.89 लाख किसानों को लाभ</span>
+                        <span>1.89 lakh farmers benefited</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>100+ FPC/FPO गठित</span>
+                        <span>100+ FPC/FPO formed</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>ब्रांडिंग और पैकेजिंग सहायता</span>
+                        <span>Branding and packaging support</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>जैविक प्रमाणीकरण सहायता</span>
+                        <span>Organic certification support</span>
                     </div>
                 </div>
                 <a href="https://movcdner.gov.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn9">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn9">Apply</button>
                 </a>
             </div>
 
@@ -298,27 +289,27 @@
             <div class="scheme-card">
                 <span class="year-badge">2018</span>
                 <h3 id="scheme10-name">National Bamboo Mission (NBM)</h3>
-                <p class="scheme-desc" id="scheme10-desc">बांस के बागानों और प्रशिक्षण का समर्थन करता है</p>
+                <p class="scheme-desc" id="scheme10-desc">Supports bamboo plantations and training</p>
                 <div class="highlight" id="scheme10-highlight">
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>23 राज्यों में लागू</span>
+                        <span>Implemented in 23 states</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>बांस क्षेत्र का विस्तार</span>
+                        <span>Expansion of bamboo area</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>प्रसंस्करण इकाइयों को सहायता</span>
+                        <span>Support for processing units</span>
                     </div>
                     <div class="highlight-item">
                         <span class="highlight-checkbox">✅</span>
-                        <span>कौशल विकास कार्यक्रम</span>
+                        <span>Skill development programs</span>
                     </div>
                 </div>
                 <a href="https://nbm.nic.in/" target="_blank">
-                    <button class="apply-btn" id="applyBtn10">आवेदन करें</button>
+                    <button class="apply-btn" id="applyBtn10">Apply</button>
                 </a>
             </div>
         </div>
@@ -335,246 +326,6 @@
         let userMarker = null;
         let marketMarkers = [];
     
-        // Translations
-        const translate = {
-            hindi: {
-                title: "सरकारी योजनाएं",
-                language: "English",
-                logout: "लॉगआउट",
-                greeting: "नमस्ते, User !",
-                schemes: [
-                    {
-                        name: "PM-KISAN",
-                        desc: "छोटे और सीमांत किसानों को प्रत्यक्ष नकद सहायता ₹6,000 प्रति वर्ष",
-                        highlights: [
-                            "₹2.81 लाख करोड़ वितरित",
-                            "11+ करोड़ लाभार्थी",
-                            "3 समान किस्तों में ₹2,000-₹2,000",
-                            "DBT के माध्यम से सीधे बैंक खाते में"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Per Drop More Crop (PDMC)",
-                        desc: "ड्रिप और स्प्रिंकलर सिंचाई जैसी सूक्ष्म सिंचाई को बढ़ावा देता है",
-                        highlights: [
-                            "2022-23 तक 78 लाख हेक्टेयर कवर",
-                            "पानी की बचत 20-48%",
-                            "उत्पादकता में 30-50% वृद्धि",
-                            "छोटे किसानों के लिए 55% सब्सिडी"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Micro Irrigation Fund (MIF)",
-                        desc: "NABARD के तहत सूक्ष्म सिंचाई के लिए ₹5,000 करोड़ का फंड",
-                        highlights: [
-                            "3% ब्याज अनुदान",
-                            "5 साल की मोहलत अवधि",
-                            "7 साल की चुकौती अवधि",
-                            "राज्य सरकारों को ऋण उपलब्ध"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Paramparagat Krishi Vikas Yojana (PKVY)",
-                        desc: "क्लस्टर-आधारित दृष्टिकोण के माध्यम से जैविक खेती का समर्थन करता है",
-                        highlights: [
-                            "₹31,500/हेक्टेयर सहायता",
-                            "50 एकड़ के क्लस्टर",
-                            "3 साल का प्रमाणीकरण",
-                            "बाजार संपर्क सहायता"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Sub-Mission on Agricultural Mechanization (SMAM)",
-                        desc: "आधुनिक कृषि मशीनरी के लिए धन प्रदान करता है",
-                        highlights: [
-                            "कीटनाशक छिड़काव के लिए ड्रोन उपयोग को बढ़ावा",
-                            "40-50% तक सब्सिडी",
-                            "कस्टम हायरिंग सेंटर",
-                            "महिला किसानों के लिए अतिरिक्त प्रोत्साहन"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "National Food Security Mission (NFSM)",
-                        desc: "चावल, गेहूं, दलहन और बाजरा का उत्पादन बढ़ाता है",
-                        highlights: [
-                            "बाजरा क्षेत्र में 500+ स्टार्टअप और 350 FPO",
-                            "HYV बीज, माइक्रो-न्यूट्रिएंट्स",
-                            "कृषि यंत्रों पर 50% सब्सिडी",
-                            "क्षेत्र विस्तार और उत्पादकता वृद्धि"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "National Mission on Edible Oils (NMEO)-Oil Palm",
-                        desc: "भारत में ताड़ की खेती का विस्तार",
-                        highlights: [
-                            "2025-26 तक 6.5 लाख हेक्टेयर लक्ष्य",
-                            "₹11,040 करोड़ का बजट",
-                            "पूर्वोत्तर और अंडमान पर फोकस",
-                            "किसानों के लिए मूल्य निर्धारण सुरक्षा"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Integrated Scheme for Agricultural Marketing (ISAM)",
-                        desc: "ई-नाम ऑनलाइन ट्रेडिंग के माध्यम से उचित मूल्य निर्धारण का समर्थन करता है",
-                        highlights: [
-                            "1.76 करोड़ किसान पंजीकृत",
-                            "1,000+ मंडियों को जोड़ा गया",
-                            "100+ कृषि उत्पादों का कारोबार",
-                            "पारदर्शी कीमत खोज"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "Mission Organic Value Chain Development (MOVCD-NER)",
-                        desc: "पूर्वोत्तर भारत में जैविक खेती को बढ़ावा देता है",
-                        highlights: [
-                            "1.89 लाख किसानों को लाभ",
-                            "100+ FPC/FPO गठित",
-                            "ब्रांडिंग और पैकेजिंग सहायता",
-                            "जैविक प्रमाणीकरण सहायता"
-                        ],
-                        apply: "आवेदन करें"
-                    },
-                    {
-                        name: "National Bamboo Mission (NBM)",
-                        desc: "बांस के बागानों और प्रशिक्षण का समर्थन करता है",
-                        highlights: [
-                            "23 राज्यों में लागू",
-                            "बांस क्षेत्र का विस्तार",
-                            "प्रसंस्करण इकाइयों को सहायता",
-                            "कौशल विकास कार्यक्रम"
-                        ],
-                        apply: "आवेदन करें"
-                    }
-                ]
-            },
-            english: {
-                title: "Government Schemes",
-                language: "हिंदी",
-                logout: "Logout",
-                greeting: "Hello, User!",
-                schemes: [
-                    {
-                        name: "PM-KISAN",
-                        desc: "Direct cash support of ₹6,000 per year to small and marginal farmers",
-                        highlights: [
-                            "₹2.81 lakh crore distributed",
-                            "11+ crore beneficiaries",
-                            "₹2,000 in 3 equal installments",
-                            "Directly to bank account via DBT"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Per Drop More Crop (PDMC)",
-                        desc: "Promotes micro-irrigation like drip and sprinkler systems",
-                        highlights: [
-                            "78 lakh hectares covered till 2022-23",
-                            "20-48% water saving",
-                            "30-50% increase in productivity",
-                            "55% subsidy for small farmers"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Micro Irrigation Fund (MIF)",
-                        desc: "₹5,000 crore fund for micro-irrigation under NABARD",
-                        highlights: [
-                            "3% interest subvention",
-                            "5 years moratorium period",
-                            "7 years repayment period",
-                            "Loans available to state governments"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Paramparagat Krishi Vikas Yojana (PKVY)",
-                        desc: "Supports organic farming through cluster-based approach",
-                        highlights: [
-                            "₹31,500/hectare assistance",
-                            "50-acre clusters",
-                            "3 years certification",
-                            "Market linkage support"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Sub-Mission on Agricultural Mechanization (SMAM)",
-                        desc: "Funds for modern agricultural machinery",
-                        highlights: [
-                            "Promotes drone use for pesticide spraying",
-                            "40-50% subsidy",
-                            "Custom hiring centers",
-                            "Extra incentives for women farmers"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "National Food Security Mission (NFSM)",
-                        desc: "Boosts production of rice, wheat, pulses, and millets",
-                        highlights: [
-                            "500+ startups and 350 FPOs in millet sector",
-                            "HYV seeds, micro-nutrients",
-                            "50% subsidy on agri-machinery",
-                            "Area expansion and productivity increase"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "National Mission on Edible Oils (NMEO)-Oil Palm",
-                        desc: "Expanding oil palm cultivation in India",
-                        highlights: [
-                            "6.5 lakh hectare target by 2025-26",
-                            "₹11,040 crore budget",
-                            "Focus on Northeast and Andaman",
-                            "Price assurance for farmers"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Integrated Scheme for Agricultural Marketing (ISAM)",
-                        desc: "Supports fair pricing via e-NAM online trading",
-                        highlights: [
-                            "1.76 crore farmers registered",
-                            "1,000+ mandis connected",
-                            "100+ agri-products traded",
-                            "Transparent price discovery"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "Mission Organic Value Chain Development (MOVCD-NER)",
-                        desc: "Promotes organic farming in Northeast India",
-                        highlights: [
-                            "1.89 lakh farmers benefited",
-                            "100+ FPC/FPO formed",
-                            "Branding and packaging support",
-                            "Organic certification support"
-                        ],
-                        apply: "Apply"
-                    },
-                    {
-                        name: "National Bamboo Mission (NBM)",
-                        desc: "Supports bamboo plantations and training",
-                        highlights: [
-                            "Implemented in 23 states",
-                            "Expansion of bamboo area",
-                            "Support for processing units",
-                            "Skill development programs"
-                        ],
-                        apply: "Apply"
-                    }
-                ]
-            }
-        };
-    
         // DOM References
         const langToggleBtn = document.getElementById('langToggle');
         const langText = document.getElementById('lang-text');
@@ -582,44 +333,251 @@
         const greetingText = document.getElementById('greeting-text');
         const pageTitle = document.getElementById('page-title');
     
-        let isHindi = localStorage.getItem("language") === "hindi" || !localStorage.getItem("language");
-    
         // Set language content
         function setLanguage(lang) {
-            const t = translate[lang];
-            pageTitle.innerText = t.title;
-            langText.innerText = t.language;
-            logoutText.innerText = t.logout;
-            greetingText.innerText = t.greeting;
+            pageTitle.innerText = "Government Schemes";
+            langText.innerText = "English";
+            logoutText.innerText = "Logout";
+            greetingText.innerText = "Hello, User!";
     
-            t.schemes.forEach((scheme, i) => {
-                document.getElementById(`scheme${i + 1}-name`).innerText = scheme.name;
-                document.getElementById(`scheme${i + 1}-desc`).innerText = scheme.desc;
-                const highlightDiv = document.getElementById(`scheme${i + 1}-highlight`);
-                highlightDiv.innerHTML = scheme.highlights.map(h => `
-                    <div class="highlight-item">
-                        <span class="highlight-checkbox">✅</span>
-                        <span>${h}</span>
-                    </div>`).join('');
-                document.getElementById(`applyBtn${i + 1}`).innerText = scheme.apply;
-            });
-    
-            document.documentElement.lang = (lang === 'hindi') ? 'hi' : 'en';
-            localStorage.setItem("language", lang);
+            // Remove translate object and all Hindi text. Set all UI text to English only.
+            document.getElementById(`scheme1-name`).innerText = "PM-KISAN";
+            document.getElementById(`scheme1-desc`).innerText = "Direct cash support of ₹6,000 per year to small and marginal farmers";
+            document.getElementById(`scheme2-name`).innerText = "Per Drop More Crop (PDMC)";
+            document.getElementById(`scheme2-desc`).innerText = "Promotes micro-irrigation like drip and sprinkler systems";
+            document.getElementById(`scheme3-name`).innerText = "Micro Irrigation Fund (MIF)";
+            document.getElementById(`scheme3-desc`).innerText = "₹5,000 crore fund for micro-irrigation under NABARD";
+            document.getElementById(`scheme4-name`).innerText = "Paramparagat Krishi Vikas Yojana (PKVY)";
+            document.getElementById(`scheme4-desc`).innerText = "Supports organic farming through cluster-based approach";
+            document.getElementById(`scheme5-name`).innerText = "Sub-Mission on Agricultural Mechanization (SMAM)";
+            document.getElementById(`scheme5-desc`).innerText = "Funds for modern agricultural machinery";
+            document.getElementById(`scheme6-name`).innerText = "National Food Security Mission (NFSM)";
+            document.getElementById(`scheme6-desc`).innerText = "Boosts production of rice, wheat, pulses, and millets";
+            document.getElementById(`scheme7-name`).innerText = "National Mission on Edible Oils (NMEO)-Oil Palm";
+            document.getElementById(`scheme7-desc`).innerText = "Expanding oil palm cultivation in India";
+            document.getElementById(`scheme8-name`).innerText = "Integrated Scheme for Agricultural Marketing (ISAM)";
+            document.getElementById(`scheme8-desc`).innerText = "Supports fair pricing via e-NAM online trading";
+            document.getElementById(`scheme9-name`).innerText = "Mission Organic Value Chain Development (MOVCD-NER)";
+            document.getElementById(`scheme9-desc`).innerText = "Promotes organic farming in Northeast India";
+            document.getElementById(`scheme10-name`).innerText = "National Bamboo Mission (NBM)";
+            document.getElementById(`scheme10-desc`).innerText = "Supports bamboo plantations and training";
+
+            document.getElementById(`scheme1-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>₹2.81 lakh crore distributed</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>11+ crore beneficiaries</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>₹2,000 in 3 equal installments</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Directly to bank account via DBT</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme2-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>78 lakh hectares covered till 2022-23</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>20-48% water saving</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>30-50% increase in productivity</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>55% subsidy for small farmers</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme3-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>3% interest subvention</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>5 years moratorium period</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>7 years repayment period</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Loans available to state governments</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme4-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>₹31,500/hectare assistance</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>50-acre clusters</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>3 years certification</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Market linkage support</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme5-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Promotes drone use for pesticide spraying</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>40-50% subsidy</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Custom hiring centers</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Extra incentives for women farmers</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme6-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>500+ startups and 350 FPOs in millet sector</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>HYV seeds, micro-nutrients</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>50% subsidy on agri-machinery</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Area expansion and productivity increase</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme7-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>6.5 lakh hectare target by 2025-26</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>₹11,040 crore budget</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Focus on Northeast and Andaman</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Price assurance for farmers</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme8-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>1.76 crore farmers registered</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>1,000+ mandis connected</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>100+ agri-products traded</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Transparent price discovery</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme9-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>1.89 lakh farmers benefited</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>100+ FPC/FPO formed</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Branding and packaging support</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Organic certification support</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`scheme10-highlight`).innerHTML = `
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Implemented in 23 states</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Expansion of bamboo area</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Support for processing units</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-checkbox">✅</span>
+                    <span>Skill development programs</span>
+                </div>
+            `.replace(/✅/g, '✅');
+
+            document.getElementById(`applyBtn1`).innerText = "Apply";
+            document.getElementById(`applyBtn2`).innerText = "Apply";
+            document.getElementById(`applyBtn3`).innerText = "Apply";
+            document.getElementById(`applyBtn4`).innerText = "Apply";
+            document.getElementById(`applyBtn5`).innerText = "Apply";
+            document.getElementById(`applyBtn6`).innerText = "Apply";
+            document.getElementById(`applyBtn7`).innerText = "Apply";
+            document.getElementById(`applyBtn8`).innerText = "Apply";
+            document.getElementById(`applyBtn9`).innerText = "Apply";
+            document.getElementById(`applyBtn10`).innerText = "Apply";
+
+            document.documentElement.lang = "en";
+            localStorage.setItem("language", "english");
         }
     
         // Toggle language
         function toggleLanguage() {
-            isHindi = !isHindi;
-            const selectedLang = isHindi ? 'hindi' : 'english';
-            setLanguage(selectedLang);
+            // This function is no longer needed as language switching is removed.
+            // Keeping it for now, but it will not have an effect.
         }
     
         // Event listener
         langToggleBtn.addEventListener('click', toggleLanguage);
     
         // Initial load
-        setLanguage(isHindi ? 'hindi' : 'english');
+        setLanguage("english");
     
         // Logout handler
         function logoutAndRedirect() {
@@ -643,7 +601,7 @@
                             iconSize: [32, 32],
                             iconAnchor: [16, 32]
                         })
-                    }).addTo(map).bindPopup("आप यहाँ हैं / You are here").openPopup();
+                    }).addTo(map).bindPopup("You are here").openPopup();
                 });
             }
         }

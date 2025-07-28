@@ -188,25 +188,6 @@
             transform: translateY(-2px);
         }
 
-        .lang-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: transparent;
-            border: 1px solid #4CAF50;
-            color: #4CAF50;
-            padding: 3px 10px;
-            font-size: 0.75rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lang-toggle:hover {
-            background-color: #4CAF50;
-            color: white;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -221,7 +202,6 @@
 </head>
 <body>
     <div class="container">
-        <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">English</button>
         <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Green GuardLogo" class="logo">
         <h2 id="title">🌾 User Profile 🌾</h2>
 

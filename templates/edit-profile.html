@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - प्रोफाइल संपादित करें</title>
+    <title>Green Gard - Edit Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -132,25 +132,6 @@
             transform: translateY(-2px);
         }
 
-        .lang-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: transparent;
-            border: 1px solid #4CAF50;
-            color: #4CAF50;
-            padding: 3px 10px;
-            font-size: 0.75rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lang-toggle:hover {
-            background-color: #4CAF50;
-            color: white;
-        }
-
         .flash-message {
             padding: 10px;
             border-radius: 5px;
@@ -185,7 +166,6 @@
 </head>
 <body>
     <div class="container">
-        <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">English</button>
         <img src="{{ profile_picture or url_for('static', filename='image/default-profile.png') }}" 
              alt="Profile Picture" 
              class="profile-picture" 
@@ -251,52 +231,7 @@
     </div>
 
     <script>
-        let isHindi = false;
-
-        function toggleLanguage() {
-            const title = document.getElementById("title");
-            const langToggle = document.getElementById("langToggle");
-            const labelName = document.getElementById("label-name");
-            const labelEmail = document.getElementById("label-email");
-            const labelPhone = document.getElementById("label-phone");
-            const labelVillage = document.getElementById("label-village");
-            const labelDistrict = document.getElementById("label-district");
-            const labelState = document.getElementById("label-state");
-            const labelCrops = document.getElementById("label-crops");
-            const btnCancel = document.getElementById("btn-cancel");
-            const btnSave = document.getElementById("btn-save");
-            const emailNote = document.getElementById("email-note");
-            
-            if (isHindi) {
-                title.innerText = "🌾 Edit Profile 🌾";
-                langToggle.innerText = "हिन्दी";
-                labelName.innerText = "Full Name:";
-                labelEmail.innerText = "Email:";
-                labelPhone.innerText = "Phone Number:";
-                labelVillage.innerText = "Village:";
-                labelDistrict.innerText = "District:";
-                labelState.innerText = "State:";
-                labelCrops.innerText = "Crops (separate by comma):";
-                btnCancel.innerHTML = '<i class="fas fa-times"></i> <span>Cancel</span>';
-                btnSave.innerHTML = '<i class="fas fa-save"></i> <span>Save Changes</span>';
-                emailNote.innerText = "Email cannot be edited";
-            } else {
-                title.innerText = "🌾 प्रोफाइल संपादित करें 🌾";
-                langToggle.innerText = "English";
-                labelName.innerText = "पूरा नाम:";
-                labelEmail.innerText = "ईमेल:";
-                labelPhone.innerText = "फोन नंबर:";
-                labelVillage.innerText = "गांव:";
-                labelDistrict.innerText = "जिला:";
-                labelState.innerText = "राज्य:";
-                labelCrops.innerText = "फसलें (अल्पविराम से अलग करें):";
-                btnCancel.innerHTML = '<i class="fas fa-times"></i> <span>रद्द करें</span>';
-                btnSave.innerHTML = '<i class="fas fa-save"></i> <span>परिवर्तन सहेजें</span>';
-                emailNote.innerText = "ईमेल संपादित नहीं किया जा सकता";
-            }
-            
-            isHindi = !isHindi;
-        }
+        // Remove all translation and Hindi text. Set all UI text to English only.
     </script>
 </body>
 </html> 

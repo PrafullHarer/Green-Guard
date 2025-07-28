@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ग्रीन गार्ड - पंजीकरण</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Guard - Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -12,58 +12,47 @@
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: rgba(105, 249, 2, 0.283);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: #eaffea;
     }
-
     .container {
       width: 90%;
       max-width: 500px;
-      background: rgba(255, 255, 255, 0.9);
+      background: #fff;
       border-radius: 20px;
       padding: 25px 20px;
       text-align: center;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1.5s ease-in-out;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
     }
-
     .logo {
       width: 100px;
       margin-bottom: 25px;
     }
-
     h2 {
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       color: #4CAF50;
       margin-bottom: 10px;
     }
-
     label {
       display: block;
       text-align: left;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #333;
       margin-top: 15px;
       margin-bottom: 5px;
     }
-
-    input {
+    input, select {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 1rem;
     }
-
     button[type="submit"] {
       width: 100%;
       padding: 12px;
@@ -74,227 +63,108 @@
       color: white;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #388E3C;
-      transform: scale(1.03);
-    }
-
-    .flash-message {
-      font-weight: bold;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-
-    .flash-message.danger {
-      color: red;
-    }
-
-    .flash-message.success {
-      color: green;
-    }
-
-    .lang-toggle {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background-color: transparent;
-      border: 1px solid #4CAF50;
-      color: #4CAF50;
-      padding: 3px 10px;
-      font-size: 0.75rem;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .lang-toggle:hover {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .login-link {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .login-link a {
-      color: #4CAF50;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .login-link a:hover {
-      text-decoration: underline;
-    }
-
-    .profile-link {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      color: #4CAF50;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .profile-link:hover {
-      transform: scale(1.1);
-      color: #388E3C;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   </style>
-  <!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-
-  <div class="container" id="form-container">
-    <!-- Language Toggle Inside Container -->
-    <button class="lang-toggle" onclick="toggleLanguage()">English</button>
-    
-    <!-- Profile Icon with Link -->
-    <a href="/profile" class="profile-link" id="profile-link" title="प्रोफाइल देखें">👤</a>
-
-    <img src="/static/image/greenguard_logo.png" alt="Green GuardLogo" class="logo">
-
-    <h2 id="form-title">🌾 Green Guard- Registration Form 🌾</h2>
-
-
+  <div class="container">
+    <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
+    <h2>🌾 Green Guard - Registration Form 🌾</h2>
     <form method="POST">
-      <label for="name" id="label-name">👤 Full Name:</label>
-      <input type="text" id="name" name="name" required>
+      <label for="name">👤 Full Name:</label>
+      <input type="text" id="name" name="name" required />
 
-      <label for="email" id="label-email">📧 Email:</label>
-      <input type="email" id="email" name="email" required>
+      <label for="email">📧 Email:</label>
+      <input type="email" id="email" name="email" required />
 
-      <label for="password" id="label-password">🔒 Password:</label>
-      <input type="password" id="password" name="password" required>
+      <label for="phone">📱 Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="state">🌍 State:</label>
+      <select id="state" name="state"></select>
+
+      <label for="district">🏣 District:</label>
+      <select id="district" name="district"></select>
+
+      <label for="farmerType">🌾 Farmer Type:</label>
+      <select id="farmerType" name="farmerType"></select>
+
+      <label for="password">🔐 Password:</label>
+      <input type="password" id="password" name="password" required />
 
       <button type="submit" id="submit-btn">📝 Register</button>
     </form>
-
-    <!-- Google Register Button -->
-    <button id="google-register-btn" style="width:100%;padding:12px;margin-top:10px;background-color:#fff;border:1px solid #4CAF50;border-radius:25px;color:#4CAF50;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background 0.3s, color 0.3s;">
-      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" style="width:22px;height:22px;vertical-align:middle;"> <span id="google-register-label">Sign up with Google</span>
-    </button>
-
     <p class="login-link" id="login-text">Already have an account? <a href="login.html">Login here</a></p>
   </div>
 
   <script>
     const firebaseConfig = {
-    apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
-    authDomain: "greenguard-408ed.firebaseapp.com",
-    projectId: "greenguard-408ed",
-  };
+      apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
+      authDomain: "greenguard-408ed.firebaseapp.com",
+      projectId: "greenguard-408ed"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-  firebase.initializeApp(firebaseConfig);
+    window.addEventListener("load", () => {
+      const stateSelect = document.getElementById("state");
+      stateSelect.innerHTML = "";
+      ["Select State", "Uttar Pradesh", "Maharashtra"].forEach(state => {
+        const opt = document.createElement("option");
+        opt.value = state;
+        opt.innerText = state;
+        stateSelect.appendChild(opt);
+      });
 
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+      const districtSelect = document.getElementById("district");
+      districtSelect.innerHTML = "";
+      ["Select District", "Lucknow", "Pune"].forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.innerText = d;
+        districtSelect.appendChild(opt);
+      });
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+      const farmerSelect = document.getElementById("farmerType");
+      farmerSelect.innerHTML = "";
+      ["Select", "Small", "Medium", "Large"].forEach(ft => {
+        const opt = document.createElement("option");
+        opt.value = ft;
+        opt.innerText = ft;
+        farmerSelect.appendChild(opt);
+      });
+    });
 
-    try {
-      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      const user = userCredential.user;
+    document.querySelector("form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const phone = document.getElementById("phone").value;
+      const state = document.getElementById("state").value;
+      const district = document.getElementById("district").value;
+      const farmerType = document.getElementById("farmerType").value;
 
-      alert("✅ Registered: " + user.email);
-      window.location.href = "login.html";
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
-  });
-  
-    // Language toggle logic
-    let isHindi = false;
-    function toggleLanguage() {
-      const formTitle = document.getElementById("form-title");
-      const labelName = document.getElementById("label-name");
-      const labelEmail = document.getElementById("label-email");
-      const labelPassword = document.getElementById("label-password");
-      const submitBtn = document.getElementById("submit-btn");
-      const toggleBtn = document.querySelector(".lang-toggle");
-      const loginText = document.getElementById("login-text");
-      const profileLink = document.getElementById("profile-link");
-  
-      if (isHindi) {
-        formTitle.innerText = "🌾 ग्रीन गार्ड - पंजीकरण फॉर्म 🌾";
-        labelName.innerText = "👤 पूरा नाम:";
-        labelEmail.innerText = "📧 ईमेल:";
-        labelPassword.innerText = "🔒 पासवर्ड:";
-        submitBtn.innerText = "📝 पंजीकरण करें";
-        toggleBtn.innerText = "English";
-        loginText.innerHTML = "पहले से ही एक खाता है? <a href=\"/login\">यहां लॉगिन करें</a>";
-        profileLink.title = "प्रोफाइल देखें";
-      } else {
-        formTitle.innerText = "🌾 Green Guard- Registration Form 🌾";
-        labelName.innerText = "👤 Full Name:";
-        labelEmail.innerText = "📧 Email:";
-        labelPassword.innerText = "🔒 Password:";
-        submitBtn.innerText = "📝 Register";
-        toggleBtn.innerText = "हिन्दी";
-        loginText.innerHTML = "Already have an account? <a href=\"/login\">Login here</a>";
-        profileLink.title = "View Profile";
+      try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        await db.collection("users").doc(user.uid).set({
+          name, email, phone, state, district, farmerType, language: "en",
+          uid: user.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert("✅ Registered & saved: " + user.email);
+        window.location.href = "login.html";
+      } catch (error) {
+        alert("❌ " + error.message);
+        console.error(error);
       }
-  
-      isHindi = !isHindi;
-    }
-
-  // Google Register
-  const googleRegisterBtn = document.getElementById("google-register-btn");
-  const googleRegisterLabel = document.getElementById("google-register-label");
-  googleRegisterBtn.addEventListener("click", async function () {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const result = await firebase.auth().signInWithPopup(provider);
-      const user = result.user;
-      alert("✅ Registered: " + user.email);
-      window.location.href = "login.html";
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
-  });
-
-  // Update Google button label on language toggle
-  function updateGoogleRegisterLabel() {
-    if (isHindi) {
-      googleRegisterLabel.innerText = "Google से पंजीकरण करें";
-    } else {
-      googleRegisterLabel.innerText = "Sign up with Google";
-    }
-  }
-
-  // Patch toggleLanguage to update Google button label
-  const origToggleLanguage = toggleLanguage;
-  toggleLanguage = function() {
-    origToggleLanguage();
-    updateGoogleRegisterLabel();
-  }
-  // Set initial label
-  updateGoogleRegisterLabel();
+    });
   </script>
-  
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +29,6 @@
                 <i class="fas fa-clock"></i>
                 <span id="current-time"></span>
             </div>
-            <button class="lang-toggle" id="langToggle">
-                <i class="fas fa-language"></i> <span class="lang-text">English</span>
-            </button>
         </div>
     </header>
     
@@ -75,57 +72,7 @@
 
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <script>
-        // Language data
-        const translations = {
-            en: {
-                logoText: "KISAN Guard",
-                pageTitle: "Plant Disease Recognition",
-                formTitle: "Upload Plant Image",
-                analyzeText: "Analyze Image",
-                loadingText: "Analyzing image...",
-                diseaseName: "Disease Name",
-                causeLabel: "Cause:",
-                treatmentLabel: "Treatment:",
-                langText: "हिंदी"
-            },
-            hi: {
-                logoText: "ग्रीन गार्ड",
-                pageTitle: "पौध रोग पहचान",
-                formTitle: "पौधे की छवि अपलोड करें",
-                analyzeText: "छवि विश्लेषण",
-                loadingText: "छवि का विश्लेषण किया जा रहा है...",
-                diseaseName: "रोग का नाम",
-                causeLabel: "कारण:",
-                treatmentLabel: "उपचार:",
-                langText: "English"
-            }
-        };
-
-        let currentLang = 'en'; // Default language is English
-
-        // Update all text elements based on current language
-        function updateLanguage() {
-            document.getElementById('logo-text').textContent = translations[currentLang].logoText;
-            document.title = translations[currentLang].pageTitle;
-            document.getElementById('form-title').textContent = translations[currentLang].formTitle;
-            document.getElementById('analyze-text').textContent = translations[currentLang].analyzeText;
-            document.getElementById('loading-text').textContent = translations[currentLang].loadingText;
-            document.querySelector('.lang-text').textContent = translations[currentLang].langText;
-            
-            if (document.getElementById('disease-name')) {
-                // Don't overwrite the actual prediction value
-                document.getElementById('cause-label').textContent = translations[currentLang].causeLabel;
-                document.getElementById('treatment-label').textContent = translations[currentLang].treatmentLabel;
-            }
-        }
-
-        // Language toggle
-        document.getElementById('langToggle').addEventListener('click', () => {
-            currentLang = currentLang === 'hi' ? 'en' : 'hi';
-            document.documentElement.lang = currentLang;
-            updateLanguage();
-        });
-
+        // Remove translations object and all Hindi text. Set all UI text to English only.
         // Time widget functionality
         function updateTime() {
             const now = new Date();
@@ -141,7 +88,7 @@
             
             // Format date as Day, Month Date, Year
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateString = now.toLocaleDateString(currentLang === 'hi' ? 'hi-IN' : 'en-US', options);
+            const dateString = now.toLocaleDateString('en-US', options);
             
             timeElement.textContent = `${hours}:${minutes}:${seconds} ${ampm} • ${dateString}`;
         }
@@ -155,7 +102,7 @@
             const fileInput = document.getElementById('plant-image');
             if (fileInput.files.length === 0) {
                 e.preventDefault();
-                alert(currentLang === 'hi' ? 'कृपया एक छवि चुनें' : 'Please select an image');
+                alert('Please select an image');
                 return;
             }
             
@@ -195,7 +142,6 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
-            updateLanguage();
             
             // Add animation to form elements
             const formElements = document.querySelectorAll('.input-box');

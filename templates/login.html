@@ -166,7 +166,6 @@
 
   <div class="container" id="form-container">
     <!-- Language Toggle Inside Container -->
-    <button class="lang-toggle" onclick="toggleLanguage()">English</button>
     
     <!-- Profile Icon with Link -->
     <a href="/profile" class="profile-link" id="profile-link" title="प्रोफाइल देखें">👤</a>
@@ -225,71 +224,6 @@
       alert("❌ " + error.message);
     }
   });
-    let isHindi = false;
-
-    function toggleLanguage() {
-      const formTitle = document.getElementById("form-title");
-      const labelEmail = document.getElementById("label-email");
-      const labelPassword = document.getElementById("label-password");
-      const submitBtn = document.getElementById("submit-btn");
-      const toggleBtn = document.querySelector(".lang-toggle");
-      const registerText = document.getElementById("register-text");
-      const profileLink = document.getElementById("profile-link");
-
-      if (isHindi) {
-        formTitle.innerText = "🌾 ग्रीन गार्ड - लॉगिन 🌾";
-        labelEmail.innerText = "📧 ईमेल:";
-        labelPassword.innerText = "🔒 पासवर्ड:";
-        submitBtn.innerText = "🔐 लॉगिन करें";
-        toggleBtn.innerText = "English";
-        registerText.innerHTML = "खाता नहीं है? <a href=\"/register\">यहां पंजीकरण करें</a>";
-        profileLink.title = "प्रोफाइल देखें";
-      } else {
-        formTitle.innerText = "🌾 Green Guard- Login 🌾";
-        labelEmail.innerText = "📧 Email:";
-        labelPassword.innerText = "🔒 Password:";
-        submitBtn.innerText = "🔐 Login";
-        toggleBtn.innerText = "हिन्दी";
-        registerText.innerHTML = "Don't have an account? <a href=\"/register\">Register here</a>";
-        profileLink.title = "View Profile";
-      }
-
-      isHindi = !isHindi;
-    }
-
-  // Google Login
-  const googleLoginBtn = document.getElementById("google-login-btn");
-  const googleBtnLabel = document.getElementById("google-btn-label");
-  googleLoginBtn.addEventListener("click", async function () {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const result = await firebase.auth().signInWithPopup(provider);
-      const user = result.user;
-      alert("✅ Logged in as " + user.email);
-      window.location.href = "DAS.html";
-    } catch (error) {
-      console.error("Google Login Error:", error);
-      alert("❌ " + error.message);
-    }
-  });
-
-  // Update Google button label on language toggle
-  function updateGoogleBtnLabel() {
-    if (isHindi) {
-      googleBtnLabel.innerText = "Google से लॉगिन करें";
-    } else {
-      googleBtnLabel.innerText = "Sign in with Google";
-    }
-  }
-
-  // Patch toggleLanguage to update Google button label
-  const origToggleLanguage = toggleLanguage;
-  toggleLanguage = function() {
-    origToggleLanguage();
-    updateGoogleBtnLabel();
-  }
-  // Set initial label
-  updateGoogleBtnLabel();
   </script>
 </body>
 </html> 

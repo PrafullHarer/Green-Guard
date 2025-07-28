@@ -24,10 +24,6 @@
       🌱 <span id="greeting">Hello</span>, <span id="user-name">User</span>!
     </div>
 
-    <button onclick="toggleLanguage()" style="background-color: black; color: white; padding: 8px 16px; border-radius: 9999px; border: none; font-weight: 500; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-      <i class="fa-solid fa-language"></i> <span id="lang-label">English</span>
-    </button>
-
     <button onclick="logoutAndRedirect()" style="background-color: #ffc107; border: none; border-radius: 9999px; padding: 8px 20px; font-weight: 600; cursor: pointer;">
       <i class="fa-solid fa-right-from-bracket"></i> <span id="logout-label">Logout</span>
     </button>
@@ -113,23 +109,17 @@
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <img src="${crop.img}" alt="${crop[currentLang].name}">
-        <strong>${crop[currentLang].name}</strong>
-        <p>${crop[currentLang].desc}</p>
-        <a href="${crop.link}" class="more-info-btn">${currentLang === "en" ? "More Information" : "और जानकारी"}</a>
+        <img src="${crop.img}" alt="${crop.en.name}">
+        <strong>${crop.en.name}</strong>
+        <p>${crop.en.desc}</p>
+        <a href="${crop.link}" class="more-info-btn">More Information</a>
       `;
       container.appendChild(card);
     });
 
-    document.getElementById("crop-heading").textContent = currentLang === "en" ? "Crop Guide" : "फसल मार्गदर्शिका";
-    document.getElementById("greeting").textContent = currentLang === "en" ? "Hello" : "नमस्ते";
-    document.getElementById("lang-label").textContent = currentLang === "en" ? "हिन्दी" : "English";
-    document.getElementById("logout-label").textContent = currentLang === "en" ? "Logout" : "लॉग आउट";
-  }
-
-  function toggleLanguage() {
-    currentLang = currentLang === "en" ? "hi" : "en";
-    renderCrops();
+    document.getElementById("crop-heading").textContent = "Crop Guide";
+    document.getElementById("greeting").textContent = "Hello";
+    document.getElementById("logout-label").textContent = "Logout";
   }
 
   function logoutAndRedirect() {
