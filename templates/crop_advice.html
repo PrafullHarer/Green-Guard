@@ -20,15 +20,17 @@
 
   <div style="display: flex; align-items: center; gap: 16px;">
     <div style="background-color: #2e7d32; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-      <i class="fa fa-user" style="color: white;"></i>
+      <a href="profile.html" class="profile-link" title="View Profile">
+        <i class="fas fa-user"></i>
+      </a>
     </div>
 
-    <div style="background-color: #2e7d32; color: white; padding: 8px 16px; border-radius: 9999px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+    <div style="background-color: #2e7d32; color: white; padding: 8px 20px; border-radius: 9999px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
       🌱 <span id="greeting">Hello</span>, <span id="user-name">User</span>!
     </div>
 
-    <button onclick="logoutAndRedirect()" style="background-color: #ffc107; border: none; border-radius: 9999px; padding: 8px 20px; font-weight: 600; cursor: pointer;">
-      <i class="fa-solid fa-right-from-bracket"></i> <span id="logout-label">Logout</span>
+    <button onclick="logoutAndRedirect()" class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i> <span id="logout-label">Logout</span>
     </button>
   </div>
 </nav>
