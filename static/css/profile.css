@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 :root {
-  --primary: #4CAF50;
-  --primary-light: #81C784;
+  --primary:  #4CAF50;
   --primary-dark: #218838;
   --secondary: #FFC107;
   --secondary-dark: #FFA000;
   --background: rgba(105, 249, 2, 0.283);
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --text-dark: #000000;
-  --text-light: #ffffff;
-  --border: #000000;
+  --card-bg: #fff;
+  --text: #333;
+  --cancel: #f44336;
+  --cancel-dark: #c62828;
 }
 
 * {
@@ -25,26 +24,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 40px 20px;
+  min-height: 100vh;
 }
 
-.container {
+.profile-container {
   background: var(--card-bg);
-  padding: 40px 30px;
   border-radius: 15px;
+  padding: 40px 30px;
   max-width: 600px;
   width: 100%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
+  position: relative;
 }
 
 .logo {
-  width: 120px;
-  margin-bottom: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 80px;
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -52,137 +49,125 @@ h2 {
   color: var(--primary-dark);
   margin-bottom: 30px;
   position: relative;
+  text-align: center;
 }
 
-h2::after {
-  content: '';
+.underline {
   width: 60px;
-  height: 3px;
+  height: 4px;
   background-color: var(--secondary);
-  display: block;
-  margin: 10px auto 0;
-  border-radius: 3px;
+  margin: 10px auto 30px;
+  border-radius: 5px;
 }
 
-#profileData {
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 25px;
   text-align: left;
-  font-size: 1.2rem;
-  margin-bottom: 30px;
 }
 
-#profileData p {
-  margin: 15px 0;
-  color: var(--text-dark);
-  font-weight: 500;
-  line-height: 1.6;
-}
-
-#profileData strong {
-  color: var(--primary-dark);
+.field label {
   font-weight: 600;
-}
-
-#profileData span {
-  font-weight: 500;
-}
-
-/* Centered buttons */
-#profileData button {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 6px;
   display: block;
-  width: 100%;
-  max-width: 220px;
-  margin: 12px auto 0;
-  padding: 12px 18px;
-  font-size: 0.95rem;
+}
+
+.field span {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease;
 }
 
-/* Edit Profile button */
-#profileData button:first-of-type {
+.edit-btn {
   background-color: var(--primary-dark);
   color: white;
 }
 
-#profileData button:first-of-type:hover {
+.edit-btn:hover {
   background-color: var(--primary);
 }
 
-/* Logout button - now yellow */
-#profileData button:last-of-type {
-  background-color: var(--secondary);
-  color: black;
-}
-
-#profileData button:last-of-type:hover {
-  background-color: var(--secondary-dark);
+.logout-btn {
+  background-color: var(--cancel);
   color: white;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 30px 20px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  #profileData button {
-    width: 100%;
-  }
+.logout-btn:hover {
+  background-color: var(--cancel-dark);
 }
 
-
-.container {
-    position: relative; /* Add this to anchor home icon inside */
-  }
-
-  .home-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: var(--primary);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    z-index: 1;
-  }
-
-  .home-button:hover {
-    background-color: var(--primary-dark);
-  }
-
-  .loader-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(255, 255, 255, 0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .spinner {
-    border: 6px solid #e0e0e0;
-    border-top: 6px solid #2e7d32;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #2e7d32;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.home-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+.home-button:hover {
+  background-color: var(--primary-dark);
+}
+
+@media (max-width: 600px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 15px;
+  }
 }

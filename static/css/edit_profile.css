@@ -28,24 +28,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
   min-height: 100vh;
 }
 
 .container {
   background: var(--card-bg);
-  padding: 40px 35px;
+  padding: 40px 30px;
   border-radius: 15px;
   width: 100%;
-  max-width: 550px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  position: relative;
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: center;
+  text-align: center;
 }
 
 .logo {
   width: 120px;
+  margin-bottom: 20px;
   display: block;
-  margin: 0 auto 25px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h2 {
@@ -66,23 +69,35 @@ h2::after {
   margin: 10px auto 0;
 }
 
-form p {
-  margin-bottom: 18px;
-  font-weight: 500;
-  color: var(--text-medium);
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 15px;
 }
 
-/* Input + Dropdown shared styles */
-form input,
-form select {
+form p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+form p label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+form p input,
+form p select {
   width: 100%;
-  padding: 10px 14px;
+  padding: 8px 12px;
+  font-size: 1.1rem;;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-top: 6px;
+  border-radius: 6px;
+  background-color: #fff;
   transition: all 0.2s ease;
-  background-color: white;
 }
 
 form input:focus,
@@ -92,23 +107,35 @@ form select:focus {
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
-/* Button Container */
+form p:nth-child(odd) {
+  grid-column: 1;
+}
+
+form p:nth-child(even) {
+  grid-column: 2;
+}
+
 .button-group {
+  grid-column: span 2;
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 30px;
+  margin-top: 25px;
   flex-wrap: wrap;
 }
 
 form button {
-  padding: 12px 24px;
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  margin: 12px auto 0;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Save Button */
@@ -131,7 +158,7 @@ form button[type="button"]:hover {
   background-color: var(--danger-dark);
 }
 
-/* Optional Yellow Logout Button Style (for reuse) */
+/* Optional Logout Button */
 button.logout {
   background-color: var(--secondary);
   color: #000;
@@ -142,13 +169,34 @@ button.logout:hover {
   color: white;
 }
 
+/* Home Button */
+.home-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+.home-button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Responsive (Mobile) */
 @media (max-width: 600px) {
-  .container {
-    padding: 30px 25px;
+  form {
+    grid-template-columns: 1fr;
   }
 
-  h2 {
-    font-size: 1.6rem;
+  form p {
+    grid-column: span 1;
   }
 
   .button-group {
@@ -159,24 +207,11 @@ button.logout:hover {
   form button {
     width: 100%;
   }
-}
+  .container {
+    padding: 30px 20px;
+  }
 
-.home-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: var(--primary);
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-    padding: 10px 14px;
-    border-radius: 10px;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease;
+  h2 {
+    font-size: 1.5rem;
   }
-  
-  .home-button:hover {
-    background-color: var(--primary-dark);
-  }
-  
+}
