@@ -15,11 +15,17 @@
 </head>
 
 <body>
-    <div class="container">
+    <!-- Loader -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" style="display: none;">
         <a href="DAS.html" class="home-button" title="Go to Dashboard">🏠</a>
         <a href="DAS.html" title="Go to Dashboard">
             <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
-          </a>
+        </a>
         <h2>🌿 Green Guard - Your Profile 🌿</h2>
 
         <div id="profileData">
@@ -34,8 +40,8 @@
         </div>
     </div>
 
+    <!-- Firebase & Loader Logic -->
     <script>
-        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
             authDomain: "greenguard-408ed.firebaseapp.com",
@@ -45,6 +51,9 @@
         const db = firebase.firestore();
 
         firebase.auth().onAuthStateChanged(async (user) => {
+            const loader = document.getElementById("loader");
+            const container = document.querySelector(".container");
+
             if (user) {
                 const uid = user.uid;
                 try {
@@ -62,6 +71,9 @@
                     }
                 } catch (error) {
                     console.error("Error fetching profile:", error);
+                } finally {
+                    loader.style.display = "none";
+                    container.style.display = "block";
                 }
             } else {
                 window.location.href = "login.html";
