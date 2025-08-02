@@ -33,14 +33,13 @@ body {
 }
 
 .container {
-  background: var(--card-bg);
-  padding: 40px 30px;
-  border-radius: 15px;
-  width: 100%;
+  position: relative;
   max-width: 600px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  position: center;
-  text-align: center;
+  margin: 40px auto;
+  padding: 40px 30px 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -186,7 +185,12 @@ button.logout:hover {
 }
 
 .home-button:hover {
-  background-color: var(--primary-dark);
+  background-color: #45a049;
+}
+
+.home-button img {
+  width: 24px;
+  height: 24px;
 }
 
 /* Responsive (Mobile) */
