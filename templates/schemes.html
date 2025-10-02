@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Guard - Government Schemes</title>
+    <title>Green Guard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="\static\css\schemes.css">
 </head>
@@ -12,17 +12,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <a href="DAS.html" title="Go to Dashboard">
+            <a href="/DAS" title="Go to Dashboard">
                 <img src="/static/image/greenguard_logo.png" alt=" FarmConnect Logo" class="logo" />
               </a>
             <div class="user-info">
                 <a href="profile.html" class="profile-link" title="View Profile">
                     <i class="fas fa-user"></i>
+                    <span>Profile</span>
                 </a>
-                <div class="user-greeting" id="greeting">
-                    <i class="fas fa-seedling"></i>
-                    <span id="greeting-text">Hello, User!</span>
-                </div>
+                    <a href="/DAS" class="home-btn" title="Go to Home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                </a>
                 
                 <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn"
                     onclick="event.preventDefault(); logoutAndRedirect();">
@@ -314,6 +315,284 @@
                     <button class="apply-btn" id="applyBtn10">Apply</button>
                 </a>
             </div>
+            <!-- Scheme 11 - PMFBY -->
+            <div class="scheme-card">
+                <span class="year-badge">2016</span>
+                <h3 id="scheme11-name">Pradhan Mantri Fasal Bima Yojana (PMFBY)</h3>
+                <p class="scheme-desc" id="scheme11-desc">Crop insurance scheme for farmers against crop loss</p>
+                <div class="highlight" id="scheme11-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Maximum premium ₹2,000 per hectare</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Coverage for all crops</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Quick claim settlement</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Weather-based insurance</span>
+                    </div>
+                </div>
+                <a href="https://pmfby.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn11">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 12 - PMKSY -->
+            <div class="scheme-card">
+                <span class="year-badge">2015</span>
+                <h3 id="scheme12-name">Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</h3>
+                <p class="scheme-desc" id="scheme12-desc">Ensures water to every field through irrigation</p>
+                <div class="highlight" id="scheme12-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Har Khet Ko Pani</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Per Drop More Crop</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Watershed development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Convergence of schemes</span>
+                    </div>
+                </div>
+                <a href="https://pmksy.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn12">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 13 - PM-KMY -->
+            <div class="scheme-card">
+                <span class="year-badge">2020</span>
+                <h3 id="scheme13-name">Pradhan Mantri Kisan Maan Dhan Yojana (PM-KMY)</h3>
+                <p class="scheme-desc" id="scheme13-desc">Pension scheme for small and marginal farmers</p>
+                <div class="highlight" id="scheme13-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>₹3,000 monthly pension at 60</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>₹100-200 monthly contribution</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Government matching contribution</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Life insurance coverage</span>
+                    </div>
+                </div>
+                <a href="https://pmkmy.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn13">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 14 - MIDH -->
+            <div class="scheme-card">
+                <span class="year-badge">2018</span>
+                <h3 id="scheme14-name">Mission for Integrated Development of Horticulture (MIDH)</h3>
+                <p class="scheme-desc" id="scheme14-desc">Promotes holistic growth of horticulture sector</p>
+                <div class="highlight" id="scheme14-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Area expansion programs</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Post-harvest management</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Marketing infrastructure</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Skill development training</span>
+                    </div>
+                </div>
+                <a href="https://midh.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn14">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 15 - NMSA -->
+            <div class="scheme-card">
+                <span class="year-badge">2021</span>
+                <h3 id="scheme15-name">National Mission for Sustainable Agriculture (NMSA)</h3>
+                <p class="scheme-desc" id="scheme15-desc">Promotes sustainable agriculture practices</p>
+                <div class="highlight" id="scheme15-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Soil health management</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Water use efficiency</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Climate change adaptation</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Integrated farming systems</span>
+                    </div>
+                </div>
+                <a href="https://nmsa.dac.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn15">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 16 - PMKSY -->
+            <div class="scheme-card">
+                <span class="year-badge">2019</span>
+                <h3 id="scheme16-name">Pradhan Mantri Kisan Sampada Yojana (PMKSY)</h3>
+                <p class="scheme-desc" id="scheme16-desc">Comprehensive scheme for food processing infrastructure</p>
+                <div class="highlight" id="scheme16-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Cold chain infrastructure</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Food processing units</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Mega food parks</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Backward and forward linkages</span>
+                    </div>
+                </div>
+                <a href="https://mofpi.nic.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn16">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 17 - PMMSY -->
+            <div class="scheme-card">
+                <span class="year-badge">2020</span>
+                <h3 id="scheme17-name">Pradhan Mantri Matsya Sampada Yojana (PMMSY)</h3>
+                <p class="scheme-desc" id="scheme17-desc">Comprehensive scheme for fisheries sector development</p>
+                <div class="highlight" id="scheme17-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>₹20,050 crore investment</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Aquaculture development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Infrastructure development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Fisheries management</span>
+                    </div>
+                </div>
+                <a href="https://dof.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn17">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 18 - NLM -->
+            <div class="scheme-card">
+                <span class="year-badge">2018</span>
+                <h3 id="scheme18-name">National Livestock Mission (NLM)</h3>
+                <p class="scheme-desc" id="scheme18-desc">Comprehensive development of livestock sector</p>
+                <div class="highlight" id="scheme18-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Breed improvement programs</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Feed and fodder development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Livestock health management</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Skill development training</span>
+                    </div>
+                </div>
+                <a href="https://dahd.nic.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn18">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 19 - PM-KUSUM -->
+            <div class="scheme-card">
+                <span class="year-badge">2021</span>
+                <h3 id="scheme19-name">Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan (PM-KUSUM)</h3>
+                <p class="scheme-desc" id="scheme19-desc">Solar power scheme for farmers</p>
+                <div class="highlight" id="scheme19-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Solar water pumps</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Solar power plants</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Grid-connected solar</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Income generation</span>
+                    </div>
+                </div>
+                <a href="https://pmkusum.mnre.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn19">Apply</button>
+                </a>
+            </div>
+
+            <!-- Scheme 20 - NMNF -->
+            <div class="scheme-card">
+                <span class="year-badge">2022</span>
+                <h3 id="scheme20-name">National Mission on Natural Farming (NMNF)</h3>
+                <p class="scheme-desc" id="scheme20-desc">Promotes chemical-free natural farming practices</p>
+                <div class="highlight" id="scheme20-highlight">
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Zero budget natural farming</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Chemical-free agriculture</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Soil health improvement</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-checkbox">✅</span>
+                        <span>Training and awareness</span>
+                    </div>
+                </div>
+                <a href="https://naturalfarming.dac.gov.in/" target="_blank">
+                    <button class="apply-btn" id="applyBtn20">Apply</button>
+                </a>
         </div>
     </div>
 
@@ -340,7 +619,6 @@
             pageTitle.innerText = "Government Schemes";
             langText.innerText = "English";
             logoutText.innerText = "Logout";
-            greetingText.innerText = "Hello, User!";
     
             // Remove translate object and all Hindi text. Set all UI text to English only.
             document.getElementById(`scheme1-name`).innerText = "PM-KISAN";
@@ -363,6 +641,26 @@
             document.getElementById(`scheme9-desc`).innerText = "Promotes organic farming in Northeast India";
             document.getElementById(`scheme10-name`).innerText = "National Bamboo Mission (NBM)";
             document.getElementById(`scheme10-desc`).innerText = "Supports bamboo plantations and training";
+            document.getElementById(`scheme11-name`).innerText = "Pradhan Mantri Fasal Bima Yojana (PMFBY)";
+            document.getElementById(`scheme11-desc`).innerText = "Crop insurance scheme for farmers against crop loss";
+            document.getElementById(`scheme12-name`).innerText = "Pradhan Mantri Krishi Sinchai Yojana (PMKSY)";
+            document.getElementById(`scheme12-desc`).innerText = "Ensures water to every field through irrigation";
+            document.getElementById(`scheme13-name`).innerText = "Pradhan Mantri Kisan Maan Dhan Yojana (PM-KMY)";
+            document.getElementById(`scheme13-desc`).innerText = "Pension scheme for small and marginal farmers";
+            document.getElementById(`scheme14-name`).innerText = "Mission for Integrated Development of Horticulture (MIDH)";
+            document.getElementById(`scheme14-desc`).innerText = "Promotes holistic growth of horticulture sector";
+            document.getElementById(`scheme15-name`).innerText = "National Mission for Sustainable Agriculture (NMSA)";
+            document.getElementById(`scheme15-desc`).innerText = "Promotes sustainable agriculture practices";
+            document.getElementById(`scheme16-name`).innerText = "Pradhan Mantri Kisan Sampada Yojana (PMKSY)";
+            document.getElementById(`scheme16-desc`).innerText = "Comprehensive scheme for food processing infrastructure";
+            document.getElementById(`scheme17-name`).innerText = "Pradhan Mantri Matsya Sampada Yojana (PMMSY)";
+            document.getElementById(`scheme17-desc`).innerText = "Comprehensive scheme for fisheries sector development";
+            document.getElementById(`scheme18-name`).innerText = "National Livestock Mission (NLM)";
+            document.getElementById(`scheme18-desc`).innerText = "Comprehensive development of livestock sector";
+            document.getElementById(`scheme19-name`).innerText = "Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan (PM-KUSUM)";
+            document.getElementById(`scheme19-desc`).innerText = "Solar power scheme for farmers";
+            document.getElementById(`scheme20-name`).innerText = "National Mission on Natural Farming (NMNF)";
+            document.getElementById(`scheme20-desc`).innerText = "Promotes chemical-free natural farming practices";
 
             document.getElementById(`scheme1-highlight`).innerHTML = `
                 <div class="highlight-item">
@@ -611,7 +909,111 @@
         locateUser();
     </script>
     
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                        <h3>Green Guard</h3>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
 
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">Dashboard</a></li>
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                        <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="market.html">Seed & Equipment Market</a></li>
+                        <li><a href="about.html">Support & Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@greenguard.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9090909090</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolhapur, Maharashtra, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.greenguard.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

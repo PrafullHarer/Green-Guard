@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Guard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="\static\css\team.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/DAS" title="Go to Dashboard">
+                <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo" />
+              </a>
+              
+            <div class="user-info">
+                <a href="profile.html" class="profile-link" title="View Profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                    <a href="/DAS" class="home-btn" title="Go to Home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn"
+                    onclick="event.preventDefault(); logoutAndRedirect();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span id="logout-text">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Team Header Section -->
+        <div class="team-header">
+            <h1 class="team-title">Meet Our Team</h1>
+            <p class="team-subtitle">The passionate individuals behind Green Guard's mission to revolutionize Indian agriculture</p>
+        </div>
+
+        <!-- Team Members Grid -->
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="/static/team/team.png" alt="Prafull Harer" />
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Prafull Harer</h3>
+                    <p class="member-role">Documentation & Reports Specialist</p>
+                    <p class="member-bio">Expert in Project Documentation and Reporting with extensive experience in agricultural project management and technical writing.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Project Documentation</span>
+                        <span class="skill-tag">Technical Writing</span>
+                        <span class="skill-tag">Report Analysis</span>
+                    </div>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="/static/team/team.png" alt="Pranav More" />
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Pranav More</h3>
+                    <p class="member-role">Frontend Developer</p>
+                    <p class="member-bio">Expert in User Interface and Web Design with a passion for creating intuitive and responsive agricultural technology solutions.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="/static/team/team.png" alt="Rushikesh Kulkarni" />
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Rushikesh Kulkarni</h3>
+                    <p class="member-role">System Architect & Project Lead</p>
+                    <p class="member-bio">Expert in System Architecture and Project Planning with deep knowledge of agricultural technology integration and scalable solutions.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">System Architecture</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Technology Integration</span>
+                    </div>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="/static/team/team.png" alt="Parth Mokal" />
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Parth Mokal</h3>
+                    <p class="member-role">Backend Developer</p>
+                    <p class="member-bio">Expert in Server-side Logic and Database Management with specialization in agricultural data processing and API development.</p>
+                    <div class="member-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">API Development</span>
+                    </div>
+                    <div class="member-social">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Values Section -->
+        <div class="team-values">
+            <h2 class="values-title">Our Team Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="value-name">Innovation</h3>
+                    <p class="value-description">We constantly innovate to bring cutting-edge technology to Indian agriculture.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="value-name">Collaboration</h3>
+                    <p class="value-description">We work together to create solutions that benefit farmers across India.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="value-name">Passion</h3>
+                    <p class="value-description">We are passionate about transforming agriculture through technology.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="value-name">Excellence</h3>
+                    <p class="value-description">We strive for excellence in everything we do for our farming community.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join Our Team Section -->
+        <div class="join-team">
+            <h2 class="join-title">Join Our Mission</h2>
+            <p class="join-description">Are you passionate about agriculture and technology? We're always looking for talented individuals to join our team.</p>
+            <div class="join-actions">
+                <a href="mailto:careers@greenguard.com" class="join-btn primary">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </a>
+                <a href="about.html" class="join-btn secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                        <h3>Green Guard</h3>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">Dashboard</a></li>
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                        <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="market.html">Seed & Equipment Market</a></li>
+                        <li><a href="about.html">Support & Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@greenguard.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9090909090</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolhapur, Maharashtra, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.greenguard.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function logoutAndRedirect() {
+            // If you use localStorage/sessionStorage for login, clear it here if needed
+            // localStorage.removeItem('user');
+            // sessionStorage.removeItem('user');
+            window.location.href = "login.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle image loading errors
+            const images = document.querySelectorAll('.member-photo img');
+            images.forEach(img => {
+                img.onerror = function () {
+                    if (this.dataset.fallback) {
+                        this.src = this.dataset.fallback;
+                    }
+                };
+            });
+
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+    </script>
+</body>
+
+</html>

@@ -3,37 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Crop Guide</title>
+  <title>Green Guard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="\static\css\crop_advice.css">
 </head>
 <body>
-
-<!-- Navigation Bar -->
-<nav>
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <a href="DAS.html" title="Go to Dashboard">
-      <img src="/static/image/greenguard_logo.png" alt="GreenGuard Logo" style="height: 120px;" class="logo" />
-    </a>
-    
-  </div>
-
-  <div style="display: flex; align-items: center; gap: 16px;">
-    <div style="background-color: #2e7d32; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-      <a href="profile.html" class="profile-link" title="View Profile">
-        <i class="fas fa-user"></i>
+  <div class="container">
+    <div class="header">
+      <a href="/DAS" title="Go to Dashboard">
+        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo" />
       </a>
+      
+      <div class="user-info">
+        <a href="profile.html" class="profile-link" title="View Profile">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+          <a href="/DAS" class="home-btn" title="Go to Home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+        <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+            <i class="fas fa-sign-out-alt"></i> 
+            <span id="logout-text">Logout</span>
+        </a>
+      </div>
     </div>
-
-    <div style="background-color: #2e7d32; color: white; padding: 8px 20px; border-radius: 9999px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
-      🌱 <span id="greeting">Hello</span>, <span id="user-name">User</span>!
-    </div>
-
-    <button onclick="logoutAndRedirect()" class="logout-btn">
-      <i class="fas fa-sign-out-alt"></i> <span id="logout-label">Logout</span>
-    </button>
-  </div>
-</nav>
 
 <h1 id="crop-heading">Crop Guide</h1>
 
@@ -47,61 +42,61 @@
       en: { name: "Sugarcane", desc: "Essential cash crop with year-round cultivation cycle." },
       hi: { name: "गन्ना", desc: "सालभर उगाई जाने वाली आवश्यक नकदी फसल।" },
       img: "/static/image/SUGARCANE.jpg",
-      link: "crops/sugarcane.html"
+      link: "/sugarcane.html"
     },
     {
       en: { name: "Rice", desc: "Staple food crop cultivated across various seasons." },
       hi: { name: "चावल", desc: "विभिन्न मौसमों में उगाई जाने वाली मुख्य खाद्यान्न फसल।" },
       img: "/static/image/rice.jpeg",
-      link: "crops/rice.html"
+      link: "/rice.html"
     },
     {
       en: { name: "Wheat", desc: "Primary crop for bread and flour production." },
       hi: { name: "गेहूं", desc: "रोटी और आटे के लिए प्रमुख फसल।" },
       img: "/static/image/wheat.jpeg",
-      link: "crops/wheat.html"
+      link: "/wheat.html"
     },
     {
       en: { name: "Onion", desc: "Essential kitchen vegetable with multiple harvests." },
       hi: { name: "प्याज", desc: "अनेक फसल चक्रों वाली आवश्यक सब्ज़ी।" },
       img: "/static/image/onion.jpg",
-      link: "crops/onion.html"
+      link: "/onion.html"
     },
     {
       en: { name: "Tomato", desc: "Versatile fruit vegetable used in countless dishes." },
       hi: { name: "टमाटर", desc: "अनेक व्यंजनों में उपयोग होने वाली फल-सब्ज़ी।" },
       img: "/static/image/tomato.avif",
-      link: "crops/tomato.html"
+      link: "/tomato.html"
     },
     {
       en: { name: "Potato", desc: "Starchy tuber crop grown in various conditions." },
       hi: { name: "आलू", desc: "विभिन्न स्थितियों में उगने वाली स्टार्चयुक्त फसल।" },
       img: "/static/image/potato.jpg",
-      link: "crops/potato.html"
+      link: "/potato.html"
     },
     {
       en: { name: "Cabbage", desc: "Leafy vegetable with multiple varieties." },
       hi: { name: "पत्ता गोभी", desc: "अनेक किस्मों वाली पत्तेदार सब्ज़ी।" },
       img: "/static/image/cabbage.jpg",
-      link: "crops/cabbage.html"
+      link: "/cabbage.html"
     },
     {
       en: { name: "Ladies Finger", desc: "Warm season vegetable known for nutrition." },
       hi: { name: "भिंडी", desc: "गर्मी में उगाई जाने वाली पौष्टिक सब्ज़ी।" },
       img: "/static/image/ladii.jpg",
-      link: "crops/ladii.html"
+      link: "/ladii.html"
     },
     {
       en: { name: "Chilli", desc: "Spice crop with multiple varieties and heat levels." },
       hi: { name: "मिर्च", desc: "विभिन्न प्रकारों और तीव्रता की मसालेदार फसल।" },
       img: "/static/image/image.png",
-      link: "crops/chilli.html"
+      link: "/chilli.html"
     },
     {
       en: { name: "Garlic", desc: "Bulb crop valued for culinary and medicinal uses." },
       hi: { name: "लहसुन", desc: "खाद्य और औषधीय गुणों वाली बल्ब फसल।" },
       img: "/static/image/garlic.jpg",
-      link: "crops/garlic.html"
+      link: "/garlic.html"
     }
   ];
 
@@ -134,5 +129,112 @@
   document.addEventListener("DOMContentLoaded", renderCrops);
 </script>
 
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-content">
+              <!-- Company Info -->
+              <div class="footer-section">
+                  <div class="footer-logo">
+                      <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                      <h3>Green Guard</h3>
+                  </div>
+                  <p class="footer-description">
+                      Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                  </p>
+                  <div class="social-links">
+                      <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                          <i class="fab fa-facebook-f"></i>
+                      </a>
+                      <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                          <i class="fab fa-twitter"></i>
+                      </a>
+                      <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                          <i class="fab fa-linkedin-in"></i>
+                      </a>
+                      <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                          <i class="fab fa-instagram"></i>
+                      </a>
+                      <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                          <i class="fab fa-youtube"></i>
+                      </a>
+                  </div>
+              </div>
+
+              <!-- Quick Links -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Quick Links</h4>
+                  <ul class="footer-links">
+                      <li><a href="/DAS">Dashboard</a></li>
+                      <li><a href="disease.html">AI Disease Detection</a></li>
+                      <li><a href="about.html">About Us</a></li>
+                      <li><a href="team.html">Our Team</a></li>
+                      <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                  </ul>
+              </div>
+
+              <!-- Services -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Our Services</h4>
+                  <ul class="footer-links">
+                        <li><a href="/DAS">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                      <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                      <li><a href="schemes.html">Government Schemes</a></li>
+                      <li><a href="market.html">Seed & Equipment Market</a></li>
+                      <li><a href="about.html">Support & Help</a></li>
+                  </ul>
+              </div>
+
+              <!-- Contact Info -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Contact Us</h4>
+                  <div class="contact-info">
+                      <div class="contact-item">
+                          <i class="fas fa-envelope"></i>
+                          <span>contact@greenguard.in</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-phone"></i>
+                          <span>+91 9090909090</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <span>Kolhapur, Maharashtra, India</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-clock"></i>
+                          <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-globe"></i>
+                          <span>www.greenguard.in</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Footer Bottom -->
+          <div class="footer-bottom">
+              <div class="footer-bottom-content">
+                  <div class="copyright">
+                      <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                  </div>
+                  <div class="footer-bottom-links">
+                      <a href="privacy-policy.html">Privacy Policy</a>
+                      <a href="terms-of-service.html">Terms of Service</a>
+                      <a href="cookie-policy.html">Cookie Policy</a>
+                      <a href="contact.html">Contact</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
 </body>
 </html>

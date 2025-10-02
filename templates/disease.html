@@ -1,39 +1,848 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - पौध रोग पहचान</title>
+    <title>Green Guard</title>
     <link rel="icon" href="{{ url_for('static', filename='image/logo.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="\static\css\disease.css">
+    <style>
+        :root {
+            --primary: rgb(170,249,63);
+            --primary-light: rgba(170,249,63,0.8);
+            --primary-dark: rgba(170,249,63,0.9);
+            --secondary: rgb(170,249,63);
+            --secondary-dark: rgba(170,249,63,0.7);
+            --light: #ffffff;
+            --dark: #000000;
+            --card-bg: rgba(0,0,0,0.8);
+            --text-color: #ffffff;
+            --text-light: rgba(255,255,255,0.9);
+            --border-color: rgba(170,249,63,0.3);
+            --background-primary: #000000;
+            --background-secondary: rgba(0,0,0,0.9);
+            --success: rgb(170,249,63);
+            --warning: rgb(170,249,63);
+            --error: #F44336;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #000000;
+            background-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0.9) 100%);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 10px 12px;
+            height: 60px;
+        }
+
+
+        .logo {
+            height: 100px;
+            width: auto;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-link {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .profile-link:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-link i {
+            color: var(--dark);
+        }
+
+        .home-btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .home-btn:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-btn i {
+            color: var(--dark);
+        }
+
+        .logout-btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-btn i {
+            color: var(--dark);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px);
+            padding: 1rem 0;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Modern Form Box */
+        .form-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(170, 249, 63, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .form-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 2;
+        }
+
+        .form-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(170, 249, 63, 0.02) 0%, rgba(0, 0, 0, 0.02) 100%);
+            z-index: -1;
+        }
+
+        .form-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .form-box h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            color: var(--light);
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-box h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .input-box {
+            margin: 1.2rem 0;
+            position: relative;
+        }
+
+        /* Modern File Input */
+        .custom-file-input {
+            width: 100%;
+            position: relative;
+        }
+
+        .custom-file-input input[type="file"] {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            color: var(--light);
+            border: 2px dashed var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            outline: none;
+            font-weight: 500;
+        }
+
+        .custom-file-input input[type="file"]:hover {
+            border-color: var(--primary);
+            background: rgba(170, 249, 63, 0.03);
+            box-shadow: 0 5px 15px rgba(170, 249, 63, 0.1);
+        }
+
+        .custom-file-input input[type="file"]:focus {
+            border-color: var(--secondary);
+        }
+
+        .custom-file-input input[type="file"]::file-selector-button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--dark);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(170, 249, 63, 0.2);
+        }
+
+        .custom-file-input input[type="file"]::file-selector-button:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(170, 249, 63, 0.3);
+        }
+
+        /* Modern Button */
+        .btn-upload {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(170, 249, 63, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-upload::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-upload:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(170, 249, 63, 0.4);
+        }
+
+        .btn-upload:hover::before {
+            left: 100%;
+        }
+
+        .btn-upload:active {
+            transform: translateY(1px);
+        }
+
+        .btn-upload i {
+            margin-right: 8px;
+        }
+
+        /* Modern Result Container */
+        .result-container {
+            margin-top: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(170, 249, 63, 0.3);
+            animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .result-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            z-index: 2;
+        }
+
+        .result-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(170, 249, 63, 0.02) 0%, rgba(0, 0, 0, 0.02) 100%);
+            z-index: -1;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .result-image {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            transition: all 0.5s;
+            border: 1px solid var(--border-color);
+        }
+
+        .result-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .result-text {
+            width: 100%;
+        }
+
+        .result-text h3 {
+            color: var(--light);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            padding-bottom: 6px;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .result-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 2px;
+        }
+
+        .result-text p {
+            margin-bottom: 1rem;
+            padding: 0 0.8rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .result-text p strong {
+            color: var(--light);
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .result-text p em {
+            color: var(--text-light);
+            font-style: italic;
+            background: rgba(170, 249, 63, 0.1);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            display: block;
+            margin: 0.8rem 0;
+        }
+
+        /* Modern Loading Animation */
+        .loading-container {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(170, 249, 63, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            border-right-color: var(--secondary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loading-text {
+            color: var(--light);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .form-box {
+                padding: 1.2rem;
+                max-width: 500px;
+            }
+            
+            .result-container {
+                padding: 1.2rem;
+                max-width: 500px;
+            }
+            
+            .header {
+                padding: 8px 3%;
+                flex-direction: column;
+                gap: 10px;
+                height: auto;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .result-text h3 {
+                font-size: 1.2rem;
+            }
+            
+            .btn-upload {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .main-container {
+                padding: 0.8rem 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-box, .result-container {
+                padding: 1rem;
+                border-radius: 16px;
+                max-width: 400px;
+            }
+            
+            .form-box h1 {
+                font-size: 1.3rem;
+            }
+
+            .main-container {
+                padding: 0.5rem 0;
+            }
+
+            .result-image {
+                max-height: 200px;
+            }
+        }
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0.95) 100%);
+    border-top: 1px solid var(--border-color);
+    margin-top: 80px;
+    padding: 60px 0 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.footer-logo h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.footer-description {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 1px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.footer-links a::before {
+    content: '→';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(170, 249, 63, 0.3);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.contact-item i {
+    color: var(--primary);
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 30px;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.copyright {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 25px;
+}
+
+.footer-bottom-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--primary);
+}
+
+/* Footer Responsive Design */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+        margin-top: 60px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 15px;
+    }
+
+    .footer-logo {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footer-logo h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+    </style>
 </head>
 <body>
-    <!-- Floating background elements -->
-    <div class="floating-elements">
-        <div class="floating-element" style="width: 300px; height: 300px; top: -100px; left: -100px; animation-duration: 20s;"></div>
-        <div class="floating-element" style="width: 200px; height: 200px; bottom: -50px; right: -50px; animation-duration: 25s;"></div>
-    </div>
-    
-    <!-- Header Section -->
-    <header class="header">
-        <div class="logo-container">
-            <img src="/static/image/greenguard_logo.png" alt="Kisan Guard Logo" class="logo-img">
-            <span class="logo-text" id="logo-text">KISAN Guard</span>
-        </div>
-        
-        <div class="header-controls">
-            <div class="time-widget">
-                <i class="fas fa-clock"></i>
-                <span id="current-time"></span>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <a href="/DAS" title="Go to Dashboard">
+                <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo" />
+            </a>
+            
+            <div class="user-info">
+                <a href="profile.html" class="profile-link" title="View Profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                    <a href="/DAS" class="home-btn" title="Go to Home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+                    <i class="fas fa-sign-out-alt"></i> 
+                    <span id="logout-text">Logout</span>
+                </a>
             </div>
-        </div>
-    </header>
-    
-    <div class="main-container">
+        </header>
+        
+        <div class="main-container">
         <div class="form-box">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }} alert-dismissible fade show" role="alert" style="margin-bottom: 1.5rem; border-radius: 12px; border: none; background: {{ 'rgba(244, 67, 54, 0.1)' if category == 'danger' else 'rgba(76, 175, 80, 0.1)' }}; color: {{ '#d32f2f' if category == 'danger' else '#2e7d32' }}; padding: 1rem 1.5rem;">
+                            <i class="fas fa-{{ 'exclamation-triangle' if category == 'danger' else 'check-circle' }}" style="margin-right: 8px;"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="float: right; background: none; border: none; font-size: 1.2rem; color: inherit;">&times;</button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
             <form action="/upload/" method="POST" enctype="multipart/form-data" id="upload-form">
                 <h1 id="form-title">Upload Plant Image</h1>
                 <div class="input-box">
@@ -60,19 +869,27 @@
                         <img src="{{imagepath}}" alt="Uploaded plant image" class="result-image">
                     </div>
                     <div class="result-text">
-                        <h3 id="disease-name">{{prediction['name']}}</h3>
+                        <h3 id="disease-name">{{prediction.get('name', 'Unknown Disease')}}</h3>
+                        {% if prediction.get('cause') %}
                         <p><strong id="cause-label">Cause:</strong> <span id="cause-text">{{prediction['cause']}}</span></p>
+                        {% endif %}
+                        {% if prediction.get('cure') %}
                         <p><strong id="treatment-label">Treatment:</strong> <span id="treatment-text">{{prediction['cure']}}</span></p>
+                        {% endif %}
+                        {% if not prediction.get('cause') and not prediction.get('cure') %}
+                        <p><em>Detailed information about this disease is not available. Please consult with a plant specialist for proper diagnosis and treatment.</em></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             {% endif %}
         </div>
     </div>
+    </div>
 
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
     <script>
-        // Remove translations object and all Hindi text. Set all UI text to English only.
+
         // Time widget functionality
         function updateTime() {
             const now = new Date();
@@ -150,20 +967,113 @@
                 el.style.opacity = '0';
             });
             
-            // Create floating elements dynamically
-            const floatingContainer = document.querySelector('.floating-elements');
-            for (let i = 0; i < 4; i++) {
-                const element = document.createElement('div');
-                element.className = 'floating-element';
-                element.style.width = `${Math.random() * 200 + 100}px`;
-                element.style.height = element.style.width;
-                element.style.top = `${Math.random() * 100}%`;
-                element.style.left = `${Math.random() * 100}%`;
-                element.style.background = `rgba(${Math.floor(Math.random() * 56 + 16)}, ${Math.floor(Math.random() * 125 + 50)}, ${Math.floor(Math.random() * 50 + 20)}, ${Math.random() * 0.1 + 0.05})`;
-                element.style.animationDuration = `${Math.random() * 20 + 15}s`;
-                floatingContainer.appendChild(element);
-            }
         });
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                        <h3>Green Guard</h3>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">Dashboard</a></li>
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                        <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="market.html">Seed & Equipment Market</a></li>
+                        <li><a href="about.html">Support & Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@greenguard.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9090909090</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolhapur, Maharashtra, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.greenguard.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

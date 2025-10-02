@@ -4,44 +4,443 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Green Guard - Registration</title>
+  <title>Green Guard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
-  <link rel="stylesheet" href="\static\css\register.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #000000;
+      background-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0.9) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .register-container {
+      width: 100%;
+      max-width: 1000px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(170, 249, 63, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(170, 249, 63, 0.1);
+      overflow: hidden;
+      display: flex;
+      min-height: 600px;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .form-section {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      overflow-y: auto;
+    }
+
+    .info-section {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(170, 249, 63, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: rgb(170,249,63);
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .form-group.full-width {
+      flex: none;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: white;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid rgba(170, 249, 63, 0.3);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: rgb(170,249,63);
+      box-shadow: 0 0 0 3px rgba(170, 249, 63, 0.1);
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, rgb(170,249,63) 0%, rgba(170,249,63,0.8) 100%);
+      border: none;
+      border-radius: 12px;
+      color: black;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(170, 249, 63, 0.3);
+    }
+
+    .login-link {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: rgb(170,249,63);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .info-content {
+      text-align: center;
+      color: white;
+    }
+
+    .info-content h3 {
+      font-size: 1.8rem;
+      color: rgb(170,249,63);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .info-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .features {
+      margin-top: 30px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .feature-item span {
+      margin-left: 10px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .register-container {
+        flex-direction: column;
+        max-width: 450px;
+        min-height: auto;
+        max-height: 95vh;
+      }
+
+      .form-section {
+        padding: 25px 20px;
+      }
+
+      .info-section {
+        display: none;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .register-container {
+        max-width: 400px;
+        margin: 10px;
+      }
+
+      .form-section {
+        padding: 20px 15px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      input, select {
+        padding: 10px 12px;
+      }
+
+      button[type="submit"] {
+        padding: 12px;
+      }
+    }
+
+    /* Welcome/Error Popup Styles */
+    .welcome-popup,
+    .error-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-content {
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(170, 249, 63, 0.3);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s ease;
+    }
+
+    .popup-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .welcome-popup .popup-icon {
+      color: rgb(170, 249, 63);
+    }
+
+    .error-popup .popup-icon {
+      color: #f44336;
+    }
+
+    .popup-content h3 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .popup-content p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1rem;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .popup-btn {
+      background: linear-gradient(135deg, rgb(170, 249, 63) 0%, rgba(170, 249, 63, 0.8) 100%);
+      color: black;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(170, 249, 63, 0.3);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .popup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(170, 249, 63, 0.3);
+    }
+
+    .popup-btn:active {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
-    <h2>🌾 Green Guard - Registration Form 🌾</h2>
-    <form method="POST">
-      <label for="name">👤 Full Name:</label>
-      <input type="text" id="name" name="name" required />
+  <div class="register-container">
+    <!-- Form Section -->
+    <div class="form-section">
+      <h2>Register</h2>
+      <p class="subtitle">Create your account to get started</p>
 
-      <label for="email">📧 Email:</label>
-      <input type="email" id="email" name="email" required />
+      <form method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">👤 Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">📧 Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+        </div>
 
-      <label for="phone">📱 Phone Number:</label>
-      <input type="tel" id="phone" name="phone" required />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">📱 Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required />
+          </div>
+          <div class="form-group">
+            <label for="farmerType">🌾 Farmer Type</label>
+            <select id="farmerType" name="farmerType"></select>
+          </div>
+        </div>
 
-      <label for="state">🌍 State:</label>
-      <select id="state" name="state"></select>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="state">🌍 State</label>
+            <select id="state" name="state"></select>
+          </div>
+          <div class="form-group">
+            <label for="district">🏣 District</label>
+            <select id="district" name="district"></select>
+          </div>
+        </div>
 
-      <label for="district">🏣 District:</label>
-      <select id="district" name="district"></select>
+        <div class="form-group full-width">
+          <label for="password">🔐 Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
 
-      <label for="farmerType">🌾 Farmer Type:</label>
-      <select id="farmerType" name="farmerType"></select>
+        <button type="submit" id="submit-btn">📝 Register</button>
+      </form>
 
-      <label for="password">🔐 Password:</label>
-      <input type="password" id="password" name="password" required />
+      <p class="login-link" id="login-text">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
 
-      <button type="submit" id="submit-btn">📝 Register</button>
-    </form>
-    <p class="login-link" id="login-text">Already have an account? <a href="login.html">Login here</a></p>
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-content">
+        <h3>Welcome to Green Guard!</h3>
+        <p>Join thousands of farmers who are transforming agriculture with technology.</p>
+        
+        <div class="features">
+          <div class="feature-item">
+            <span>🌾</span>
+            <span>AI-powered crop recommendations</span>
+          </div>
+          <div class="feature-item">
+            <span>📊</span>
+            <span>Real-time market analysis</span>
+          </div>
+          <div class="feature-item">
+            <span>🔍</span>
+            <span>Disease detection technology</span>
+          </div>
+          <div class="feature-item">
+            <span>📱</span>
+            <span>Mobile-friendly interface</span>
+          </div>
+          <div class="feature-item">
+            <span>💰</span>
+            <span>Government scheme updates</span>
+          </div>
+          <div class="feature-item">
+            <span>🌱</span>
+            <span>Sustainable farming practices</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -347,13 +746,55 @@
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        alert("✅ Registered & saved: " + user.email);
-        window.location.href = "login.html";
+        showWelcomePopup(name);
       } catch (error) {
-        alert("❌ " + error.message);
+        showErrorPopup(error.message);
         console.error(error);
       }
     });
+
+    function showWelcomePopup(userName) {
+      const popup = document.createElement('div');
+      popup.className = 'welcome-popup';
+      popup.innerHTML = `
+        <div class="popup-content">
+          <div class="popup-icon">
+            <i class="fas fa-hand-wave"></i>
+          </div>
+          <h3>Welcome to Green Guard, ${userName}!</h3>
+          <p>Your account has been created successfully. You can now start your farming journey with us!</p>
+          <button onclick="redirectToLogin()" class="popup-btn">Continue to Login</button>
+        </div>
+      `;
+      document.body.appendChild(popup);
+    }
+
+    function showErrorPopup(errorMessage) {
+      const popup = document.createElement('div');
+      popup.className = 'error-popup';
+      popup.innerHTML = `
+        <div class="popup-content">
+          <div class="popup-icon">
+            <i class="fas fa-exclamation-circle"></i>
+          </div>
+          <h3>Registration Failed</h3>
+          <p>${errorMessage}</p>
+          <button onclick="closePopup()" class="popup-btn">Try Again</button>
+        </div>
+      `;
+      document.body.appendChild(popup);
+    }
+
+    function redirectToLogin() {
+      window.location.href = "login.html";
+    }
+
+    function closePopup() {
+      const popup = document.querySelector('.welcome-popup, .error-popup');
+      if (popup) {
+        popup.remove();
+      }
+    }
   </script>
 </body>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ग्रीन गार्ड - नजदीकी कृषि बाजार</title>
+    <title>Green Guard</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -13,41 +13,59 @@
 </head>
 
 <body>
-    <div class="header">
-        <a href="DAS.html" title="Go to Dashboard">
-            <img src="/static/image/greenguard_logo.png" alt=" FarmConnect Logo" class="logo" />
-          </a>
-        <div class="user-info">
-            <a href="profile.html" class="profile-link" title="View Profile">
-                <i class="fas fa-user"></i>
+    <div class="container">
+        <div class="header">
+            <a href="/DAS" title="Go to Dashboard">
+                <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo" />
             </a>
-            <div class="user-greeting" id="greeting">
-                <i class="fas fa-seedling"></i>
-                <span id="greeting-text">Hello , User !</span>
+            <div class="user-info">
+                <a href="profile.html" class="profile-link" title="View Profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                    <a href="/DAS" class="home-btn" title="Go to Home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
+                    <i class="fas fa-sign-out-alt"></i> 
+                    <span id="logout-text">Logout</span>
+                </a>
             </div>
-            <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
-                <i class="fas fa-sign-out-alt"></i> 
-                <span id="logout-text">Logout</span>
-            </a>
         </div>
-    </div>
-    <!-- TASK BAR HEADER END -->
 
     <!-- Page Title with ID -->
     <div class="page-title" id="page-title">नजदीकी कृषि बाजार</div>
 
-    <div class="map-container">
-        <div id="map"></div>
-        <div class="map-controls">
-            <button class="control-btn" id="locate-btn" title="Find my location">
-                <i class="fas fa-location-arrow"></i>
-            </button>
-            <button class="control-btn" id="refresh-btn" title="Refresh markets">
-                <i class="fas fa-sync-alt"></i>
-            </button>
+    <!-- Containers Wrapper -->
+    <div class="containers-wrapper">
+        <!-- Map Container -->
+        <div class="map-container">
+            <div class="map-section">
+                <div id="map"></div>
+                <div class="map-controls">
+                    <button class="control-btn" id="locate-btn" title="Find my location">
+                        <i class="fas fa-location-arrow"></i>
+                    </button>
+                    <button class="control-btn" id="refresh-btn" title="Refresh markets">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner"></i> <span id="loading-text">लोड हो रहा है...</span>
+            </div>
         </div>
-        <div class="loading" id="loading">
-            <i class="fas fa-spinner"></i> <span id="loading-text">लोड हो रहा है...</span>
+
+        <!-- Market List Container -->
+        <div class="market-container">
+            <div class="market-list-header">
+                <h3>Nearby Markets</h3>
+                <div class="market-count" id="market-count">0 markets found</div>
+            </div>
+            <div class="market-list" id="market-list">
+                <div class="no-markets">Click "Find my location" to discover nearby markets</div>
+            </div>
         </div>
     </div>
     </div>
@@ -161,7 +179,9 @@
 
                     if (data.elements.length === 0) {
                         alert("No markets found. Please try another location.");
+                        updateMarketList([]);
                     } else {
+                        const markets = [];
                         data.elements.forEach(market => {
                             const marketLat = market.lat || market.center?.lat;
                             const marketLon = market.lon || market.center?.lon;
@@ -173,10 +193,63 @@
                                 const marker = L.marker([marketLat, marketLon]).addTo(map)
                                     .bindPopup(`<strong>${marketLabel}:</strong> ${marketName}`);
                                 marketMarkers.push(marker);
+                                
+                                // Calculate distance from user location
+                                const distance = calculateDistance(lat, lon, marketLat, marketLon);
+                                markets.push({
+                                    name: marketName,
+                                    distance: distance,
+                                    lat: marketLat,
+                                    lon: marketLon
+                                });
                             }
                         });
+                        
+                        // Sort markets by distance
+                        markets.sort((a, b) => a.distance - b.distance);
+                        updateMarketList(markets);
                     }
                 });
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in kilometers
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c; // Distance in kilometers
+        }
+
+        function updateMarketList(markets) {
+            const marketList = document.getElementById('market-list');
+            const marketCount = document.getElementById('market-count');
+            
+            marketCount.textContent = `${markets.length} market${markets.length !== 1 ? 's' : ''} found`;
+            
+            if (markets.length === 0) {
+                marketList.innerHTML = '<div class="no-markets">No markets found in this area</div>';
+                return;
+            }
+            
+            marketList.innerHTML = markets.map(market => `
+                <div class="market-item" onclick="focusOnMarket(${market.lat}, ${market.lon}, '${market.name}')">
+                    <div class="market-name">${market.name}</div>
+                    <div class="market-distance">${market.distance.toFixed(1)} km away</div>
+                </div>
+            `).join('');
+        }
+
+        function focusOnMarket(lat, lon, name) {
+            map.setView([lat, lon], 15);
+            // Find and open the popup for this market
+            marketMarkers.forEach(marker => {
+                if (marker.getLatLng().lat === lat && marker.getLatLng().lng === lon) {
+                    marker.openPopup();
+                }
+            });
         }
 
         document.getElementById('locate-btn').addEventListener('click', locateUser);
@@ -189,6 +262,111 @@
   }
     </script>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                        <h3>Green Guard</h3>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">Dashboard</a></li>
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                        <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="market.html">Seed & Equipment Market</a></li>
+                        <li><a href="about.html">Support & Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@greenguard.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9090909090</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolhapur, Maharashtra, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.greenguard.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

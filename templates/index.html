@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Green Guard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  
+  <style>
+    /* Critical CSS to ensure theme loads immediately */
+    body {
+      background: #000000 !important;
+      background-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0.9) 100%) !important;
+      color: #ffffff !important;
+      font-family: 'Poppins', sans-serif !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .main-layout {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .content {
+      width: 70%;
+      padding: 20px 30px 30px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-size: cover;
+      background-position: center left;
+      background-repeat: no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(170, 249, 63, 0.1);
+      z-index: 0;
+    }
+
+    .content h1,
+    .content h2,
+    .content p,
+    .content .features {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: rgb(170,249,63);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      color: rgb(170,249,63);
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: rgb(170,249,63);
+      border-radius: 2px;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
+      max-width: 100%;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      row-gap: 60px;
+      margin-top: 50px;
+      align-items: stretch;
+    }
+
+    .feature {
+      background: rgba(0,0,0,0.8);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(170,249,63,0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.712);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      min-height: 0;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(170, 249, 63, 0.2);
+      border-color: rgb(170,249,63);
+    }
+
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: rgb(170,249,63);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature h3 i {
+      font-size: 1.2rem;
+      color: rgb(170,249,63);
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.9);
+      flex-grow: 1;
+    }
+
+    .feature-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, rgb(170,249,63), rgba(170,249,63,0.8));
+      color: #000000;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(170, 249, 63, 0.3);
+    }
+
+    .feature-link:hover {
+      background: linear-gradient(135deg, rgba(170,249,63,0.9), rgb(170,249,63));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(170, 249, 63, 0.4);
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .sidebar {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 10px 10px 10px 10px;
+      background: linear-gradient(135deg, rgba(170,249,63,0.8), rgb(170,249,63));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-logo {
+      width: 300px;
+      height: auto;
+      margin-bottom: 1px;
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+      z-index: 1;
+      position: relative;
+      display: block;
+      opacity: 1;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 350px;
+      background: rgba(0,0,0,0.8);
+      border-radius: 15px;
+      padding: 35px 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 1;
+      position: relative;
+      border: 1px solid rgba(170,249,63,0.3);
+    }
+
+    .auth-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 35px;
+      color: rgb(170,249,63);
+      position: relative;
+    }
+
+    .auth-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: rgb(170,249,63);
+    }
+
+    .auth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .auth-button {
+      padding: 16px 30px;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1rem;
+    }
+
+    .login-btn {
+      background: rgb(170,249,63);
+      color: #000000;
+    }
+
+    .login-btn:hover {
+      background: rgba(170,249,63,0.8);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .register-btn {
+      background: rgba(0,0,0,0.8);
+      color: rgb(170,249,63);
+      border: 2px solid rgb(170,249,63);
+    }
+
+    .register-btn:hover {
+      background: rgb(170,249,63);
+      color: #000000;
+      border-color: rgb(170,249,63);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(170,249,63,0.3);
+    }
+
+    .divider::before {
+      margin-right: 15px;
+    }
+
+    .divider::after {
+      margin-left: 15px;
+    }
+
+    @media (max-width: 1024px) {
+      .main-layout {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .content, .sidebar {
+        width: 100%;
+        padding: 30px 20px;
+      }
+
+      .sidebar {
+        background: linear-gradient(to right, rgba(170,249,63,0.8), rgb(170,249,63));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content, .sidebar {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .auth-container {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-layout">
+    <!-- Main Content with Background -->
+    <div class="content">
+      <h1>Green Guard</h1>
+      <p class="subtitle">Sustainable farming solutions for a better tomorrow. Empowering farmers with technology, information, and smart solutions.</p>
+
+      <div class="features">
+        <div class="feature">
+          <h3><i class="fas fa-file-contract"></i> Government Schemes</h3>
+          <p>Access comprehensive information about all agricultural schemes from central and state governments with simplified application processes.</p>
+        </div>
+
+        <div class="feature">
+          <h3><i class="fas fa-leaf"></i> AI Disease Detection</h3>
+          <p>Our advanced AI analyzes crop images to detect diseases early and provides tailored treatment recommendations.</p>
+        </div>
+
+        <div class="feature">
+          <h3><i class="fas fa-map-marker-alt"></i> Agricultural Market Info</h3>
+          <p>
+            Discover nearby agricultural markets (mandis) to easily find where you can buy or sell crops and farming goods. 
+           <p>
+            Our platform helps you identify the closest mandis in your region so you can plan your visits more efficiently.
+
+           </p>
+          </p>
+        </div>
+        
+        <div class="feature">
+          <h3><i class="fas fa-tractor"></i> Agri E-Commerce</h3>
+          <p>Direct marketplace connecting farmers with suppliers for seeds, equipment, and other agricultural needs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar with Logo and Auth -->
+    <div class="sidebar">
+      <img src="{{ url_for('static', filename='image/greenguard_logo.png') }}" alt="Green Guard Logo" class="main-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
+      <div style="display:none; color: white; font-size: 2.5rem; font-weight: bold; margin-bottom: 30px;">🌱 Green Guard</div>
+
+      <div class="auth-container">
+        <h3 class="auth-title">Welcome</h3>
+
+        <div class="auth-buttons">
+          <a href="/login.html" class="auth-button login-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </a>
+
+          <div class="divider">OR</div>
+
+          <a href="/register.html" class="auth-button register-btn">
+            <i class="fas fa-user-plus"></i> Create Account
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 

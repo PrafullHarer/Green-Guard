@@ -11,18 +11,19 @@
 <body>
   <div class="container">
     <div class="header">
-      <a href="DAS.html" title="Go to Dashboard">
+      <a href="/DAS" title="Go to Dashboard">
         <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" class="logo" />
       </a>
       
       <div class="user-info">
         <a href="profile.html" class="profile-link" title="View Profile">
           <i class="fas fa-user"></i>
+          <span>Profile</span>
         </a>
-        <div class="user-greeting" id="greeting">
-          <i class="fas fa-seedling"></i>
-          <span id="greeting-text">Hello, User!</span>
-        </div>
+        <a href="/DAS" class="home-btn" title="Go to Home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
         <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn" onclick="event.preventDefault(); logoutAndRedirect();">
             <i class="fas fa-sign-out-alt"></i> 
             <span id="logout-text">Logout</span>
@@ -36,31 +37,31 @@
 
     <div class="dashboard-content">
       <div class="dashboard-grid">
-        <a href="disease.html" class="dashboard-card">
+        <button type="button" class="dashboard-card" data-hs-overlay="#ai-assistant-modal">
           <div class="card-icon"><i class="fas fa-robot"></i></div>
           <h3 class="card-title-4">AI Assistant</h3>
           <p class="card-desc-4">Talk to our AI assistant for crop disease identification and solutions</p>
-        </a>
-        <a href="market.html" class="dashboard-card">
+        </button>
+        <button type="button" class="dashboard-card" data-hs-overlay="#market-info-modal">
           <div class="card-icon"><i class="fas fa-chart-line"></i></div>
           <h3 class="card-title-2">Agricultural Market Info</h3>
           <p class="card-desc-2">Current prices and market analysis of agricultural products in nearby mandis</p>
-        </a>
-        <a href="crop_advice.html" class="dashboard-card">
+        </button>
+        <button type="button" class="dashboard-card" data-hs-overlay="#crop-advice-modal">
           <div class="card-icon"><i class="fas fa-leaf"></i></div>
           <h3 class="card-title-3">Crop Advice</h3>
           <p class="card-desc-3">Crop suggestions and methods based on weather and soil</p>
-        </a>
-        <a href="schemes.html" class="dashboard-card">
+        </button>
+        <button type="button" class="dashboard-card" data-hs-overlay="#government-schemes-modal">
           <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
           <h3 class="card-title-1">Government Schemes</h3>
           <p class="card-desc-1">Information and application process for all government schemes related to agriculture</p>
-        </a>
-        <a href="market1.html" class="dashboard-card">
+        </button>
+        <button type="button" class="dashboard-card" data-hs-overlay="#seed-equipment-modal">
           <div class="card-icon"><i class="fas fa-shopping-basket"></i></div>
           <h3 class="card-title-5">Seed and Equipment Market</h3>
           <p class="card-desc-5">Buy high-quality seeds, fertilizers, and agricultural equipment</p>
-        </a>
+        </button>
         <a href="about.html" class="dashboard-card">
           <div class="card-icon"><i class="fas fa-info-circle"></i></div>
           <h3 class="card-title-6">About Us</h3>
@@ -100,7 +101,363 @@
     </div>
   </div>
 
+  <!-- AI Assistant Modal -->
+  <div id="ai-assistant-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="ai-assistant-modal-label">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+          <div class="flex items-center gap-x-2">
+            <div class="flex-shrink-0 size-8 inline-flex justify-center items-center gap-x-2 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3 id="ai-assistant-modal-label" class="font-bold text-gray-800 dark:text-white">
+              AI Assistant
+            </h3>
+          </div>
+          <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#ai-assistant-modal">
+            <span class="sr-only">Close</span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="mb-4">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">Overview</h4>
+            <p class="text-gray-600 dark:text-neutral-400">
+              Our AI Assistant uses advanced machine learning algorithms to identify crop diseases from images and provide expert recommendations for treatment and prevention.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Key Features</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Disease identification from photos</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Treatment recommendations</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Prevention strategies</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> 24/7 availability</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Benefits</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Instant diagnosis</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Expert-level accuracy</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Cost-effective solution</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Save crop yields</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+          <a href="disease.html" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Try AI Assistant
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agricultural Market Info Modal -->
+  <div id="market-info-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="market-info-modal-label">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+          <div class="flex items-center gap-x-2">
+            <div class="flex-shrink-0 size-8 inline-flex justify-center items-center gap-x-2 rounded-full bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-500">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 id="market-info-modal-label" class="font-bold text-gray-800 dark:text-white">
+              Agricultural Market Info
+            </h3>
+          </div>
+          <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#market-info-modal">
+            <span class="sr-only">Close</span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="mb-4">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">Overview</h4>
+            <p class="text-gray-600 dark:text-neutral-400">
+              Get real-time market prices, trends, and analysis for agricultural products from nearby mandis and markets to make informed selling decisions.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Key Features</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Real-time price updates</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Market trend analysis</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Nearby mandi locations</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Price predictions</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Benefits</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Maximize profits</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Better timing</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Market insights</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Informed decisions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+          <a href="market.html" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            View Market Info
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crop Advice Modal -->
+  <div id="crop-advice-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="crop-advice-modal-label">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+          <div class="flex items-center gap-x-2">
+            <div class="flex-shrink-0 size-8 inline-flex justify-center items-center gap-x-2 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-800/30 dark:text-emerald-500">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3 id="crop-advice-modal-label" class="font-bold text-gray-800 dark:text-white">
+              Crop Advice
+            </h3>
+          </div>
+          <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#crop-advice-modal">
+            <span class="sr-only">Close</span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="mb-4">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">Overview</h4>
+            <p class="text-gray-600 dark:text-neutral-400">
+              Get personalized crop recommendations based on your soil type, weather conditions, and local climate to maximize your agricultural yield.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Key Features</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Soil-based recommendations</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Weather-based advice</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Seasonal planning</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Crop rotation tips</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Benefits</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Higher yields</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Better planning</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Risk reduction</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Expert guidance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+          <a href="crop_advice.html" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Get Crop Advice
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Government Schemes Modal -->
+  <div id="government-schemes-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="government-schemes-modal-label">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+          <div class="flex items-center gap-x-2">
+            <div class="flex-shrink-0 size-8 inline-flex justify-center items-center gap-x-2 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-800/30 dark:text-purple-500">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <h3 id="government-schemes-modal-label" class="font-bold text-gray-800 dark:text-white">
+              Government Schemes
+            </h3>
+          </div>
+          <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#government-schemes-modal">
+            <span class="sr-only">Close</span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="mb-4">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">Overview</h4>
+            <p class="text-gray-600 dark:text-neutral-400">
+              Access comprehensive information about government agricultural schemes, subsidies, and financial assistance programs to support your farming activities.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Key Features</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Scheme eligibility checker</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Application process guide</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Document requirements</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Status tracking</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Benefits</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Financial support</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Easy application</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Updated information</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Expert assistance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+          <a href="schemes.html" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            View Schemes
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seed and Equipment Market Modal -->
+  <div id="seed-equipment-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="seed-equipment-modal-label">
+    <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 scale-95 opacity-0 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+          <div class="flex items-center gap-x-2">
+            <div class="flex-shrink-0 size-8 inline-flex justify-center items-center gap-x-2 rounded-full bg-orange-100 text-orange-800 dark:bg-orange-800/30 dark:text-orange-500">
+              <i class="fas fa-shopping-basket"></i>
+            </div>
+            <h3 id="seed-equipment-modal-label" class="font-bold text-gray-800 dark:text-white">
+              Seed and Equipment Market
+            </h3>
+          </div>
+          <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#seed-equipment-modal">
+            <span class="sr-only">Close</span>
+            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div class="mb-4">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-2">Overview</h4>
+            <p class="text-gray-600 dark:text-neutral-400">
+              Browse and purchase high-quality seeds, fertilizers, pesticides, and agricultural equipment from verified suppliers at competitive prices.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Key Features</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Quality certified products</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Competitive pricing</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Verified suppliers</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-check text-green-500"></i> Home delivery</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="font-semibold text-gray-800 dark:text-white mb-2">Benefits</h5>
+              <ul class="space-y-1 text-sm text-gray-600 dark:text-neutral-400">
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Convenient shopping</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Quality assurance</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Best prices</li>
+                <li class="flex items-center gap-x-2"><i class="fas fa-bolt text-yellow-500"></i> Expert support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
+          <a href="market1.html" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            Browse Market
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize all modals
+      const modalTriggers = document.querySelectorAll('[data-hs-overlay]');
+      const modals = document.querySelectorAll('.hs-overlay');
+      
+      modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          const modalId = this.getAttribute('data-hs-overlay');
+          const modal = document.querySelector(modalId);
+          
+          if (modal) {
+            // Show modal
+            modal.style.display = 'flex';
+            setTimeout(() => {
+              modal.classList.add('hs-overlay-open');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+            
+            // Focus management
+            const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) {
+              firstFocusable.focus();
+            }
+          }
+        });
+      });
+      
+      // Close modal functionality
+      modals.forEach(modal => {
+        const closeButtons = modal.querySelectorAll('[data-hs-overlay]');
+        closeButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            modal.classList.remove('hs-overlay-open');
+            setTimeout(() => {
+              modal.style.display = 'none';
+            }, 200);
+            document.body.style.overflow = '';
+          });
+        });
+        
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            modal.classList.remove('hs-overlay-open');
+            setTimeout(() => {
+              modal.style.display = 'none';
+            }, 200);
+            document.body.style.overflow = '';
+          }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.classList.contains('hs-overlay-open')) {
+            modal.classList.remove('hs-overlay-open');
+            setTimeout(() => {
+              modal.style.display = 'none';
+            }, 200);
+            document.body.style.overflow = '';
+          }
+        });
+      });
+    });
+
     async function getWeatherFromAPI(location) {
       const apiKey = "8cc6019347fb4791b83181032251907";
       const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(location)}&days=4&aqi=no&alerts=no`;
@@ -211,5 +568,111 @@
     window.location.href = "login.html";
   }
   </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-content">
+              <!-- Company Info -->
+              <div class="footer-section">
+                  <div class="footer-logo">
+                      <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                      <h3>Green Guard</h3>
+                  </div>
+                  <p class="footer-description">
+                      Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                  </p>
+                  <div class="social-links">
+                      <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                          <i class="fab fa-facebook-f"></i>
+                      </a>
+                      <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                          <i class="fab fa-twitter"></i>
+                      </a>
+                      <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                          <i class="fab fa-linkedin-in"></i>
+                      </a>
+                      <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                          <i class="fab fa-instagram"></i>
+                      </a>
+                      <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                          <i class="fab fa-youtube"></i>
+                      </a>
+                  </div>
+              </div>
+
+              <!-- Quick Links -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Quick Links</h4>
+                  <ul class="footer-links">
+                      <li><a href="/DAS">Dashboard</a></li>
+                      <li><a href="disease.html">AI Disease Detection</a></li>
+                      <li><a href="about.html">About Us</a></li>
+                      <li><a href="team.html">Our Team</a></li>
+                      <li><a href="crop_advice.html">Crop Advice</a></li>
+                      <li><a href="market.html">Market Info</a></li>
+                      <li><a href="schemes.html">Government Schemes</a></li>
+                      <li><a href="profile.html">Profile</a></li>
+                  </ul>
+              </div>
+
+              <!-- Services -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Our Services</h4>
+                  <ul class="footer-links">
+                      <li><a href="/DAS">AI Disease Detection</a></li>
+                      <li><a href="/DAS">Weather Forecast</a></li>
+                      <li><a href="market.html">Market Analysis</a></li>
+                      <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                      <li><a href="schemes.html">Government Schemes</a></li>
+                      <li><a href="market.html">Seed & Equipment Market</a></li>
+                      <li><a href="about.html">Support & Help</a></li>
+                  </ul>
+              </div>
+
+              <!-- Contact Info -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Contact Us</h4>
+                  <div class="contact-info">
+                      <div class="contact-item">
+                          <i class="fas fa-envelope"></i>
+                          <span>contact@greenguard.in</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-phone"></i>
+                          <span>+91 9090909090</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <span>Kolhapur, Maharashtra, India</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-clock"></i>
+                          <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-globe"></i>
+                          <span>www.greenguard.in</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Footer Bottom -->
+          <div class="footer-bottom">
+              <div class="footer-bottom-content">
+                  <div class="copyright">
+                      <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                  </div>
+                  <div class="footer-bottom-links">
+                      <a href="privacy-policy.html">Privacy Policy</a>
+                      <a href="terms-of-service.html">Terms of Service</a>
+                      <a href="cookie-policy.html">Cookie Policy</a>
+                      <a href="contact.html">Contact</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
 </body>
 </html>

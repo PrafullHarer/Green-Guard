@@ -4,29 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Guard - About Us</title>
+    <title>Green Guard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="\static\css\about.css">
+    <link rel="stylesheet" href="/static/css/about.css">
+    <link rel="stylesheet" href="/static/css/DAS.css">
+    
     
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <a href="DAS.html" title="Go to Dashboard">
+            <a href="/DAS" title="Go to Dashboard">
                 <img src="/static/image/greenguard_logo.png" alt="FarmConnect Logo" class="logo" />
               </a>
               
             <div class="user-info">
                 <a href="profile.html" class="profile-link" title="View Profile">
                     <i class="fas fa-user"></i>
+                    <span>Profile</span>
                 </a>
-                <div class="user-greeting" id="greeting">
-                    <i class="fas fa-seedling"></i>
-                    <span id="greeting-text">Hello, User!</span>
-                </div>
+                    <a href="/DAS" class="home-btn" title="Go to Home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
                 <a href="{{ url_for('logout') }}" class="logout-btn" id="logoutBtn"
                     onclick="event.preventDefault(); logoutAndRedirect();">
                     <i class="fas fa-sign-out-alt"></i>
@@ -35,6 +38,7 @@
             </div>
         </div>
 
+        <!-- About Us Section -->
         <div class="about-section">
             <h1 class="about-title" id="about-title">About Us</h1>
             <div class="about-content" id="about-content">
@@ -50,46 +54,98 @@
                         <p id="vision-text">To create an India where every farmer is digitally empowered and practices sustainable agriculture.</p>
                     </div>
                 </div>
+                
+                <div class="team-link-section">
+                    <h3>Meet Our Team</h3>
+                    <p>Learn more about the passionate individuals behind Green Guard's mission to revolutionize Indian agriculture.</p>
+                    <a href="team.html" class="team-link-btn">
+                        <i class="fas fa-users"></i>
+                        View Our Team
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="about-section team-section">
-            <h2 class="about-title" id="team-title">Our Team</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/static/team/team.png" alt="Prafull Harer" />
+        <!-- Suggestion Container -->
+        <div class="about-section suggestion-section">
+            <h2 class="about-title" id="suggestion-title">Share Your Suggestions</h2>
+            <div class="suggestion-content">
+                <p class="suggestion-description">We value your feedback and suggestions to improve Green Guard. Help us make our platform better for farmers across India.</p>
+                
+                <form class="suggestion-form" id="suggestionForm">
+                    <div class="form-group">
+                        <label for="suggestion-name" class="form-label">Your Name</label>
+                        <input type="text" id="suggestion-name" name="name" class="form-input" placeholder="Enter your name" required>
                     </div>
-                    <h3 class="member-name">Prafull Harer</h3>
-                    <p class="member-role">Documentation and Reports</p>
-                    <p class="member-bio">Expert in Project Documentation and Reporting</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/static/team/team.png" alt="Pranav More" />
+                    
+                    <div class="form-group">
+                        <label for="suggestion-email" class="form-label">Email Address</label>
+                        <input type="email" id="suggestion-email" name="email" class="form-input" placeholder="Enter your email" required>
                     </div>
-                    <h3 class="member-name">Pranav More</h3>
-                    <p class="member-role">Frontend Developer</p>
-                    <p class="member-bio">Expert in User Interface and Web Design</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/static/team/team.png" alt="Rushikesh Kulkarni" />
+                    
+                    <div class="form-group">
+                        <label for="suggestion-category" class="form-label">Category</label>
+                        <select id="suggestion-category" name="category" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="feature">New Feature Request</option>
+                            <option value="improvement">Platform Improvement</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="ui">User Interface</option>
+                            <option value="performance">Performance</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
-                    <h3 class="member-name">Rushikesh Kulkarni</h3>
-                    <p class="member-role">Idea and System Development</p>
-                    <p class="member-bio">Expert in System Architecture and Project Planning</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/static/team/team.png" alt="Parth Mokal" />
+                    
+                    <div class="form-group">
+                        <label for="suggestion-message" class="form-label">Your Suggestion</label>
+                        <textarea id="suggestion-message" name="message" class="form-textarea" placeholder="Describe your suggestion or feedback in detail..." rows="5" required></textarea>
                     </div>
-                    <h3 class="member-name">Parth Mokal</h3>
-                    <p class="member-role">Backend Developer</p>
-                    <p class="member-bio">Expert in Server-side Logic and Database Management</p>
+                    
+                    <div class="form-group">
+                        <label for="suggestion-priority" class="form-label">Priority Level</label>
+                        <div class="priority-options">
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="low" class="priority-radio">
+                                <span class="priority-label">Low</span>
+                            </label>
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="medium" class="priority-radio" checked>
+                                <span class="priority-label">Medium</span>
+                            </label>
+                            <label class="priority-option">
+                                <input type="radio" name="priority" value="high" class="priority-radio">
+                                <span class="priority-label">High</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Suggestion
+                        </button>
+                        <button type="reset" class="reset-btn">
+                            <i class="fas fa-undo"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="suggestion-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>We review suggestions within 24-48 hours</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>You'll receive updates via email</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Your feedback helps us improve</span>
+                    </div>
                 </div>
             </div>
-            
         </div>
     </div>
 
@@ -115,8 +171,147 @@
                         }
                     };
                 });
+
+                // Suggestion form handling
+                const suggestionForm = document.getElementById('suggestionForm');
+                if (suggestionForm) {
+                    suggestionForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Get form data
+                        const formData = new FormData(suggestionForm);
+                        const suggestionData = {
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            category: formData.get('category'),
+                            message: formData.get('message'),
+                            priority: formData.get('priority')
+                        };
+                        
+                        // Validate form
+                        if (!suggestionData.name || !suggestionData.email || !suggestionData.category || !suggestionData.message) {
+                            alert('Please fill in all required fields.');
+                            return;
+                        }
+                        
+                        // Show success message
+                        alert('Thank you for your suggestion! We will review it and get back to you soon.');
+                        
+                        // Reset form
+                        suggestionForm.reset();
+                        
+                        // In a real application, you would send this data to your backend
+                        console.log('Suggestion submitted:', suggestionData);
+                    });
+                }
             });
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                        <h3>Green Guard</h3>
+                    </div>
+                    <p class="footer-description">
+                        Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">Dashboard</a></li>
+                        <li><a href="disease.html">AI Disease Detection</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="crop_advice.html">Crop Advice</a></li>
+                        <li><a href="market.html">Market Info</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/DAS">AI Disease Detection</a></li>
+                        <li><a href="/DAS">Weather Forecast</a></li>
+                        <li><a href="market.html">Market Analysis</a></li>
+                        <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
+                        <li><a href="market.html">Seed & Equipment Market</a></li>
+                        <li><a href="about.html">Support & Help</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@greenguard.in</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9090909090</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kolhapur, Maharashtra, India</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.greenguard.in</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms-of-service.html">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

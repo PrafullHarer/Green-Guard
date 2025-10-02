@@ -1,60 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Profile - Green Guard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/edit_profile.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Guard - Edit Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/profile.css" />
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <a href="DAS.html" class="home-button" title="Go to Dashboard">🏠</a>
+  <!-- Loader -->
+  <div id="loader" class="loader-container">
+    <div class="spinner"></div>
+  </div>
 
-            <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
+  <!-- Edit Profile Content -->
+  <div class="main-content" style="display: flex;">
+    <div class="profile-container">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <!-- Header Section -->
+        <div class="profile-header">
+          <div class="header-content">
+            <h2>Edit Your Profile</h2>
+            <div class="underline"></div>
+          </div>
+        </div>
 
-        <h2>🌿 Edit Your Profile 🌿</h2>
+        <!-- Edit Profile Form -->
+        <div class="profile-card">
+          <form id="editForm" class="edit-form">
+            <div class="profile-grid">
+              <div class="field">
+                <i class="fas fa-user"></i>
+                <div class="field-content">
+                  <label>Full Name</label>
+                  <input type="text" id="name" required class="form-input" />
+                </div>
+              </div>
 
-        <form id="editForm">
-            <p><strong>Name:</strong><br /><input type="text" id="name" required /></p>
-            <p><strong>Email:</strong><br /><input type="email" id="email" required /></p>
-            <p><strong>Phone:</strong><br /><input type="text" id="phone" required /></p>
-            <p><strong>State:</strong><br /><select id="state" required></select></p>
-            <p><strong>District:</strong><br /><select id="district" required></select></p>
-            <p><strong>Farmer Type:</strong><br />
-                <select id="farmerType" required>
+              <div class="field">
+                <i class="fas fa-envelope"></i>
+                <div class="field-content">
+                  <label>Email Address</label>
+                  <input type="email" id="email" required class="form-input" />
+                </div>
+              </div>
+
+              <div class="field">
+                <i class="fas fa-phone"></i>
+                <div class="field-content">
+                  <label>Phone Number</label>
+                  <input type="text" id="phone" required class="form-input" />
+                </div>
+              </div>
+
+              <div class="field">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="field-content">
+                  <label>State</label>
+                  <select id="state" required class="form-select">
+                    <option value="">-- Select State --</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <i class="fas fa-map"></i>
+                <div class="field-content">
+                  <label>District</label>
+                  <select id="district" required class="form-select">
+                    <option value="">-- Select District --</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <i class="fas fa-seedling"></i>
+                <div class="field-content">
+                  <label>Farmer Type</label>
+                  <select id="farmerType" required class="form-select">
                     <option value="">-- Select Farmer Type --</option>
-                    <option value="Small"> Small</option>
+                    <option value="Small">Small</option>
                     <option value="Medium">Medium</option>
                     <option value="Large">Large</option>
-                </select>
-            </p>
-
-            <div class="button-group">
-                <button type="submit">💾 Save</button>
-                <button type="button" onclick="window.location.href='profile.html'">❌ Cancel</button>
+                  </select>
+                </div>
+              </div>
             </div>
 
-        </form>
-    </div>
+            <div class="button-row">
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-save"></i>
+                <span>Save Changes</span>
+              </button>
+              <button type="button" onclick="window.location.href='profile.html'" class="btn-secondary">
+                <i class="fas fa-times"></i>
+                <span>Cancel</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
 
-    <script>
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
-            authDomain: "greenguard-408ed.firebaseapp.com",
-            projectId: "greenguard-408ed"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        let currentUID = null;
+      <!-- Features Section -->
+      <div class="features-section">
+        <div class="features-content">
+          <h3>Coming Soon!</h3>
+          <p>Exciting new features are being developed to enhance your farming experience.</p>
+          
+          <div class="upcoming-features">
+            <div class="feature-item">
+              <span>🚀</span>
+              <span>Advanced AI Crop Analysis</span>
+            </div>
+            <div class="feature-item">
+              <span>📈</span>
+              <span>Real-time Weather Integration</span>
+            </div>
+            <div class="feature-item">
+              <span>🤖</span>
+              <span>Smart Irrigation Control</span>
+            </div>
+            <div class="feature-item">
+              <span>📱</span>
+              <span>Mobile App Launch</span>
+            </div>
+            <div class="feature-item">
+              <span>💰</span>
+              <span>Advanced Market Predictions</span>
+            </div>
+            <div class="feature-item">
+              <span>🌱</span>
+              <span>Carbon Footprint Tracking</span>
+            </div>
+          </div>
+          
+          <div class="features-link">
+            <a href="javascript:void(0)" onclick="goToDashboard()" class="home-btn">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAhkb7NJbm_iaYrEyzS_G9quAbk3rIHkLM",
+      authDomain: "greenguard-408ed.firebaseapp.com",
+      projectId: "greenguard-408ed"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    let currentUID = null;
 
         const stateDistrictMap = {
             "Select State": ["Select District"],
@@ -316,29 +424,56 @@
             }
         }
 
-        // Fetch and prefill form
-        firebase.auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                currentUID = user.uid;
-                try {
-                    const doc = await db.collection("users").doc(currentUID).get();
-                    if (doc.exists) {
-                        const data = doc.data();
-                        document.getElementById("name").value = data.name || "";
-                        document.getElementById("email").value = data.email || "";
-                        document.getElementById("phone").value = data.phone || "";
-                        document.getElementById("farmerType").value = data.farmerType || "";
-                        prefillDropdowns(data);
-                    } else {
-                        alert("User data not found.");
-                    }
-                } catch (error) {
-                    console.error("Error:", error);
-                }
-            } else {
-                window.location.href = "login.html";
-            }
-        });
+    // Fetch and prefill form
+    firebase.auth().onAuthStateChanged(async (user) => {
+      const loader = document.getElementById("loader");
+      const mainContent = document.querySelector(".main-content");
+
+      // Set a timeout to hide loader after 5 seconds regardless
+      setTimeout(() => {
+        if (loader) {
+          loader.style.display = "none";
+        }
+        if (mainContent) {
+          mainContent.style.display = "flex";
+        }
+      }, 5000);
+
+      if (user) {
+        currentUID = user.uid;
+        try {
+          const doc = await db.collection("users").doc(currentUID).get();
+          if (doc.exists) {
+            const data = doc.data();
+            document.getElementById("name").value = data.name || "";
+            document.getElementById("email").value = data.email || "";
+            document.getElementById("phone").value = data.phone || "";
+            document.getElementById("farmerType").value = data.farmerType || "";
+            prefillDropdowns(data);
+          } else {
+            alert("User data not found.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        } finally {
+          if (loader) {
+            loader.style.display = "none";
+          }
+          if (mainContent) {
+            mainContent.style.display = "flex";
+          }
+        }
+      } else {
+        // Hide loader immediately if no user
+        if (loader) {
+          loader.style.display = "none";
+        }
+        if (mainContent) {
+          mainContent.style.display = "flex";
+        }
+        window.location.href = "login.html";
+      }
+    });
 
         // Save data
         document.getElementById("editForm").addEventListener("submit", async (e) => {
@@ -356,20 +491,183 @@
 
             try {
                 await db.collection("users").doc(currentUID).update(updatedData);
-                alert("✅ Profile updated successfully.");
-                window.location.href = "profile.html";
+                showSuccessPopup();
             } catch (error) {
                 console.error("Update failed:", error);
-                alert("❌ Failed to save changes.");
+                showErrorPopup();
             }
         });
 
-        // Initialize state dropdown
-        populateStates();
-    </script>
+        function showSuccessPopup() {
+            const popup = document.createElement('div');
+            popup.className = 'success-popup';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <div class="popup-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Profile Updated Successfully!</h3>
+                    <p>Your profile information has been saved successfully.</p>
+                    <button onclick="closePopup()" class="popup-btn">Continue</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Auto redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = "profile.html";
+            }, 3000);
+        }
 
+        function showErrorPopup() {
+            const popup = document.createElement('div');
+            popup.className = 'error-popup';
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <div class="popup-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>Update Failed</h3>
+                    <p>There was an error saving your profile. Please try again.</p>
+                    <button onclick="closePopup()" class="popup-btn">Try Again</button>
+                </div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        function closePopup() {
+            const popup = document.querySelector('.success-popup, .error-popup');
+            if (popup) {
+                popup.remove();
+            }
+        }
+
+    // Initialize state dropdown
+    populateStates();
+
+    function goToDashboard() {
+      try {
+        // Try to navigate to dashboard
+        window.location.href = "/DAS";
+      } catch (error) {
+        console.error("Navigation error:", error);
+        // Fallback navigation methods
+        try {
+          window.location.assign("/DAS");
+        } catch (e) {
+          // Last resort - try to open in new tab
+          window.open("/DAS", "_self");
+        }
+      }
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-content">
+              <!-- Company Info -->
+              <div class="footer-section">
+                  <div class="footer-logo">
+                      <img src="/static/image/greenguard_logo.png" alt="Green Guard Logo" />
+                      <h3>Green Guard</h3>
+                  </div>
+                  <p class="footer-description">
+                      Empowering Indian farmers with modern technology and innovative agricultural solutions for sustainable farming practices.
+                  </p>
+                  <div class="social-links">
+                      <a href="https://facebook.com/greenguardindia" class="social-link" title="Facebook" target="_blank">
+                          <i class="fab fa-facebook-f"></i>
+                      </a>
+                      <a href="https://twitter.com/greenguardindia" class="social-link" title="Twitter" target="_blank">
+                          <i class="fab fa-twitter"></i>
+                      </a>
+                      <a href="https://linkedin.com/company/greenguard-india" class="social-link" title="LinkedIn" target="_blank">
+                          <i class="fab fa-linkedin-in"></i>
+                      </a>
+                      <a href="https://instagram.com/greenguardindia" class="social-link" title="Instagram" target="_blank">
+                          <i class="fab fa-instagram"></i>
+                      </a>
+                      <a href="https://youtube.com/@greenguardindia" class="social-link" title="YouTube" target="_blank">
+                          <i class="fab fa-youtube"></i>
+                      </a>
+                  </div>
+              </div>
+
+              <!-- Quick Links -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Quick Links</h4>
+                  <ul class="footer-links">
+                      <li><a href="/DAS">Dashboard</a></li>
+                      <li><a href="disease.html">AI Disease Detection</a></li>
+                      <li><a href="about.html">About Us</a></li>
+                      <li><a href="team.html">Our Team</a></li>
+                      <li><a href="crop_advice.html">Crop Advice</a></li>
+                      <li><a href="market.html">Market Info</a></li>
+                      <li><a href="schemes.html">Government Schemes</a></li>
+                      <li><a href="profile.html">Profile</a></li>
+                  </ul>
+              </div>
+
+              <!-- Services -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Our Services</h4>
+                  <ul class="footer-links">
+                      <li><a href="/DAS">AI Disease Detection</a></li>
+                      <li><a href="/DAS">Weather Forecast</a></li>
+                      <li><a href="market.html">Market Analysis</a></li>
+                      <li><a href="crop_advice.html">Crop Recommendations</a></li>
+                      <li><a href="schemes.html">Government Schemes</a></li>
+                      <li><a href="market.html">Seed & Equipment Market</a></li>
+                      <li><a href="about.html">Support & Help</a></li>
+                  </ul>
+              </div>
+
+              <!-- Contact Info -->
+              <div class="footer-section">
+                  <h4 class="footer-title">Contact Us</h4>
+                  <div class="contact-info">
+                      <div class="contact-item">
+                          <i class="fas fa-envelope"></i>
+                          <span>contact@greenguard.in</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-phone"></i>
+                          <span>+91 9090909090</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <span>Kolhapur, Maharashtra, India</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-clock"></i>
+                          <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                      </div>
+                      <div class="contact-item">
+                          <i class="fas fa-globe"></i>
+                          <span>www.greenguard.in</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Footer Bottom -->
+          <div class="footer-bottom">
+              <div class="footer-bottom-content">
+                  <div class="copyright">
+                      <p>&copy; 2025 Green Guard. All rights reserved.</p>
+                  </div>
+                  <div class="footer-bottom-links">
+                      <a href="privacy-policy.html">Privacy Policy</a>
+                      <a href="terms-of-service.html">Terms of Service</a>
+                      <a href="cookie-policy.html">Cookie Policy</a>
+                      <a href="contact.html">Contact</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
 </body>
-
 </html>
 
 
