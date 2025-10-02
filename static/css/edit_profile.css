@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root {
-  --primary: #4CAF50;
-  --primary-light: #81C784;
-  --primary-dark: #218838;
-  --secondary: #FFC107;
-  --secondary-dark: #FFA000;
-  --background: rgba(105, 249, 2, 0.283);
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --text-dark: #000000;
-  --text-medium: #222;
+  --primary: rgb(170,249,63);
+  --primary-light: rgba(170,249,63,0.8);
+  --primary-dark: rgba(170,249,63,0.9);
+  --secondary: rgb(170,249,63);
+  --secondary-dark: rgba(170,249,63,0.7);
+  --background: #000000;
+  --card-bg: rgba(0,0,0,0.8);
+  --text-dark: #ffffff;
+  --text-medium: rgba(255,255,255,0.9);
   --text-light: #ffffff;
-  --border: #000000;
+  --border: rgba(170,249,63,0.3);
   --danger: #f44336;
   --danger-dark: #c62828;
 }
@@ -24,7 +24,8 @@
 }
 
 body {
-  background-color: var(--background);
+  background: var(--background);
+  background-image: linear-gradient(135deg, var(--background) 0%, rgba(0,0,0,0.9) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +44,7 @@ body {
 }
 
 .logo {
-  width: 120px;
+  width: 100px;
   margin-bottom: 20px;
   display: block;
   margin-left: auto;

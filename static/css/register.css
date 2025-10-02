@@ -9,16 +9,20 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #eaffea;
+    background: #000000;
+    background-image: linear-gradient(135deg, #000000 0%, rgba(0,0,0,0.9) 100%);
+    color: white;
   }
   .container {
     width: 90%;
     max-width: 500px;
-    background: #fff;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
     border-radius: 20px;
     padding: 25px 20px;
     text-align: center;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(170, 249, 63, 0.1);
+    border: 1px solid rgba(170, 249, 63, 0.2);
+    backdrop-filter: blur(10px);
     position: relative;
   }
   .logo {
@@ -27,32 +31,57 @@
   }
   h2 {
     font-size: 1.8rem;
-    color: #4CAF50;
+    color: rgb(170,249,63);
     margin-bottom: 10px;
   }
   label {
     display: block;
     text-align: left;
     font-size: 0.9rem;
-    color: #333;
+    color: white;
     margin-top: 15px;
     margin-bottom: 5px;
   }
   input, select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(170, 249, 63, 0.3);
     border-radius: 10px;
     font-size: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
   }
   button[type="submit"] {
     width: 100%;
     padding: 12px;
     margin-top: 20px;
-    background-color: #4CAF50;
+    background-color: rgb(170,249,63);
     border: none;
     border-radius: 25px;
-    color: white;
+    color: black;
     font-size: 1rem;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s;
+    font-weight: 600;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: rgba(170, 249, 63, 0.8);
+    transform: scale(1.03);
+  }
+  
+  .login-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: white;
+  }
+  
+  .login-link a {
+    color: rgb(170,249,63);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
   }
