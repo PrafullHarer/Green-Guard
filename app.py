@@ -25,7 +25,6 @@ app.config['ALLOWED_EXTENSIONS'] = Config.ALLOWED_EXTENSIONS
 
 # Ensure upload directory exists
 os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
- 
 
 # WeatherAPI Key
 WEATHER_API_KEY = Config.WEATHER_API_KEY
@@ -48,7 +47,6 @@ except Exception as e:
     plant_disease = {}
 
 # Helper functions
-
 def _check_access(template_name: str):
     return render_template(template_name)
 
@@ -67,26 +65,22 @@ def model_predict(image_path):
     features = extract_features(image_path)
     prediction = model.predict(features)
     idx = int(np.argmax(prediction[0]))
-    
-    # Debug logging
+
     logger.info(f"Model predicted class: {idx}")
     logger.info(f"Total disease classes available: {len(plant_disease) if isinstance(plant_disease, list) else 'Not a list'}")
-    
-    # plant_disease is now a list, access by index
+
     if isinstance(plant_disease, list) and 0 <= idx < len(plant_disease):
         entry = plant_disease[idx]
         logger.info(f"Found disease entry for class {idx}: {entry.get('name', 'Unknown')}")
         return entry
     elif isinstance(plant_disease, dict):
-        # Fallback for dictionary format
         entry = plant_disease.get(str(idx))
         logger.info(f"Looking for class '{idx}' in dict, found entry: {entry}")
         if isinstance(entry, dict):
             return entry
         if isinstance(entry, str):
             return {"name": entry}
-    
-    # Enhanced fallback with more information
+
     confidence = float(np.max(prediction[0]))
     logger.warning(f"Class {idx} not found in disease database. Confidence: {confidence:.2f}")
     return {
@@ -107,18 +101,16 @@ def DAS_html():
 @app.route('/')
 def index():
     return render_template('index.html')
- 
+
 @app.route('/home')
 def home_redirect():
     return redirect(url_for('index'))
 
-
-
-#login and register
+# login and register
 @app.route('/login.html')
 def login():
     return render_template('login.html')
- 
+
 @app.route('/register.html')
 def register():
     return render_template('register.html')
@@ -133,12 +125,9 @@ def reset_password():
 
 @app.route("/logout.html")
 def logout():
-    # For now, just redirect to login page
     return render_template("login.html")
 
-
-
-#disease prediction
+# disease prediction
 @app.route('/disease')
 def disease():
     return render_template('disease.html', result=False)
@@ -147,42 +136,27 @@ def disease():
 def disease_html():
     return render_template('disease.html', result=False)
 
-# Alias route in case of pluralized path usage
 @app.route('/diseases.html')
 def diseases_alias():
     return render_template('disease.html', result=False)
 
-
-#map market
+# market
 @app.route("/market.html")
 def market():
     return _check_access("market.html")
 
-
-
-#irrigation market and tools
 @app.route("/irrigation.html")
 def irrigation():
     return _check_access("irrigation.html")
 
-
-
-#tools market
 @app.route("/tools.html")
 def tools():
     return _check_access("tools.html")
 
-
-
-
-#seeds market
 @app.route("/seeds.html")
 def seeds():
     return _check_access("seeds.html")
 
-
-
-#seeds and equipment market
 @app.route("/market1.html")
 def market1():
     return _check_access("market1.html")
@@ -191,9 +165,7 @@ def market1():
 def equipment():
     return render_template("tools.html")
 
-
-
-#crop advice
+# crop advice
 @app.route("/crop_advice.html")
 def crop_advice():
     return _check_access("crop_advice.html")
@@ -238,15 +210,12 @@ def chilli():
 def garlic():
     return _check_access("crops/garlic.html")
 
-
-
-#govt schemes
+# govt schemes
 @app.route("/schemes.html")
 def schemes():
     return _check_access("schemes.html")
 
-
-#profile
+# profile
 @app.route("/profile.html")
 def profile():
     return _check_access("profile.html")
@@ -255,8 +224,7 @@ def profile():
 def edit_profile():
     return _check_access("edit_profile.html")
 
-
-#about us
+# about us
 @app.route("/about.html")
 def about():
     return render_template("about.html")
@@ -275,35 +243,26 @@ def uploaded_images(filename):
 
 @app.route("/upload/", methods=["POST", "GET"])
 def uploadimage():
-    """
-    Handle plant image upload and disease prediction
-    Supports both GET and POST requests
-    """
     if request.method == "POST":
         try:
-            # Check if file is present in request
             if 'img' not in request.files:
                 flash("No image file found. Please select an image to upload.", "danger")
                 return redirect(url_for('disease'))
-            
+
             image = request.files["img"]
-            
-            # Check if filename is empty
+
             if image.filename == '':
                 flash("No image selected. Please choose an image file.", "danger")
                 return redirect(url_for('disease'))
-            
-            # Validate file extension
+
             if not image.filename.lower().endswith(tuple(Config.ALLOWED_EXTENSIONS)):
                 flash(f"Invalid file format. Only {', '.join(Config.ALLOWED_EXTENSIONS).upper()} files are allowed.", "danger")
                 return redirect(url_for('disease'))
-            
-            # Check file size (16MB limit)
+
             try:
-                image.seek(0, 2)  # Seek to end of file
+                image.seek(0, 2)
                 file_size = image.tell()
-                image.seek(0)  # Reset file pointer
-                
+                image.seek(0)
                 if file_size > Config.MAX_CONTENT_LENGTH:
                     flash(f"File too large. Maximum size allowed is {Config.MAX_CONTENT_LENGTH // (1024*1024)}MB.", "danger")
                     return redirect(url_for('disease'))
@@ -311,26 +270,20 @@ def uploadimage():
                 logger.error(f"Error checking file size: {str(e)}")
                 flash("Error reading file. Please try with a different image.", "danger")
                 return redirect(url_for('disease'))
-            
-            # Check if model is available
+
             if model is None:
                 flash("AI model is not available. Please try again later.", "danger")
                 return redirect(url_for('disease'))
-            
-            # Generate unique filename
+
             original_filename = secure_filename(image.filename)
             file_extension = os.path.splitext(original_filename)[1]
             unique_filename = f"temp_{uuid.uuid4().hex}{file_extension}"
             filepath = os.path.join(Config.UPLOAD_FOLDER, unique_filename)
-            
-            # Ensure upload directory exists
+
             os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
-            
-            # Save uploaded file
             image.save(filepath)
             logger.info(f"Image saved successfully: {unique_filename}")
-            
-            # Basic image validation - try to open the saved file
+
             try:
                 test_image = tf.keras.utils.load_img(filepath, target_size=(160, 160))
                 test_image.close()
@@ -340,47 +293,36 @@ def uploadimage():
                     os.remove(filepath)
                 flash("Invalid image file. Please upload a valid image.", "danger")
                 return redirect(url_for('disease'))
-            
-            # Perform disease prediction
+
             try:
                 prediction = model_predict(filepath)
                 logger.info(f"Prediction completed: {prediction.get('name', 'Unknown')}")
-                
-                # Clean up old temporary files (optional - remove files older than 1 hour)
+
                 cleanup_old_files()
-                
-                # Render results
-                return render_template("disease.html", 
-                                    result=True, 
-                                    imagepath=f"/uploadimages/{unique_filename}", 
-                                    prediction=prediction,
-                                    filename=original_filename)
-                                    
+
+                return render_template("disease.html",
+                                       result=True,
+                                       imagepath=f"/uploadimages/{unique_filename}",
+                                       prediction=prediction,
+                                       filename=original_filename)
             except Exception as prediction_error:
                 logger.error(f"Prediction error: {str(prediction_error)}")
-                # Clean up uploaded file if prediction fails
                 if os.path.exists(filepath):
                     os.remove(filepath)
                 flash("Error analyzing the image. Please try with a different image.", "danger")
                 return redirect(url_for('disease'))
-                
+
         except Exception as e:
             logger.error(f"Upload error: {str(e)}")
             flash("An error occurred while processing your image. Please try again.", "danger")
             return redirect(url_for('disease'))
-    
-    # Handle GET requests - redirect to disease page
+
     return redirect(url_for('disease'))
 
-
 def cleanup_old_files():
-    """
-    Clean up temporary files older than 1 hour
-    """
     try:
         current_time = time.time()
-        one_hour_ago = current_time - 3600  # 1 hour in seconds
-        
+        one_hour_ago = current_time - 3600
         for filename in os.listdir(Config.UPLOAD_FOLDER):
             if filename.startswith('temp_'):
                 filepath = os.path.join(Config.UPLOAD_FOLDER, filename)
@@ -393,4 +335,5 @@ def cleanup_old_files():
         logger.error(f"Error during cleanup: {str(e)}")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render's dynamic port
+    app.run(host="0.0.0.0", port=port, debug=os.environ.get("FLASK_DEBUG", "false").lower() == "true")
