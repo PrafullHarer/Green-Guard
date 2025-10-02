@@ -1,8 +1,4 @@
 import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
 
 class Config:
     
@@ -31,11 +27,10 @@ class Config:
     
     # API Keys
     WEATHER_API_KEY = os.getenv('WEATHER_API_KEY', '4067ebad8ace4cacac9134438242510')
-    TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
-    TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
-    TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")
+
     
     # File Upload Configuration
     UPLOAD_FOLDER = "uploadimages"
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size 
